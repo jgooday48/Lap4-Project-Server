@@ -48,6 +48,13 @@ def test_update_place(client):
     updated_data = json.loads(response.data)
     assert "data" in updated_data
 
+def test_update_activity_error(client):
+    data = {
+        "location": "America"
+    }
+    response = client.patch('/places/500', json=data)
+    assert response.status_code == 404
+
 # def test_delete_place(client):
 #     response = client.delete('/places/1')
 #     assert response.status_code == 204  

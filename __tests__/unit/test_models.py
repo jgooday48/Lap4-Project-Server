@@ -1,5 +1,6 @@
 from application.places.model import Place
 from application.activities.model import Activity
+# from application.plans.model import Plan
 def test_new_place():
 
     new_place = Place(name="amsterdam", location="Netherlands", description="European city", tags="#awesome")
@@ -28,3 +29,18 @@ def test_new_activity():
         "description": new_activity.description,
         "post_code": new_activity.post_code
         }
+
+# def test_new_plan():
+
+#     new_plan = Plan(tourist_id=1, guide_id=1, activity_id=1, status=1)
+#     # assert new_place.place_id == 1
+
+
+#     assert new_plan.json == {
+#         "plan_id": new_plan.plan_id,
+#         "tourist_id": new_plan.tourist_id,
+#         "guide_id": new_plan.guide_id,
+#         "timestamp": new_plan.timestamp,
+#         "activity_id": new_plan.activity_id,
+#         "status": new_plan.status
+#         }

@@ -8,6 +8,7 @@ class Place(db.Model):
     location = db.Column(db.String(150), nullable=False)
     description = db.Column(db.String(500), nullable=False)
     tags = db.Column(db.String(150), nullable=False)
+    # google_api = db.Column(db.String(150), nullable=False)
     activities = db.relationship('Activity', backref='place', lazy=True)
 
     def __init__(self, name, location, description, tags):
@@ -15,6 +16,7 @@ class Place(db.Model):
         self.location = location
         self.description = description
         self.tags = tags
+        # self.google_api = google_api
 
     @property
     def json(self):
@@ -24,5 +26,6 @@ class Place(db.Model):
             "location": self.location,
             "description": self.description,
             "tags": self.tags
+            # "google_api": self.google_api
         }
 
