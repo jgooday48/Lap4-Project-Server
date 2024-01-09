@@ -1,5 +1,5 @@
 from flask import request, Blueprint
-from .controller import register, login, find_user, current_tourist, refresh_access, logout
+from .controller import register, login, find_user, current_tourist, refresh_access
 from flask_jwt_extended import jwt_required
 
 
@@ -37,7 +37,3 @@ def handle_refresh_token():
    return refresh_access()
 
 
-@tourist_bp.route('/tourists/logout', methods=['GET'])
-@jwt_required()
-def handle_logout():
-   return logout()

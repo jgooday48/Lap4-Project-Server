@@ -1,5 +1,6 @@
 from application import create_app, db
 from application.tourists.model import Tourist
+from application.guides.model import Guide
 
 app = create_app()
 app.app_context().push()  # push the app context
@@ -18,6 +19,10 @@ db.session.add(tourist1)
 db.session.commit()
 
 
+guide1 = Guide(name='Guy Dunn', user_type='GUIDE', username='guydunn42', email='guy.dunn@gmail.com')
+guide1.set_password('password')
+guide1.filters = ['HISTORICAL', 'OUTDOOR_ACTIVITIES']
+db.session.add(guide1)
 
 
 db.session.commit()

@@ -3,9 +3,7 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from flask_jwt_extended import JWTManager
-# from .tourists.model import Tourist
-# from .tokens.model import Token
-from .tokens.model import get_token_model
+
 
 import os
 
@@ -37,16 +35,18 @@ def create_app(env=None):
     #import blueprints
     from application.routes import main
     from application.tourists.routes import tourist_bp
-    from application.tokens.routes import token_bp
+    from application.guides.routes import guide_bp
+    from application.tourists.model import Tourist
+
 
     app.register_blueprint(main)
     app.register_blueprint(tourist_bp)
-    app.register_blueprint(token_bp)
+    app.register_blueprint(guide_bp)
 
-    # @jwt.user_lookup_loader
-    # def user_lookup_callback(_jwt_headers, jwt_data):
-    #     identity = jwt_data['sub']
-    #     return Tourist.query.filter_by(username=identity).one_or_none
+    @jwt.user_lookup_loader
+    def user_lookup_callback(_jwt_headers, jwt_data):
+        identity = jwt_data['sub']
+        return Tourist.query.filter_by(username=identity).one_or_none
 
 
 
@@ -63,14 +63,8 @@ def create_app(env=None):
     def missing_token_callback(error):
         return jsonify({'message': 'Request does not contain valid token', 'error': 'authorization_header'}), 401
     
-    @jwt.token_in_blocklist_loader
-    def token_in_blocklist_callback(jwt_header, jwt_data):
-        jti = jwt_data['jti']
-        Token = get_token_model()
 
-        token = db.session.query(Token).filter(Token.jti == jti).scalar()
-        return token is not None
-        
+
     
 
 
