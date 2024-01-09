@@ -6,7 +6,7 @@ class Activity(db.Model):
     activity_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), nullable=False)
     location = db.Column(db.String(150), nullable=False)
-    # specialisation = db.Column()
+    # specialisation = db.Column(db.Enum(UserType), nullable=False)
     place_id = db.Column(db.Integer,db.ForeignKey('places.place_id') ,nullable=False)
     # guide_id = db.Column(db.Integer, db.ForeignKey('guide.guide_id'), nullable=False)
     description = db.Column(db.String(300), nullable=False)

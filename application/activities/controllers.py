@@ -4,7 +4,7 @@ from .model import Activity
 
 from .. import db
 
-def index(): # GET all places
+def index(): # GET all activities
     activities = Activity.query.all()
 
     try:
@@ -23,12 +23,12 @@ def show(id): #GET a activity
 def create(): #POST an activity
     try:
         name, location, description, tags = request.json.values()
-        new_place = Activity(name, location, description, tags)
-        db.session.add(new_place)
+        new_activity= Activity(name, location, description, tags)
+        db.session.add(new_activity)
         db.session.commit()
-        return jsonify({ "data": new_place.json}), 201
+        return jsonify({ "data": new_activity.json}), 201
     except:
-        raise exceptions.BadRequest(f"cant post place")
+        raise exceptions.BadRequest(f"cant post activity")
 
 
 def update(id): #PATCH an activity
