@@ -1,5 +1,6 @@
 from application.places.model import Place
 from application.activities.model import Activity
+# from application.reviews.model import Review
 # from application.plans.model import Plan
 def test_new_place():
 
@@ -44,3 +45,14 @@ def test_new_activity():
 #         "activity_id": new_plan.activity_id,
 #         "status": new_plan.status
 #         }
+
+# def test_new_review():
+#     new_review = Review(guide_id=1,tourist_id=1, rating=10, comment="jkl")
+#     assert new_review.json == {
+#         "review_id": new_review.review_id,
+#         "guide_id": new_review.guide_id,
+#         "tourist_id": new_review.tourist_id,
+#         "rating": new_review.rating,
+#         "comment": new_review.comment
+#         }
+
