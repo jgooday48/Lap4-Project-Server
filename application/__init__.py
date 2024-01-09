@@ -2,10 +2,12 @@ from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
+from flask_jwt_extended import JWTManager
 import os
 
 
 db = SQLAlchemy() # initialise db
+jwt = JWTManager()
 
 def create_app(env=None):
     load_dotenv()
@@ -26,6 +28,7 @@ def create_app(env=None):
 
     
     db.init_app(app)
+    jwt.init_app(app)
 
     #import blueprints
     from application.routes import main
