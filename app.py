@@ -2,6 +2,7 @@ from application import create_app # app from __init__.py
 
 from application import routes
 from application.tourists import routes
+from application.tokens import routes
 
 
 if __name__=='__main__':

@@ -1,9 +1,9 @@
 from enum import Enum, auto
 
 class UserType(Enum): 
-    TOURIST = auto()
-    GUIDE = auto()
-    ADMIN = auto()
+    TOURIST = 'TOURIST'
+    GUIDE = 'GUIDE'
+    ADMIN = 'ADMIN'
 
 
 

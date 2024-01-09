@@ -1,5 +1,5 @@
 from flask import request, Blueprint
-from .controller import register, login, find_user
+from .controller import register, login, find_user, current_tourist, refresh_access, logout
 from flask_jwt_extended import jwt_required
 
 
@@ -22,3 +22,22 @@ def handle_user_login():
 def handle_username(username): 
    if request.method == 'GET': 
       return find_user(username)
+
+
+@tourist_bp.route("/tourists/current", methods=['GET'])
+@jwt_required()
+def handle_current_user():
+   if request.method == 'GET':
+      return current_tourist()
+   
+
+@tourist_bp.route("/tourists/refresh", methods=['GET'])
+@jwt_required(refresh=True)
+def handle_refresh_token():
+   return refresh_access()
+
+
+@tourist_bp.route('/tourists/logout', methods=['GET'])
+@jwt_required()
+def handle_logout():
+   return logout()
