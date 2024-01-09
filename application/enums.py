@@ -1,5 +1,5 @@
-# from enums 
-class Specialisation:
+from enum import Enum, auto
+class Specialisation(Enum):
     HISTORICAL="historical"
     OUTDOOR_ACTIVITIES="outdoor activities"
     CULTURAL="cultural"
