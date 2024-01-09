@@ -1,7 +1,7 @@
 from flask import jsonify, request
 from werkzeug import exceptions
 from .model import Activity
-
+from application.enums import Specialisation
 from .. import db
 
 def index(): # GET all activities
@@ -22,8 +22,9 @@ def show(id): #GET a activity
     
 def create(): #POST an activity
     try:
-        name, location, description, tags = request.json.values()
-        new_activity= Activity(name, location, description, tags)
+        name, location, specialisation, place_id, description, post_code = request.json.values()
+
+        new_activity= Activity(name, location, specialisation, place_id, description, post_code)
         db.session.add(new_activity)
         db.session.commit()
         return jsonify({ "data": new_activity.json}), 201

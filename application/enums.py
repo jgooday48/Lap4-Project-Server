@@ -13,3 +13,6 @@ class Status(Enum):
     PLANNED=auto()
     ONGOING=auto()
     COMPLETED=auto()
+    
+# def __str__(self):
+#     return self.name

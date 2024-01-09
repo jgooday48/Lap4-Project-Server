@@ -17,6 +17,7 @@ class Place(db.Model):
         self.description = description
         self.tags = tags
         # self.google_api = google_api
+    
 
     @property
     def json(self):
