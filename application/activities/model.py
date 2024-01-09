@@ -6,16 +6,16 @@ class Activity(db.Model):
     activity_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), nullable=False)
     location = db.Column(db.String(150), nullable=False)
-    # specialisation = db.Column(db.Enum(Specialisation), nullable=False)
+    specialisation = db.Column(db.Enum(Specialisation), nullable=False)
     place_id = db.Column(db.Integer,db.ForeignKey('places.place_id') ,nullable=False)
     # guide_id = db.Column(db.Integer, db.ForeignKey('guide.guide_id'), nullable=False)
     description = db.Column(db.String(300), nullable=False)
     post_code = db.Column(db.String(300), nullable=False)
 
-    def __init__(self, name, location, place_id, description, post_code):
+    def __init__(self, name, location, place_id, description, post_code, specialisation):
         self.name = name
         self.location = location
-        # self.specialisation = specialisation
+        self.specialisation = specialisation
         self.place_id = place_id
         # self.guide_id = guide_id
         self.description = description
@@ -27,7 +27,7 @@ class Activity(db.Model):
             "activity_id": self.activity_id,
             "name": self.name,
             "location": self.location,
-            # "specialisation": self.specialisation,
+            "specialisation": self.specialisation.value,
             "place_id": self.place_id,
             # "guide_id": self.guide_id,
             "description": self.description,

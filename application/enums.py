@@ -1,9 +1,15 @@
 from enum import Enum, auto
+
 class Specialisation(Enum):
-    HISTORICAL="historical"
-    OUTDOOR_ACTIVITIES="outdoor activities"
-    CULTURAL="cultural"
-    DINING="dining"
-    MUSIC="music"
-    FEMALE_FRIENDLY="female friendly"
-    DISABILLITY_FRIENDLY="disabillity friendly"
+    HISTORICAL=auto()
+    OUTDOOR_ACTIVITIES=auto()
+    CULTURAL=auto()
+    DINING=auto()
+    MUSIC=auto()
+    FEMALE_FRIENDLY=auto()
+    DISABILITY_FRIENDLY=auto()
+
+class Status(Enum):
+    PLANNED=auto()
+    ONGOING=auto()
+    COMPLETED=auto()

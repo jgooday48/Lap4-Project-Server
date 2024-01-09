@@ -1,5 +1,5 @@
 import json
-    
+from application.enums import Specialisation
 def test_index_page(client):
     response = client.get("/")    
     assert response.status_code == 200     
@@ -22,7 +22,7 @@ def test_create_activity(client):
     data = {
         "name": "sailing",
         "location": "Oregon",
-        # "specialisation": self.specialisation,
+        "specialisation": Specialisation.DINING,
         "place_id": 1,
         # "guide_id": self.guide_id,
         "description": "jkl",
