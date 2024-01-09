@@ -8,6 +8,7 @@ class Place(db.Model):
     location = db.Column(db.String(150), nullable=False)
     description = db.Column(db.String(500), nullable=False)
     tags = db.Column(db.String(150), nullable=False)
+    activities = db.relationship('Activity', backref='place', lazy=True)
 
     def __init__(self, name, location, description, tags):
         self.name = name
