@@ -9,8 +9,7 @@ class Place(db.Model):
     description = db.Column(db.String(500), nullable=False)
     tags = db.Column(db.String(150), nullable=False)
 
-    def __init__(self, place_id, name, location, description, tags):
-        self.place_id = place_id
+    def __init__(self, name, location, description, tags):
         self.name = name
         self.location = location
         self.description = description

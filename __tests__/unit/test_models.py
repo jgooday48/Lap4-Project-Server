@@ -2,8 +2,8 @@ from application.Place.model import Place
 
 def test_new_place():
 
-    new_place = Place(place_id=1, name="amsterdam", location="Netherlands", description="European city", tags="#awesome")
-    assert new_place.place_id == 1
+    new_place = Place(name="amsterdam", location="Netherlands", description="European city", tags="#awesome")
+    # assert new_place.place_id == 1
 
 
     assert new_place.json == {

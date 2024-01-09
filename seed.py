@@ -1,5 +1,5 @@
 from application import create_app, db
-
+from application.Place.model import Place
 app = create_app()
 app.app_context().push()  # push the app context
 
@@ -10,6 +10,15 @@ db.create_all()
 print("Creating Database")
 
 print("Seeding Database")
+
+name = "NYC"
+tags = "#photo"
+description="awesome"
+location = "USA"
+
+place = Place(name=name, tags=tags, description=description, location=location)
+
+db.session.add(place)
 
 
 
