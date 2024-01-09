@@ -6,6 +6,7 @@ from application.activities import routes
 # from application.plans import routes
 # from application.reviews import routes
 
+
 app = create_app()
 if __name__=='__main__':
     # app = create_app("PROD")
