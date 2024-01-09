@@ -10,11 +10,13 @@ flask-cors = "*"
 flask-sqlalchemy = "*"
 psycopg2-binary = "*"
 gunicorn = "*"
+werkzeug = "*"
 
 [dev-packages]
 pytest = "*"
 pytest-cov = "*"
 pytest-watch = "*"
+autopep8 = "*"
 
 [requires]
 python_version = "3.9"

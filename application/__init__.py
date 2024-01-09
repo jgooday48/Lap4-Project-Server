@@ -29,7 +29,11 @@ def create_app(env=None):
 
     #import blueprints
     from application.routes import main
+    from application.tourists.routes import tourist_bp
+
     app.register_blueprint(main)
+    app.register_blueprint(tourist_bp)
+
 
     # from application.authors.routes import authors
     # app.register_blueprint(authors)
