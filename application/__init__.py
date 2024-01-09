@@ -29,11 +29,11 @@ def create_app(env=None):
     from application.routes import main
     app.register_blueprint(main)
 
-    # from application.authors.routes import authors
-    # app.register_blueprint(authors)
+    from application.places.routes import places
+    app.register_blueprint(places)
 
-    # from application.books.routes import books
-    # app.register_blueprint(books)
+    from application.activities.routes import activities
+    app.register_blueprint(activities)
 
     return app
 

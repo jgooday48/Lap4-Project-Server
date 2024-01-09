@@ -1,5 +1,7 @@
 import pytest
 from application import create_app,db
+from application.places.model import Place
+from application.activities.model import Activity
 
 @pytest.fixture
 def client():
@@ -19,11 +21,12 @@ def client():
         # Create the test database
         db.create_all()
         # Create fake data
-        # test_author = Author(name="Test")
-        # test_book = Book(title="Test", author_id=1,genre="fantasy")
-        # # Inject it into the database
-        # db.session.add(test_author)
-        # db.session.add(test_book)
+        test_place = Place(name="Test", location="test", description="test", tags="test")
+        test_activity = Activity(name="canoe", location="nyc", place_id=1, description="jkl", post_code="722")
+        # Inject it into the database
+
+        db.session.add(test_place)
+        db.session.add(test_activity)
         db.session.commit()
 
     return client
