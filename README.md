@@ -11,7 +11,7 @@ SQLALCHEMY_DATABASE_URI=DB_URI=postgresql://username:password@localhost:5432/dat
 ```
 - Open docker
 - Edit the docker-compose.yaml file to your own specifications
-- Hence, edit the DB URI in the .env file to replace username, password and database with you own
+- Hence, edit the DB URI in the .env file to replace username, password and database with your own
 - Run `docker compose up -d` to start the docker container
 - Make sure that your interpreter is selected as a pipenv one related to your file
 - Run `python seed.py` to seed the db instance
