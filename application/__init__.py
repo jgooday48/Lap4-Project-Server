@@ -11,6 +11,8 @@ def create_app(env=None):
     load_dotenv()
     app = Flask(__name__)
 
+    app.config['SECRET_KEY'] = 'KEEPITHUSHHUSH'
+
     app.json_provider_class.sort_keys = False
     CORS(app)
     if env == 'TEST':

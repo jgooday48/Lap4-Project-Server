@@ -17,7 +17,7 @@ pytest-cov = "*"
 pytest-watch = "*"
 
 [requires]
-python_version = "3.11"
+python_version = "3.9"
 
 [scripts]
 dev = "python app.py"
