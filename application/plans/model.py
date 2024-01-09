@@ -1,5 +1,6 @@
 from application import db
 from datetime import datetime
+from application.enums import Status
 
 class Plan(db.model):
     __tablename__ = "plans"
@@ -9,14 +10,14 @@ class Plan(db.model):
     guide_id = db.Column(db.Integer, db.ForeignKey('guide.guide_id'), nullable=False)
     timestamp= db.Column(db.DateTime, default=datetime.utcnow,nullable=False)
     activity_id = db.Column(db.Integer, db.ForeignKey('activities.activity_id'), nullable=False)
-    # status = db.Column(db.enum(), nullable=False)
+    status = db.Column(db.enum(Status), nullable=False)
 
-    def __init__(self, tourist_id, guide_id, timestamp, activity_id): #, status):
+    def __init__(self, tourist_id, guide_id, timestamp, activity_id, status):
         self.tourist_id = tourist_id
         self.guide_id = guide_id
         self.timestamp = timestamp
         self.activity_id= activity_id
-        # self.status = status
+        self.status = status
 
 
     @property
@@ -27,5 +28,5 @@ class Plan(db.model):
             "guide_id": self.guide_id,
             "timestamp": self.timestamp,
             "activity_id": self.activity_id,
-            # "status": self.status
+            "status": self.status.value
         }

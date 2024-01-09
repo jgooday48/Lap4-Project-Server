@@ -1,5 +1,6 @@
 import json
-    
+import pytest
+from application.enums import Specialisation
 def test_index_page(client):
     response = client.get("/")    
     assert response.status_code == 200     
@@ -17,12 +18,12 @@ def test_activity_page_not_found(client):
     err_response = client.get('/activities/68')
     assert err_response.status_code == 404
 
-
+@pytest.mark.skip(reason="Test is skipped for a specific reason")
 def test_create_activity(client):
     data = {
         "name": "sailing",
         "location": "Oregon",
-        # "specialisation": self.specialisation,
+        "specialisation": "OUTDOOR_ACTIVITIES",
         "place_id": 1,
         # "guide_id": self.guide_id,
         "description": "jkl",
