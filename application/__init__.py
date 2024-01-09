@@ -50,6 +50,7 @@ def create_app(env=None):
 
 
 
+
     #jwt error handlers
     @jwt.expired_token_loader
     def expired_token_callback(jwt_header, jwt_data): 
@@ -66,6 +67,19 @@ def create_app(env=None):
 
 
     
+
+
+    from application.places.routes import places
+    app.register_blueprint(places)
+
+    from application.activities.routes import activities
+    app.register_blueprint(activities)
+
+    # from application.plans.routes import plans
+    # app.register_blueprint(plans)
+
+    # from application.reviews.routes import reviews
+    # app.register_blueprint(reviews)
 
 
     return app

@@ -1,4 +1,4 @@
-from enum import Enum
+
 from enum import Enum, auto
 
 class UserType(Enum): 
@@ -34,6 +34,9 @@ class Filters(Enum):
     WELLNESS = 'Wellness'
 
 
-
-
+class Status(Enum):
+    PLANNED=auto()
+    ONGOING=auto()
+    COMPLETED=auto()
+    
 
