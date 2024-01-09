@@ -1,4 +1,4 @@
-from application.Place.model import Place
+from application.places.model import Place
 
 def test_new_place():
 

@@ -1,5 +1,5 @@
 from application import create_app, db
-from application.Place.model import Place
+from application.places.model import Place
 app = create_app()
 app.app_context().push()  # push the app context
 
