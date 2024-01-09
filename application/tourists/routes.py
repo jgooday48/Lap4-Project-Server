@@ -1,5 +1,6 @@
 from flask import request, Blueprint
 from .controller import register, login, find_user
+from flask_jwt_extended import jwt_required
 
 
 tourist_bp = Blueprint('tourists', __name__)
@@ -17,6 +18,7 @@ def handle_user_login():
       return login()
    
 @tourist_bp.route("/tourists/username/<username>", methods=['GET'])
+# @jwt_required()
 def handle_username(username): 
    if request.method == 'GET': 
       return find_user(username)

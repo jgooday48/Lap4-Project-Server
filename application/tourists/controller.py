@@ -42,7 +42,6 @@ def login():
     return jsonify({"error": "Invalid username or password"}), 400
 
 
-
 def find_user(username):
 
     if username is None:
