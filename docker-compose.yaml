@@ -1,0 +1,20 @@
+# docker-compose.yaml
+version: '3'
+services:
+  db:
+    image: postgres:14
+    container_name: reddy44 #<give your container a name (optional)>
+    ports:
+      - 5432:5432
+    environment: 
+      - POSTGRES_DB=database
+      - POSTGRES_USER=reddy
+      - POSTGRES_PASSWORD=jkljkl
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+      # - ./db/migrations:/docker-entrypoint-initdb.d/:ro (optional)
+volumes:
+  dbdata:
+    name: reddy_44
+
+# DB_URI=postgresql://username:password@localhost:5432/database
