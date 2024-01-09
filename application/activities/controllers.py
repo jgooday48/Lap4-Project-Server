@@ -32,17 +32,23 @@ def create(): #POST an activity
 
 
 def update(id): #PATCH an activity
-    data = request.json
-    activity = Activity.query.filter_by(activity_id=id).first()
+    try:
+        data = request.json
+        activity = Activity.query.filter_by(activity_id=id).first()
 
-    for (attribute, value) in data.items():
-        if hasattr(activity, attribute):
-            setattr(activity, attribute, value)
-    db.session.commit()
-    return jsonify({ "data":activity.json})
+        for (attribute, value) in data.items():
+            if hasattr(activity, attribute):
+                setattr(activity, attribute, value)
+        db.session.commit()
+        return jsonify({ "data":activity.json})
+    except:
+        raise exceptions.NotFound(f"place does not exist")
 
 def destroy(id): #DELETE an activity
-    activity = Activity.query.filter_by(activity_id=id).first()
-    db.session.delete(activity)
-    db.session.commit()
-    return "activity deleted", 204
+    try:
+        activity = Activity.query.filter_by(activity_id=id).first()
+        db.session.delete(activity)
+        db.session.commit()
+        return "activity deleted", 204
+    except:
+        raise exceptions.NotFound(f"place does not exist")

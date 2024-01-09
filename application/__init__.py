@@ -35,5 +35,8 @@ def create_app(env=None):
     from application.activities.routes import activities
     app.register_blueprint(activities)
 
+    # from application.plans.routes import plans
+    # app.register_blueprint(plans)
+
     return app
 

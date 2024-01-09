@@ -32,17 +32,21 @@ def create(): #POST a place
 
 
 def update(id): #PATCH a place
-    data = request.json
-    place = Place.query.filter_by(place_id=id).first()
+    try:
+        data = request.json
+        place = Place.query.filter_by(place_id=id).first()
 
-    for (attribute, value) in data.items():
-        if hasattr(place, attribute):
-            setattr(place, attribute, value)
-    db.session.commit()
-    return jsonify({ "data":place.json})
-
+        for (attribute, value) in data.items():
+            if hasattr(place, attribute):
+                setattr(place, attribute, value)
+        db.session.commit()
+        return jsonify({ "data":place.json})
+    except:
+        raise exceptions.NotFound(f"place does not exist")
 def destroy(id): #DELETE a place
-    place = Place.query.filter_by(place_id=id).first()
-    db.session.delete(place)
-    db.session.commit()
-    return "book deleted", 204
+    try:
+        place = Place.query.filter_by(place_id=id).first()
+        db.session.delete(place)
+        db.session.commit()
+    except:
+        raise exceptions.NotFound(f"place does not exist")
