@@ -29,9 +29,9 @@ name = "NYC"
 tags = ["#photo"]
 description="awesome"
 location = "USA"
+images = ["https://upload.wikimedia.org/wikipedia/commons/4/47/New_york_times_square-terabass.jpg"]
 
-place = Place(name=name, tags=tags, description=description, location=location)
-
+place = Place(name=name, tags=tags, description=description, location=location, images=images)
 db.session.add(place)
 
 
@@ -57,15 +57,15 @@ def create_tourist(name, user_type, username, email):
     db.session.add(tourist)
 
 
-def create_place(name, tags, description, location):
+def create_place(name, tags, description, location, images=None):
     place = Place(name=name, tags=tags,
-                  description=description, location=location)
+                  description=description, location=location, images=images or [])
     db.session.add(place)
 
 
-def create_guide(place_id, name, user_type, username, email, filters):
+def create_guide(place_id, name, user_type, username, email, filters, images=None):
     guide = Guide(place_id=place_id, name=name,
-                  user_type=user_type, username=username, email=email)
+                  user_type=user_type, username=username, email=email, images=images or [])
     guide.set_password('password')
     guide.filters = filters
     db.session.add(guide)
@@ -91,9 +91,11 @@ for data in tourist_data:
 
 db.session.commit()
 
+
 # Add more places
 place_data = [
-    ("Tokyo", ["#technology"], "Futuristic city", "Japan"),
+    ("Tokyo", ["#technology"], "Futuristic city", "Japan",  [
+     "https://media.cntraveller.com/photos/64f6f03779eae8fd6b04756b/16:9/w_1920,c_limit/japan-GettyImages-1345059895.jpeg"]),
     ("Malta", ["#beach"], "best island", "Europe"),
     ("Los Angeles", ["#city"], "vibrant city", "USA"),
     ("Paris", ["#culture"], "City of Love", "France"),

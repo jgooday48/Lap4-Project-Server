@@ -22,8 +22,8 @@ def show(id): #GET a place
     
 def create(): #POST a place
     try:
-        name, location, description, tags = request.json.values()
-        new_place = Place(name, location, description, tags)
+        name, location, description, tags, images = request.json.values()
+        new_place = Place(name, location, description, tags, images)
         db.session.add(new_place)
         db.session.commit()
         return jsonify({ "data": new_place.json}), 201
