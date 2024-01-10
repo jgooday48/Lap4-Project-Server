@@ -22,7 +22,8 @@ def create_app(env=None):
     if env == 'TEST':
         app.config['TESTING'] = True
         app.config['DEBUG'] = False
-        app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite://"
+        # app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite://"
+        app.config['SQLALCHEMY_DATABASE_URI']= os.environ['TEST_DB']
     else:
         app.config['TESTING'] = False
         app.config['DEBUG'] = True

@@ -18,3 +18,12 @@ SQLALCHEMY_DATABASE_URI=DB_URI=postgresql://username:password@localhost:5432/dat
 - Run `pipenv run dev` to start the api
 - The api runs on http://localhost:5000
 - To close the docker container run `docker compose down`
+
+# Instructions to test
+- Create an elephant SQL instance
+- copy and paste the following into the .env file:
+```
+TEST_DB=
+```
+- copy and paste the URL into .env
+- Run `pipenv run test` or `pipenv run coverage`

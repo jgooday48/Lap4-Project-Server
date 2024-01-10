@@ -14,6 +14,7 @@ class Guide(db.Model):
     email = db.Column(db.String(), nullable=False)
     password = db.Column(db.Text())
     filters = db.Column(ARRAY(db.Enum(Filters)))
+
     activities = db.relationship('Activity', backref='guide', lazy=True)
     plans = db.relationship('Plan', backref='guide', lazy=True, foreign_keys='Plan.guide_id')
     reviews = db.relationship('Review', backref='guide', lazy=True, foreign_keys='Review.guide_id')
@@ -49,5 +50,5 @@ class Guide(db.Model):
             "username": self.username,
             "email": self.email,
             "password": self.password,
-            "filters": [filter.value for filter in self.filters]
+            "filters": [filter.value if isinstance(filter, Filters) else filter for filter in self.filters]
         }
