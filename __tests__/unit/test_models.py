@@ -2,7 +2,7 @@ from application.places.model import Place
 from application.activities.model import Activity
 # from application.reviews.model import Review
 # from application.plans.model import Plan
-from application.enums import Specialisation
+
 import pytest
 def test_new_place():
 
@@ -21,7 +21,7 @@ def test_new_place():
 @pytest.mark.skip(reason="Test is skipped for a specific reason")
 def test_new_activity():
 
-    new_activity = Activity(name="amsterdam", location="Netherlands", description="European city", post_code="111", place_id=1, specialisation=Specialisation.CULTURAL)
+    new_activity = Activity(name="amsterdam", location="Netherlands", description="European city", post_code="111", place_id=1, specialisation="CULTURAL")
     # assert new_place.place_id == 1
 
 

@@ -1,6 +1,6 @@
 import json
 import pytest
-from application.enums import Specialisation
+
 def test_index_page(client):
     response = client.get("/")    
     assert response.status_code == 200     

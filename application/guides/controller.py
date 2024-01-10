@@ -13,6 +13,7 @@ def register():
 
     new_user = Guide(
         username=data.get('username'),
+        place_id = data.get('place_id'),
         email=data.get('email'),
         user_type=data.get('user_type'),
         name=data.get('name'),
