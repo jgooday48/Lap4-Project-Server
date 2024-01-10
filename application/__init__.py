@@ -82,8 +82,8 @@ def create_app(env=None):
     from application.places.routes import places
     app.register_blueprint(places)
 
-    from application.activities.routes import activities
-    app.register_blueprint(activities)
+    from application.activities.routes import activities_bp
+    app.register_blueprint(activities_bp)
 
     # from application.plans.routes import plans
     # app.register_blueprint(plans)

@@ -4,6 +4,9 @@ from application.tourists.model import Tourist
 from application.guides.model import Guide
 from application.places.model import Place
 from application.activities.model import Activity
+from sqlalchemy import text
+
+
 
 
 app = create_app()
@@ -37,9 +40,12 @@ guide1.set_password('password')
 guide1.filters = ['HISTORICAL', 'OUTDOOR_ACTIVITIES']
 db.session.add(guide1)
 
-activity = Activity(name="canoe", location="nyc", place_id=1, description="jkl", post_code="722",specialisation="OUTDOOR_ACTIVITIES")
-
+activity = Activity(name="canoe", location="nyc",
+                    filters=["OUTDOOR_ACTIVITIES"], place_id=1, description="sick as", zip_code="NE3 4RY")
 
 db.session.add(activity)
+
+# guide1.activities.append(activity)
+
 
 db.session.commit()
