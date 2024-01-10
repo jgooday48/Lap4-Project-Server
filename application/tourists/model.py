@@ -43,7 +43,7 @@ class Tourist(db.Model):
         return {
             "tourist_id": self.tourist_id,
             "name": self.name,
-            "user_type": self.user_type.value,  
+            "user_type": self.user_type.name,  
             "username": self.username,
             "email": self.email,
             "password": self.password

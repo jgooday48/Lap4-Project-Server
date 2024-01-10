@@ -1,4 +1,6 @@
 from application import db
+from sqlalchemy.dialects.postgresql import ARRAY
+
 
 class Place(db.Model):
     __tablename__ = "places"
@@ -7,7 +9,7 @@ class Place(db.Model):
     name = db.Column(db.String(150), nullable=False)
     location = db.Column(db.String(150), nullable=False)
     description = db.Column(db.String(500), nullable=False)
-    tags = db.Column(db.String(150), nullable=False)
+    tags = db.Column(ARRAY(db.String(150)), nullable=False)
     # google_api = db.Column(db.String(150), nullable=False)
     activities = db.relationship('Activity', backref='place', lazy=True, foreign_keys='Activity.place_id')
     plans = db.relationship('Guide', backref='place', lazy=True, foreign_keys='Guide.place_id')

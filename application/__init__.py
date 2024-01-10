@@ -38,12 +38,16 @@ def create_app(env=None):
     from application.tourists.routes import tourist_bp
     from application.guides.routes import guide_bp
     from application.tourists.model import Tourist
-
+    from application.tokens.model import Token
+    from application.tokens.routes import token_bp
 
     app.register_blueprint(main)
     app.register_blueprint(tourist_bp)
     app.register_blueprint(guide_bp)
+    app.register_blueprint(token_bp)
 
+
+   
     @jwt.user_lookup_loader
     def user_lookup_callback(_jwt_headers, jwt_data):
         identity = jwt_data['sub']
@@ -66,6 +70,12 @@ def create_app(env=None):
         return jsonify({'message': 'Request does not contain valid token', 'error': 'authorization_header'}), 401
     
 
+    @jwt.token_in_blocklist_loader
+    def token_in_blocklist_callback(jwt_header, jwt_data):
+        jti = jwt_data['jti']
+        token = db.session.query(Token).filter(Token.jti==jti).scalar()
+        return token is not None
+
 
     
 
@@ -73,8 +83,8 @@ def create_app(env=None):
     from application.places.routes import places
     app.register_blueprint(places)
 
-    from application.activities.routes import activities
-    app.register_blueprint(activities)
+    from application.activities.routes import activities_bp
+    app.register_blueprint(activities_bp)
 
     from application.plans.routes import plans
     app.register_blueprint(plans)

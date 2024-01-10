@@ -3,6 +3,15 @@ from application.enums import UserType, Filters
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.dialects.postgresql import ARRAY
 
+
+guide_activity = db.Table('guide_activity',
+                          db.Column('guide_id', db.Integer,
+                                    db.ForeignKey('guides.guide_id')),
+                          db.Column('activity_id', db.Integer,
+                                    db.ForeignKey('activities.activity_id'))
+)
+                          
+
 class Guide(db.Model):
     __tablename__ = "guides"
 
@@ -10,10 +19,13 @@ class Guide(db.Model):
     place_id = db.Column(db.Integer, db.ForeignKey('places.place_id'))
     name = db.Column(db.String(100), nullable=False)
     user_type = db.Column(db.Enum(UserType), nullable=False)
-    username = db.Column(db.String(100), nullable=False)
+    username = db.Column(db.String(100), nullable=False, unique=True)
     email = db.Column(db.String(), nullable=False)
     password = db.Column(db.Text())
     filters = db.Column(ARRAY(db.Enum(Filters)))
+    activities = db.relationship(
+        'Activity', secondary=guide_activity, backref=db.backref('guides', lazy='dynamic')
+    )
 
     activities = db.relationship('Activity', backref='guide', lazy=True)
     plans = db.relationship('Plan', backref='guide', lazy=True, foreign_keys='Plan.guide_id')
@@ -27,6 +39,14 @@ class Guide(db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+    
+    def get_activities(self):
+        return [activity.json for activity in self.activities]
+    
+    def add_activity(self, activity):
+        if activity not in self.activities:
+            self.activities.append(activity)
+            db.session.commit()
 
     @classmethod
     def get_user_by_username(cls, username):
@@ -40,15 +60,16 @@ class Guide(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    @property
+     @property
     def json(self):
         return {
             "guide_id": self.guide_id,
-            "place_id": self.place_id,
+            "place_id":self.place_id,
             "name": self.name,
             "user_type": self.user_type.value,
             "username": self.username,
             "email": self.email,
             "password": self.password,
-            "filters": [filter.value if isinstance(filter, Filters) else filter for filter in self.filters]
+            "filters": [f.value for f in self.filters]
         }
+
