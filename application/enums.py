@@ -32,6 +32,8 @@ class Filters(Enum):
     GAMING = 'Gaming'
     PHOTOGRAPHY = 'Photography'
     WELLNESS = 'Wellness'
+    FOOD = 'Food'
+    NIGHTLIFE = 'Nightlife'
 
 
 class Status(Enum):
