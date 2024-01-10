@@ -4,11 +4,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.dialects.postgresql import ARRAY
 
 
-# guide_activity = db.Table('guide_activity',
-#                           db.Column('guide_id', db.Integer,
-#                                     db.ForeignKey('guides.guide_id')),
-#                           db.Column('activity_id', db.Integer,
-#                                     db.ForeignKey('activities.activity_id'))
+guide_activity = db.Table('guide_activity',
+                          db.Column('guide_id', db.Integer,
+                                    db.ForeignKey('guides.guide_id')),
+                          db.Column('activity_id', db.Integer,
+                                    db.ForeignKey('activities.activity_id'))
+)
                           
 
 class Guide(db.Model):
@@ -21,9 +22,9 @@ class Guide(db.Model):
     email = db.Column(db.String(), nullable=False)
     password = db.Column(db.Text())
     filters = db.Column(ARRAY(db.Enum(Filters)))
-    # activities = db.relationship(
-    #     'Activity', secondary=guide_activity, backref=db.backref('guides', lazy='dynamic')
-    # )
+    activities = db.relationship(
+        'Activity', secondary=guide_activity, backref=db.backref('guides', lazy='dynamic')
+    )
 
 
     def __repr__(self):
