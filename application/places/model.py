@@ -11,8 +11,8 @@ class Place(db.Model):
     description = db.Column(db.String(500), nullable=False)
     tags = db.Column(ARRAY(db.String(150)), nullable=False)
     # google_api = db.Column(db.String(150), nullable=False)
-    activities = db.relationship('Activity', backref='place', lazy=True)
-
+    activities = db.relationship('Activity', backref='place', lazy=True, foreign_keys='Activity.place_id')
+    plans = db.relationship('Guide', backref='place', lazy=True, foreign_keys='Guide.place_id')
     def __init__(self, name, location, description, tags):
         self.name = name
         self.location = location

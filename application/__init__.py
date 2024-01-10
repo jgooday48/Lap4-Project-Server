@@ -22,7 +22,8 @@ def create_app(env=None):
     if env == 'TEST':
         app.config['TESTING'] = True
         app.config['DEBUG'] = False
-        app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite://"
+        # app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite://"
+        app.config['SQLALCHEMY_DATABASE_URI']= os.environ['TEST_DB']
     else:
         app.config['TESTING'] = False
         app.config['DEBUG'] = True
@@ -85,11 +86,11 @@ def create_app(env=None):
     from application.activities.routes import activities_bp
     app.register_blueprint(activities_bp)
 
-    # from application.plans.routes import plans
-    # app.register_blueprint(plans)
+    from application.plans.routes import plans
+    app.register_blueprint(plans)
 
-    # from application.reviews.routes import reviews
-    # app.register_blueprint(reviews)
+    from application.reviews.routes import reviews
+    app.register_blueprint(reviews)
 
 
     return app

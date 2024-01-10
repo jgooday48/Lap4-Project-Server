@@ -27,6 +27,9 @@ class Guide(db.Model):
         'Activity', secondary=guide_activity, backref=db.backref('guides', lazy='dynamic')
     )
 
+    activities = db.relationship('Activity', backref='guide', lazy=True)
+    plans = db.relationship('Plan', backref='guide', lazy=True, foreign_keys='Plan.guide_id')
+    reviews = db.relationship('Review', backref='guide', lazy=True, foreign_keys='Review.guide_id')
 
     def __repr__(self):
         return f"<Guide: {self.username}"
@@ -57,7 +60,7 @@ class Guide(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    @property
+     @property
     def json(self):
         return {
             "guide_id": self.guide_id,
@@ -69,3 +72,4 @@ class Guide(db.Model):
             "password": self.password,
             "filters": [f.value for f in self.filters]
         }
+

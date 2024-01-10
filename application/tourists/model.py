@@ -13,6 +13,8 @@ class Tourist(db.Model):
     username = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(), nullable=False)
     password = db.Column(db.Text())
+    plans = db.relationship('Plan', backref='tourist', lazy=True, foreign_keys='Plan.tourist_id')
+    reviews = db.relationship('Review', backref='tourist', lazy=True, foreign_keys='Review.tourist_id')
 
     def __repr__(self):
         return f"<User {self.username}"
