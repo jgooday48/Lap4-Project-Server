@@ -45,5 +45,5 @@ class Guide(db.Model):
             "username": self.username,
             "email": self.email,
             "password": self.password,
-            "filters": [filter.value for filter in self.filters]
+            "filters": [f.value for f in self.filters]
         }
