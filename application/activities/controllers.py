@@ -73,3 +73,19 @@ def destroy(id):
     db.session.delete(activity)
     db.session.commit()
     return "Activity Deleted", 204
+
+
+def find_guides_by_activity(id):
+    try:
+        activity = Activity.query.filter_by(activity_id=id).first()
+        print("activity: ", activity)
+
+        if activity:
+            activity_guides = activity.get_guides()
+            return jsonify(activity_guides), 200
+        else:
+            return jsonify({"error": "Guide not found"}), 404
+
+    except Exception as e:
+        print(str(e))
+        return jsonify({"error": "Error retrieving activities by guide"}), 500

@@ -1,6 +1,7 @@
 from application import db
 from application.enums import Filters
 from sqlalchemy.dialects.postgresql import ARRAY
+from application.guides import model
 
 
 
@@ -28,3 +29,6 @@ class Activity(db.Model):
             "description": self.description,
             "zip_code": self.zip_code
         }
+    
+    def get_guides(self):
+        return [guide.json for guide in self.guides]
