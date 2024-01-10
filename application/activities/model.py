@@ -8,16 +8,16 @@ class Activity(db.Model):
     location = db.Column(db.String(150), nullable=False)
     specialisation = db.Column(db.Enum(Filters), nullable=False)
     place_id = db.Column(db.Integer,db.ForeignKey('places.place_id') ,nullable=False)
-    # guide_id = db.Column(db.Integer, db.ForeignKey('guide.guide_id'), nullable=False)
+    guide_id = db.Column(db.Integer, db.ForeignKey('guides.guide_id'), nullable=False)
     description = db.Column(db.String(300), nullable=False)
     post_code = db.Column(db.String(300), nullable=False)
 
-    def __init__(self, name, location, place_id, description, post_code, specialisation):
+    def __init__(self, name, location, place_id, description, post_code, guide_id,specialisation):
         self.name = name
         self.location = location
         self.specialisation = specialisation
         self.place_id = place_id
-        # self.guide_id = guide_id
+        self.guide_id = guide_id
         self.description = description
         self.post_code = post_code
 
@@ -29,7 +29,7 @@ class Activity(db.Model):
             "location": self.location,
             "specialisation": self.specialisation.value,
             "place_id": self.place_id,
-            # "guide_id": self.guide_id,
+            "guide_id": self.guide_id,
             "description": self.description,
             "post_code": self.post_code
         }

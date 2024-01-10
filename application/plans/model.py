@@ -2,15 +2,15 @@ from application import db
 from datetime import datetime
 from application.enums import Status
 
-class Plan(db.model):
+class Plan(db.Model):
     __tablename__ = "plans"
 
     plan_id = db.Column(db.Integer, primary_key=True)
-    tourist_id = db.Column(db.Integer, db.ForeignKey('tourist.tourist_id'), nullable=False)
-    guide_id = db.Column(db.Integer, db.ForeignKey('guide.guide_id'), nullable=False)
-    timestamp= db.Column(db.DateTime, default=datetime.utcnow,nullable=False)
+    tourist_id = db.Column(db.Integer, db.ForeignKey('tourists.tourist_id'), nullable=False)
+    guide_id = db.Column(db.Integer, db.ForeignKey('guides.guide_id'), nullable=False)
+    timestamp= db.Column(db.Integer, nullable=False)
     activity_id = db.Column(db.Integer, db.ForeignKey('activities.activity_id'), nullable=False)
-    status = db.Column(db.enum(Status), nullable=False)
+    status = db.Column(db.Enum(Status), nullable=False)
 
     def __init__(self, tourist_id, guide_id, timestamp, activity_id, status):
         self.tourist_id = tourist_id

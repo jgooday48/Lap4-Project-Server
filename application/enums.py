@@ -35,8 +35,8 @@ class Filters(Enum):
 
 
 class Status(Enum):
-    PLANNED=auto()
-    ONGOING=auto()
-    COMPLETED=auto()
+    PLANNED='Planned'
+    ONGOING='Ongoing'
+    COMPLETED='Completed'
     
 
