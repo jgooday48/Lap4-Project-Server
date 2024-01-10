@@ -27,7 +27,7 @@ class Activity(db.Model):
             "activity_id": self.activity_id,
             "name": self.name,
             "location": self.location,
-            "specialisation": self.specialisation.value,
+            "specialisation":  [filter.value for filter in self.specialisation],
             "place_id": self.place_id,
             # "guide_id": self.guide_id,
             "description": self.description,

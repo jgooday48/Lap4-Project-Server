@@ -6,6 +6,7 @@ from .model import Tourist
 app = Flask(__name__)
 jwt = JWTManager(app)
 
+
 def register():
     data = request.get_json()
 
@@ -46,7 +47,6 @@ def login():
     return jsonify({"error": "Invalid username or password"}), 400
 
 
-
 def find_user(username):
 
     if username is None:
@@ -77,7 +77,3 @@ def refresh_access():
     identity = get_jwt_identity()
     access_token = create_access_token(identity=identity)
     return jsonify({"access_token": access_token})
-
-
-
-
