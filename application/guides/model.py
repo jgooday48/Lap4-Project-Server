@@ -60,7 +60,7 @@ class Guide(db.Model):
         db.session.add(self)
         db.session.commit()
 
-     @property
+    @property
     def json(self):
         return {
             "guide_id": self.guide_id,
