@@ -1,7 +1,7 @@
 from flask import jsonify, request
 from werkzeug import exceptions
 from .model import Activity
-from application.enums import Specialisation
+
 from .. import db
 
 def index(): # GET all activities
