@@ -89,3 +89,4 @@ def find_guides_by_activity(id):
     except Exception as e:
         print(str(e))
         return jsonify({"error": "Error retrieving activities by guide"}), 500
+

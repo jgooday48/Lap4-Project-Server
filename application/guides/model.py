@@ -39,6 +39,11 @@ class Guide(db.Model):
     
     def get_activities(self):
         return [activity.json for activity in self.activities]
+    
+    def add_activity(self, activity):
+        if activity not in self.activities:
+            self.activities.append(activity)
+            db.session.commit()
 
     @classmethod
     def get_user_by_username(cls, username):

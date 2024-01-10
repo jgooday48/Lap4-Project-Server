@@ -2,6 +2,7 @@ from flask import jsonify, request
 from flask_jwt_extended import create_access_token, create_refresh_token, current_user, get_jwt_identity, get_jwt
 from .model import Guide
 from werkzeug import exceptions
+from application.activities.model import Activity
 
 
 def register():
@@ -102,3 +103,30 @@ def find_activities_by_guide(username):
     except Exception as e:
         print(str(e))
         return jsonify({"error": "Error retrieving activities by guide"}), 500
+
+
+def add_activity_to_guide():
+    data = request.json
+
+    guide_id = data.get('guide_id')
+    activity_id = data.get('activity_id')
+
+    if not guide_id or not activity_id:
+        return jsonify({'error': 'Guide ID and Activity ID are required'}), 400
+
+    # Check if the guide with the given ID exists
+    guide = Guide.query.get(guide_id)
+
+    if not guide:
+        return jsonify({'error': 'Guide not found'}), 404
+
+    # Check if the activity with the given ID exists
+    activity = Activity.query.get(activity_id)
+
+    if not activity:
+        return jsonify({'error': 'Activity not found'}), 404
+
+    # Add the activity to the guide
+    guide.add_activity(activity)
+
+    return jsonify({'message': 'Activity and Guide paired up successfully'}), 200

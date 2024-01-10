@@ -18,6 +18,6 @@ def handle_activity(id):
     if request.method == "DELETE": return destroy(id)
     
 
-@activities_bp.route('/activities/<int:id>/guides', methods=["GET"])
+@activities_bp.route('/activities:<int:id>/guides', methods=["GET"])
 def handle_activity_guides(id):
     if request.method == "GET": return find_guides_by_activity(id)
