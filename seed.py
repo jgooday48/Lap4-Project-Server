@@ -35,7 +35,7 @@ place = Place(name=name, tags=tags, description=description, location=location)
 db.session.add(place)
 
 
-guide1 = Guide(name='Guy Dunn', user_type='GUIDE', username='guydunn42', email='guy.dunn@gmail.com')
+guide1 = Guide(place_id=1, name='Guy Dunn', user_type='GUIDE', username='guydunn42', email='guy.dunn@gmail.com')
 guide1.set_password('password')
 guide1.filters = ['HISTORICAL', 'OUTDOOR_ACTIVITIES']
 db.session.add(guide1)
@@ -45,7 +45,7 @@ activity = Activity(name="canoe", location="nyc",
 
 db.session.add(activity)
 
-# guide1.activities.append(activity)
+guide1.activities.append(activity)
 
 
 db.session.commit()

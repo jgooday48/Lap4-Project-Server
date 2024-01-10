@@ -16,9 +16,10 @@ class Guide(db.Model):
     __tablename__ = "guides"
 
     guide_id = db.Column(db.Integer, primary_key=True)
+    place_id = db.Column(db.Integer, db.ForeignKey('places.place_id'))
     name = db.Column(db.String(100), nullable=False)
     user_type = db.Column(db.Enum(UserType), nullable=False)
-    username = db.Column(db.String(100), nullable=False)
+    username = db.Column(db.String(100), nullable=False, unique=True)
     email = db.Column(db.String(), nullable=False)
     password = db.Column(db.Text())
     filters = db.Column(ARRAY(db.Enum(Filters)))
@@ -52,6 +53,7 @@ class Guide(db.Model):
     def json(self):
         return {
             "guide_id": self.guide_id,
+            "place_id":self.place_id,
             "name": self.name,
             "user_type": self.user_type.value,
             "username": self.username,
