@@ -26,8 +26,6 @@ class Guide(db.Model):
     activities = db.relationship(
         'Activity', secondary=guide_activity, backref=db.backref('guides', lazy='dynamic')
     )
-
-    activities = db.relationship('Activity', backref='guide', lazy=True)
     plans = db.relationship('Plan', backref='guide', lazy=True, foreign_keys='Plan.guide_id')
     reviews = db.relationship('Review', backref='guide', lazy=True, foreign_keys='Review.guide_id')
 
