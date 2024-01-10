@@ -36,6 +36,9 @@ class Guide(db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+    
+    def get_activities(self):
+        return [activity.json for activity in self.activities]
 
     @classmethod
     def get_user_by_username(cls, username):

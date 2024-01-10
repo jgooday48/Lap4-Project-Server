@@ -1,6 +1,7 @@
 from flask import jsonify, request
 from flask_jwt_extended import create_access_token, create_refresh_token, current_user, get_jwt_identity, get_jwt
 from .model import Guide
+from werkzeug import exceptions
 
 
 def register():
@@ -73,3 +74,31 @@ def refresh_access():
     identity = get_jwt_identity()
     access_token = create_access_token(identity=identity)
     return jsonify({"access_token": access_token})
+
+
+def index():
+    guides = Guide.query.all()
+
+    try:
+        return jsonify({"all guides": [g.json for g in guides]})
+    except:
+        raise exceptions.InternalServerError(
+            f"Server is down. We are fixing it")
+    
+
+
+
+def find_activities_by_guide(username):
+    try:
+        guide = Guide.query.filter_by(username=username).first()
+        print("guide: ", guide)
+
+        if guide:
+            guide_activities = guide.get_activities()
+            return jsonify(guide_activities), 200
+        else:
+            return jsonify({"error": "Guide not found"}), 404
+
+    except Exception as e:
+        print(str(e))
+        return jsonify({"error": "Error retrieving activities by guide"}), 500
