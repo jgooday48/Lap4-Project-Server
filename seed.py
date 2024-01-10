@@ -93,10 +93,10 @@ db.session.commit()
 
 # Add more places
 place_data = [
+    ("Tokyo", ["#technology"], "Futuristic city", "Japan"),
     ("Malta", ["#beach"], "best island", "Europe"),
     ("Los Angeles", ["#city"], "vibrant city", "USA"),
     ("Paris", ["#culture"], "City of Love", "France"),
-    ("Tokyo", ["#technology"], "Futuristic city", "Japan"),
     ("Sydney", ["#beach"], "Beautiful beaches", "Australia"),
     ("Rome", ["#history"], "Eternal City", "Italy")
 ]
@@ -108,11 +108,11 @@ db.session.commit()
 
 # Add more guides
 guide_data = [
-    (2, 'Alice Johnson', 'GUIDE', 'alicejohnson88','alice.johnson@gmail.com', ['CULTURAL', 'SHOPPING']),
-    (2, 'David Lee', 'GUIDE', 'davidlee42','david.lee@gmail.com', ['HISTORICAL', 'FOOD']),
-    (2, 'Mia Williams', 'GUIDE', 'miawilliams123','mia.williams@gmail.com', ['NATURE', 'ENTERTAINMENT']),
-    (2, 'Oliver Smith', 'GUIDE', 'oliversmith456','oliver.smith@gmail.com', ['ART', 'OUTDOOR_ACTIVITIES']),
-    (2, 'Emma Davis', 'GUIDE', 'emmadavis789', 'emma.davis@gmail.com', ['CULTURAL', 'NIGHTLIFE'])
+    (2, 'Hiroshi Tanaka', 'GUIDE', 'hiroshi88','hiroshi.tanakaj@gmail.com', ['CULTURAL', 'SHOPPING']),
+    (2, 'Yuki Nakamura', 'GUIDE', 'yuki42','yuki.nakamura@gmail.com', ['HISTORICAL', 'FOOD']),
+    (2, 'Haruki Ito', 'GUIDE', 'haruki123', 'haruki.ito@gmail.com', ['NATURE', 'ENTERTAINMENT']),
+    (2, 'Kaori Fujimoto', 'GUIDE', 'fujimoto456', 'koari.fujimoto@gmail.com', ['ART', 'OUTDOOR_ACTIVITIES']),
+    (2, 'Ryota Kobayashi', 'GUIDE', 'kobayashi789','ryota.kobayashi@gmail.com', ['CULTURAL', 'NIGHTLIFE'])
 ]
 
 for data in guide_data:
