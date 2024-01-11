@@ -1,6 +1,6 @@
 from flask import request, Blueprint
 from flask_jwt_extended import jwt_required
-from .controller import register, login, find_user, refresh_access, current_guide, find_activities_by_guide, index, add_activity_to_guide
+from .controller import register, login, find_user, refresh_access, current_guide, find_activities_by_guide, index, add_activity_to_guide, guides_by_place_id
 
 
 guide_bp = Blueprint('guides', __name__)
@@ -52,3 +52,8 @@ def handle_current_user():
 @jwt_required(refresh=True)
 def handle_refresh_token():
    return refresh_access()
+
+
+@guide_bp.route("/guides/placeId:<id>", methods=['GET'])
+def handle_guides_by_place_id(id): 
+   return guides_by_place_id(id)

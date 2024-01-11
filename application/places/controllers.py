@@ -12,7 +12,7 @@ def index(): # GET all places
     except:
         raise exceptions.InternalServerError(f"Server is down. We are fixing it")
 
-def show(id): #GET a place 
+def show(id): #GET a place ded
     place = Place.query.filter_by(place_id=id).first()
 
     try:
@@ -28,7 +28,7 @@ def create(): #POST a place
         db.session.commit()
         return jsonify({ "data": new_place.json}), 201
     except:
-        raise exceptions.NotFound(f"cant post place")
+        raise exceptions.BadRequest(f"cant post place")
 
 
 def update(id): #PATCH a place
@@ -43,4 +43,16 @@ def update(id): #PATCH a place
         return jsonify({ "data":place.json})
     except:
         raise exceptions.NotFound(f"place does not exist")
+def destroy(id): #DELETE a place
+    try:
+        place = Place.query.filter_by(place_id=id).first()
+        db.session.delete(place)
+        db.session.commit()
+    except:
+        raise exceptions.NotFound(f"place does not exist")
+
+
+
+
+
 
