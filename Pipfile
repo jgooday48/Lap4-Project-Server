@@ -12,6 +12,8 @@ psycopg2-binary = "*"
 gunicorn = "*"
 werkzeug = "*"
 flask-jwt-extended = "*"
+flask-socketio = "*"
+eventlet = "*"
 
 [dev-packages]
 pytest = "*"

@@ -1,8 +1,9 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from flask_jwt_extended import JWTManager
+from flask_socketio import SocketIO, emit
 
 
 import os
@@ -14,8 +15,11 @@ jwt = JWTManager()
 def create_app(env=None):
     load_dotenv()
     app = Flask(__name__)
-
     app.config['SECRET_KEY'] = 'KEEPITHUSHHUSH'
+
+    CORS(app,resources={r"/*":{"origins":"*"}})
+    socketio = SocketIO(cors_allowed_origins="*", async_handlers=True)
+    socketio.init_app(app)
 
     app.json_provider_class.sort_keys = False
     CORS(app)
