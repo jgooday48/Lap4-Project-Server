@@ -71,9 +71,9 @@ def create_guide(place_id, name, user_type, username, email, filters, images=Non
     db.session.add(guide)
 
 
-def create_activity(name, location, filters, place_id, description, zip_code):
+def create_activity(name, location, filters, place_id, description, zip_code, images=None):
     activity = Activity(name=name, location=location, filters=filters,
-                        place_id=place_id, description=description, zip_code=zip_code)
+                        place_id=place_id, description=description, zip_code=zip_code, images=images or [])
     db.session.add(activity)
 
 
@@ -96,11 +96,21 @@ db.session.commit()
 place_data = [
     ("Tokyo", ["#technology"], "Futuristic city", "Japan",  [
      "https://media.cntraveller.com/photos/64f6f03779eae8fd6b04756b/16:9/w_1920,c_limit/japan-GettyImages-1345059895.jpeg"]),
-    ("Malta", ["#beach"], "best island", "Europe"),
-    ("Los Angeles", ["#city"], "vibrant city", "USA"),
-    ("Paris", ["#culture"], "City of Love", "France"),
-    ("Sydney", ["#beach"], "Beautiful beaches", "Australia"),
-    ("Rome", ["#history"], "Eternal City", "Italy")
+    ("Malta", ["#beach"], "best island", "Europe", [
+        "https://assets.vogue.com/photos/599365b2f0b0e21484d3436e/master/w_1920,c_limit/00-lede-a-travel-guide-to-malta.jpg"
+    ]),
+    ("Los Angeles", ["#city"], "vibrant city", "USA", [
+        "https://static.independent.co.uk/2023/07/07/10/iStock-515064346.jpg?quality=75&width=990&crop=3%3A2%2Csmart&auto=webp"
+    ]),
+    ("Paris", ["#culture"], "City of Love", "France", [
+        "https://images.ctfassets.net/qr8kennq1pom/77Pd54E3jufwEzXFWvK4XC/88bc77718a8339e945a6749be2c9b344/Untitled_design_-_2022-06-14T124536.639.png"
+    ]),
+    ("Sydney", ["#beach"], "Beautiful beaches", "Australia", [
+        "https://wakeup.com.au/wp-content/themes/yootheme/cache/3shutterstock_1094901527-bd70b9b3.jpeg"
+    ]),
+    ("Rome", ["#history"], "Eternal City", "Italy", [
+        "https://media.timeout.com/images/105211701/1024/576/image.webp"
+    ])
 ]
 
 for data in place_data:
