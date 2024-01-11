@@ -42,7 +42,7 @@ def update(id): #PATCH a review
         db.session.commit()
         return jsonify({ "data":review.json})
     except:
-        raise exceptions.BadRequest(f"cant post review")
+        raise exceptions.NotFound(f"cant post review")
 
 def destroy(id): #DELETE a review
     try:
@@ -51,4 +51,4 @@ def destroy(id): #DELETE a review
         db.session.commit()
         return "book deleted", 204
     except:
-        raise exceptions.BadRequest(f"cant post review")
+        raise exceptions.NotFound(f"cant post review")

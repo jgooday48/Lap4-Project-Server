@@ -28,7 +28,7 @@ def create(): #POST a place
         db.session.commit()
         return jsonify({ "data": new_place.json}), 201
     except:
-        raise exceptions.BadRequest(f"cant post place")
+        raise exceptions.NotFound(f"cant post place")
 
 
 def update(id): #PATCH a place

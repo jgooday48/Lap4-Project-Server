@@ -51,7 +51,7 @@ def test_update_review_error(client):
         "comment": "America"
     }
     response = client.patch('/reviews/500', json=data)
-    assert response.status_code == 400
+    assert response.status_code == 404
 
 
 def test_delete_review(client):
@@ -62,5 +62,5 @@ def test_delete_review(client):
 # @pytest.mark.skip(reason="Test is skipped for a specific reason")
 def test_delete_review_error(client):
     response = client.delete('/reviews/100')
-    assert response.status_code == 400 
+    assert response.status_code == 404 
 

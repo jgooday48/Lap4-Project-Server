@@ -38,7 +38,7 @@ def test_create_place_error(client):
         "location": "France"
     }
     response = client.post('/places', json=data)
-    assert response.status_code == 400
+    assert response.status_code == 404
 
 def test_update_place(client):
     data = {

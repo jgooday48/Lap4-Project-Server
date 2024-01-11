@@ -18,3 +18,6 @@ def test_handle_guide_register(client):
 def test_guides_page(client):
     response = client.get("/guides")
     assert response.status_code == 200
+
+def test_guide_exists(client):
+    pass

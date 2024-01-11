@@ -42,7 +42,7 @@ def update(id): #PATCH a plan
         db.session.commit()
         return jsonify({ "data":plan.json})
     except:
-        raise exceptions.BadRequest(f"cant find plan")
+        raise exceptions.NotFound(f"cant find plan")
 
 
 def destroy(id): #DELETE a plan
@@ -52,4 +52,4 @@ def destroy(id): #DELETE a plan
         db.session.commit()
         return "book deleted", 204
     except:
-        raise exceptions.BadRequest(f"cant find plan")
+        raise exceptions.NotFound(f"cant find plan")
