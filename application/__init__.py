@@ -40,13 +40,19 @@ def create_app(env=None):
     from application.tourists.model import Tourist
     from application.tokens.model import Token
     from application.tokens.routes import token_bp
+    from application.places.routes import places_bp
+    from application.reviews.routes import reviews
+    from application.plans.routes import plans_bp
+    from application.activities.routes import activities_bp
 
     app.register_blueprint(main)
     app.register_blueprint(tourist_bp)
     app.register_blueprint(guide_bp)
     app.register_blueprint(token_bp)
-
-
+    app.register_blueprint(places_bp)
+    app.register_blueprint(activities_bp)
+    app.register_blueprint(plans_bp)
+    app.register_blueprint(reviews)
    
     @jwt.user_lookup_loader
     def user_lookup_callback(_jwt_headers, jwt_data):
@@ -80,17 +86,6 @@ def create_app(env=None):
     
 
 
-    from application.places.routes import places
-    app.register_blueprint(places)
-
-    from application.activities.routes import activities_bp
-    app.register_blueprint(activities_bp)
-
-    from application.plans.routes import plans
-    app.register_blueprint(plans)
-
-    from application.reviews.routes import reviews
-    app.register_blueprint(reviews)
 
 
     return app
