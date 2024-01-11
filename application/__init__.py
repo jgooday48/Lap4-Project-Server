@@ -83,10 +83,5 @@ def create_app(env=None):
         return token is not None
 
 
-    
-
-
-
-
     return app
 
