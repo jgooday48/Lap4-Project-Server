@@ -52,3 +52,7 @@ def destroy(id): #DELETE a place
         raise exceptions.NotFound(f"place does not exist")
 
 
+
+
+
+

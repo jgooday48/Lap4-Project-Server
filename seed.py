@@ -27,7 +27,7 @@ db.session.commit()
 
 name = "NYC"
 tags = ["#photo"]
-description="awesome"
+description="The city that never sleeps"
 location = "USA"
 images = ["https://upload.wikimedia.org/wikipedia/commons/4/47/New_york_times_square-terabass.jpg"]
 

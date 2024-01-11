@@ -57,22 +57,26 @@ def create():
 
 
 def update(id):
-    data = request.json
-    activity = Activity.query.filter_by(activity_id=id).first()
+    try:
+        data = request.json
+        activity = Activity.query.filter_by(activity_id=id).first()
 
-    for (attribute, value) in data.items():
-        if hasattr(activity, attribute):
-            setattr(activity, attribute, value)
+        for (attribute, value) in data.items():
+            if hasattr(activity, attribute):
+                setattr(activity, attribute, value)
 
-    db.session.commit()
-    return jsonify({"updated activity": activity.json})
+        db.session.commit()
+        return jsonify({"updated activity": activity.json})
+    except:
+        raise exceptions.NotFound(f"Activity not found")
 
 
-def destroy(id):
-    activity = Activity.query.filter_by(activity_id=id).first()
-    db.session.delete(activity)
-    db.session.commit()
-    return "Activity Deleted", 204
+
+# def destroy(id):
+#     activity = Activity.query.filter_by(activity_id=id).first()
+#     db.session.delete(activity)
+#     db.session.commit()
+#     return "Activity Deleted", 204
 
 
 def find_guides_by_activity(id):

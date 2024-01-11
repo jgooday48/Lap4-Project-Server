@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from .controllers import index, show, create, update, destroy, find_guides_by_activity
+from .controllers import index, show, create, update, find_guides_by_activity
 
 
 activities_bp = Blueprint("activities",__name__)
@@ -11,11 +11,11 @@ def handle_activities():
     if request.method == 'POST': return create()
 
 
-@activities_bp.route('/activities/<int:id>', methods=["GET", "PATCH", "DELETE"])
+@activities_bp.route('/activities/<int:id>', methods=["GET", "PATCH"])
 def handle_activity(id):
     if request.method == "GET": return show(id)
     if request.method == "PATCH": return update(id)
-    if request.method == "DELETE": return destroy(id)
+    # if request.method == "DELETE": return destroy(id)
     
 
 @activities_bp.route('/activities:<int:id>/guides', methods=["GET"])

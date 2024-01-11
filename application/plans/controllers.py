@@ -32,17 +32,24 @@ def create(): #POST a plan
 
 
 def update(id): #PATCH a plan
-    data = request.json
-    plan = Plan.query.filter_by(plan_id=id).first()
+    try:
+        data = request.json
+        plan = Plan.query.filter_by(plan_id=id).first()
 
-    for (attribute, value) in data.items():
-        if hasattr(plan, attribute):
-            setattr(plan, attribute, value)
-    db.session.commit()
-    return jsonify({ "data":plan.json})
+        for (attribute, value) in data.items():
+            if hasattr(plan, attribute):
+                setattr(plan, attribute, value)
+        db.session.commit()
+        return jsonify({ "data":plan.json})
+    except:
+        raise exceptions.NotFound(f"cant find plan")
+
 
 def destroy(id): #DELETE a plan
-    plan = Plan.query.filter_by(plan_id=id).first()
-    db.session.delete(plan)
-    db.session.commit()
-    return "book deleted", 204
+    try:
+        plan = Plan.query.filter_by(plan_id=id).first()
+        db.session.delete(plan)
+        db.session.commit()
+        return "book deleted", 204
+    except:
+        raise exceptions.NotFound(f"cant find plan")
