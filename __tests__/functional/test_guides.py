@@ -6,9 +6,9 @@ def test_handle_guide_register(client):
     data = {
         'username': 'test_username',
         'email': 'test@example.com',
-        'user_type': 'Guide',
+        'user_type': 'GUIDE',
         'name': 'Dunn Guide',
-        'filters': ['filter1', 'filter2'],
+        'filters': ['HISTORICAL', 'MUSIC'],
         'password': 'test_password'
     }
 
