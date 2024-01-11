@@ -32,7 +32,23 @@ def create_app(env=None):
         app.config['DEBUG'] = True
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["SQLALCHEMY_DATABASE_URI"]
 
-    
+    @socketio.on("connect")
+    def connected():
+        print(request.sid)
+        emit("connect",{"data": "id is connected"})
+        print("client has connected")
+
+    @socketio.on('data')
+    def handle_message(data):
+        print("data from the front end: ",str(data))
+        emit("data",{'data':data},broadcast=True)
+
+    @socketio.on("disconnect")
+    def disconnected():
+        print("user disconnected")
+        emit("disconnect","user disconnected",broadcast=True)
+
+
     db.init_app(app)
     jwt.init_app(app)
 
@@ -86,5 +102,5 @@ def create_app(env=None):
     # app.register_blueprint(reviews)
 
 
-    return app
+    return app, socketio
 
