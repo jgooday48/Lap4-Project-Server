@@ -35,6 +35,7 @@ def create():
         place_id = data.get('place_id')
         description = data.get('description')
         zip_code = data.get('zip_code')
+        images = data.get('images', [])
 
 
         new_activity = Activity(
@@ -43,7 +44,8 @@ def create():
             filters=filters,
             place_id=place_id,
             description=description,
-            zip_code=zip_code
+            zip_code=zip_code,
+            images=images
         )
 
         db.session.add(new_activity)

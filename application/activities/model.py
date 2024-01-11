@@ -17,6 +17,7 @@ class Activity(db.Model):
     place_id = db.Column(db.Integer, db.ForeignKey('places.place_id'))
     description = db.Column(db.String(), nullable=False)
     zip_code = db.Column(db.String(100), nullable=False)
+    images = db.Column(ARRAY(db.String()), nullable=True)
   
     @property
     def json(self):
@@ -27,7 +28,8 @@ class Activity(db.Model):
             "filters": [f.value for f in self.filters],
             "place_id": self.place_id,
             "description": self.description,
-            "zip_code": self.zip_code
+            "zip_code": self.zip_code,
+            "images": self.images
         }
     
     def get_guides(self):
