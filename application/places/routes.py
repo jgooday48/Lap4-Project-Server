@@ -1,6 +1,6 @@
 from flask import request, Blueprint
 from werkzeug import exceptions
-from .controllers import index, create, show, update, destroy
+from .controllers import index, create, show, update
 
 places_bp = Blueprint("places", __name__)
 
@@ -10,11 +10,11 @@ def handle_places():
     if request.method == "GET": return index()
 
 
-@places_bp.route('/places/<int:id>', methods=["GET", "PATCH", "DELETE"])
+@places_bp.route('/places/<int:id>', methods=["GET", "PATCH"])
 def handle_place(id):
     if request.method == "GET": return show(id)
     if request.method == "PATCH": return update(id)
-    if request.method == "DELETE": return destroy(id)
+
 
 
 @places_bp.errorhandler(exceptions.NotFound)

@@ -32,17 +32,23 @@ def create(): #POST a review
 
 
 def update(id): #PATCH a review
-    data = request.json
-    review = Review.query.filter_by(review_id=id).first()
+    try:
+        data = request.json
+        review = Review.query.filter_by(review_id=id).first()
 
-    for (attribute, value) in data.items():
-        if hasattr(review, attribute):
-            setattr(review, attribute, value)
-    db.session.commit()
-    return jsonify({ "data":review.json})
+        for (attribute, value) in data.items():
+            if hasattr(review, attribute):
+                setattr(review, attribute, value)
+        db.session.commit()
+        return jsonify({ "data":review.json})
+    except:
+        raise exceptions.NotFound(f"cant post review")
 
 def destroy(id): #DELETE a review
-    review = Review.query.filter_by(review_id=id).first()
-    db.session.delete(review)
-    db.session.commit()
-    return "book deleted", 204
+    try:
+        review = Review.query.filter_by(review_id=id).first()
+        db.session.delete(review)
+        db.session.commit()
+        return "book deleted", 204
+    except:
+        raise exceptions.NotFound(f"cant post review")
