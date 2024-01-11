@@ -11,5 +11,12 @@ def hello():
         "description": "",
         "endpoints": [
             "GET /"
+            "/places"
+            "/activities"
+            "/guides"
+            "/plans"
+            "/reviews"
+
+
         ]
     }), 200

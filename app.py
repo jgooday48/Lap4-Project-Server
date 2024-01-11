@@ -10,4 +10,5 @@ from application import create_app # app from __init__.py
 app = create_app()
 if __name__=='__main__':
     # app = create_app("PROD")
-    app.run(port=5000, debug=True,host="0.0.0.0") 
+    # app.run(port=5000, debug=True,host="0.0.0.0") 
+    app.run()

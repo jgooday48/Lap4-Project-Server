@@ -25,9 +25,8 @@ def test_create_activity(client):
         "location": "Oregon",
         "specialisation": "OUTDOOR_ACTIVITIES",
         "place_id": 1,
-        "guide_id": 1,
         "description": "jkl",
-        "post_code": "90210"
+        "zip_code": "90210"
     }
     response = client.post('/activities', json=data)
     assert response.status_code == 201

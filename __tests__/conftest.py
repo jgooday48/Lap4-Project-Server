@@ -31,11 +31,11 @@ def client():
         db.session.commit()
 
         name = "NYC"
-        tags = "#photo"
+        tags = ["#photo"]
         description="awesome"
         location = "USA"
 
-        place = Place(name=name, tags=tags, description=description, location=location)
+        place = Place(name=name, tags=tags, description=description, location=location, images=['dde'])
 
         db.session.add(place)
 
@@ -45,7 +45,7 @@ def client():
         guide1.filters = ['HISTORICAL', 'OUTDOOR_ACTIVITIES']
         db.session.add(guide1)
 
-        activity = Activity(name="canoe", location="nyc", place_id=1, description="jkl", guide_id=1,post_code="722",specialisation="OUTDOOR_ACTIVITIES")
+        activity = Activity(name="canoe", location="nyc", place_id=1, description="jkl",zip_code="722", filters=['HISTORICAL'])
 
 
 
