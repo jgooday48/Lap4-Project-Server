@@ -27,7 +27,7 @@ def test_create_review(client):
     created_data = json.loads(response.data)
     assert "data" in created_data
 
-@pytest.mark.skip(reason="Test is skipped for a specific reason")
+
 def test_create_review_error(client):
     data = {
         "comment": "Poor"

@@ -15,15 +15,13 @@ def test_plan_page_not_found(client):
     err_response = client.get('/plans/68')
     assert err_response.status_code == 404
 
-@pytest.mark.skip(reason="Test is skipped for a specific reason")
+
 def test_create_plan(client):
     data = {
-        "name": "Los Angeles",
         "tourist_id":1,
         "guide_id":1,
-        "location": "California",
-        "description": "Largest city on the west coast of USA",
-        "tags": "#Hollywood",
+        "timestamp": 14,
+        "activity_id": 1,
         "status":"PLANNED"
     }
     response = client.post('/plans', json=data)
@@ -33,14 +31,14 @@ def test_create_plan(client):
 
 def test_create_plan_error(client):
     data = {
-        "activity": "absailing"
+        "activity_id": 1
     }
     response = client.post('/plans', json=data)
     assert response.status_code == 400
 
 def test_update_plan(client):
     data = {
-        "date": "09/01/2024"
+        "timestamp": 10
     }
     response = client.patch('/plans/1', json=data)
     assert response.status_code == 200
@@ -50,12 +48,12 @@ def test_update_plan(client):
 @pytest.mark.skip(reason="Test is skipped for a specific reason")
 def test_update_plan_error(client):
     data = {
-        "date": "24/01/2024"
+        "timestamp": 10
     }
     response = client.patch('/plans/500', json=data)
     assert response.status_code == 404
 
-# def test_delete_place(client):
-#     response = client.delete('/places/1')
+# def test_delete_plan(client):
+#     response = client.delete('/plans/1')
 #     assert response.status_code == 204  
 #     assert response.data == b''  

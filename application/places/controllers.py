@@ -43,10 +43,4 @@ def update(id): #PATCH a place
         return jsonify({ "data":place.json})
     except:
         raise exceptions.NotFound(f"place does not exist")
-def destroy(id): #DELETE a place
-    try:
-        place = Place.query.filter_by(place_id=id).first()
-        db.session.delete(place)
-        db.session.commit()
-    except:
-        raise exceptions.NotFound(f"place does not exist")
+
