@@ -88,6 +88,13 @@ def index():
             f"Server is down. We are fixing it")
     
 
+def find_guide_by_index(id):
+    guide= Guide.query.filter_by(guide_id=id).first()
+    try:
+        return jsonify({"data": guide.json}), 200
+    except:
+        raise exceptions.NotFound(f"guide does not exist")
+
 
 
 def find_activities_by_guide(username):
