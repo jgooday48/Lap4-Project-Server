@@ -18,12 +18,12 @@ def test_activity_page_not_found(client):
     err_response = client.get('/activities/68')
     assert err_response.status_code == 404
 
-@pytest.mark.skip(reason="Test is skipped for a specific reason")
+
 def test_create_activity(client):
     data = {
         "name": "sailing",
         "location": "Oregon",
-        "specialisation": "OUTDOOR_ACTIVITIES",
+        "filters": ["OUTDOOR_ACTIVITIES"],
         "place_id": 1,
         "description": "jkl",
         "zip_code": "90210"

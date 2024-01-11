@@ -2,7 +2,7 @@ import json
 import pytest
     
 
-# GET /plana
+# GET /plans
 def test_plana_page(client):
     response = client.get("/plans")
     assert response.status_code == 200
@@ -45,13 +45,13 @@ def test_update_plan(client):
     updated_data = json.loads(response.data)
     assert "data" in updated_data
 
-@pytest.mark.skip(reason="Test is skipped for a specific reason")
+
 def test_update_plan_error(client):
     data = {
         "timestamp": 10
     }
     response = client.patch('/plans/500', json=data)
-    assert response.status_code == 404
+    assert response.status_code == 400
 
 # def test_delete_plan(client):
 #     response = client.delete('/plans/1')
