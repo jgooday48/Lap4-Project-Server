@@ -12,7 +12,7 @@ def index(): # GET all places
     except:
         raise exceptions.InternalServerError(f"Server is down. We are fixing it")
 
-def show(id): #GET a place 
+def show(id): #GET a place ded
     place = Place.query.filter_by(place_id=id).first()
 
     try:
@@ -50,3 +50,5 @@ def destroy(id): #DELETE a place
         db.session.commit()
     except:
         raise exceptions.NotFound(f"place does not exist")
+
+
