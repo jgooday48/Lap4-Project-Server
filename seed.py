@@ -110,11 +110,19 @@ db.session.commit()
 
 # Add more guides
 guide_data = [
-    (2, 'Hiroshi Tanaka', 'GUIDE', 'hiroshi88','hiroshi.tanakaj@gmail.com', ['CULTURAL', 'SHOPPING'],datetime.now(), datetime.now()),
-    (2, 'Yuki Nakamura', 'GUIDE', 'yuki42','yuki.nakamura@gmail.com', ['HISTORICAL', 'FOOD'],datetime.now(),datetime.now()),
-    (2, 'Haruki Ito', 'GUIDE', 'haruki123', 'haruki.ito@gmail.com', ['NATURE', 'ENTERTAINMENT'],datetime.now(),datetime.now()),
-    (2, 'Kaori Fujimoto', 'GUIDE', 'fujimoto456', 'koari.fujimoto@gmail.com', ['ART', 'OUTDOOR_ACTIVITIES'],datetime.now(),datetime.now()),
-    (2, 'Ryota Kobayashi', 'GUIDE', 'kobayashi789','ryota.kobayashi@gmail.com', ['CULTURAL', 'NIGHTLIFE'],datetime.now(),datetime.now())
+    (2, 'Hiroshi Tanaka', 'GUIDE', 'hiroshi88','hiroshi.tanakaj@gmail.com', ['CULTURAL', 'SHOPPING'],datetime.now(), datetime.now(), [
+        "https://i1.rgstatic.net/ii/profile.image/11431281103851697-1669864605754_Q512/Hiroshi-Tanaka-9.jpg"
+    ] ),
+    (2, 'Yuki Nakamura', 'GUIDE', 'yuki42','yuki.nakamura@gmail.com', ['HISTORICAL', 'FOOD'],datetime.now(),datetime.now(), ["https://m.media-amazon.com/images/M/MV5BMGY4ODZjYjEtOTc3MC00ZTFiLThiYjktMDk1ZTQ1NjY1YjM2XkEyXkFqcGdeQXVyMTEwODg2MDY@._V1_.jpg"]),
+    (2, 'Haruki Ito', 'GUIDE', 'haruki123', 'haruki.ito@gmail.com', ['NATURE', 'ENTERTAINMENT'],datetime.now(),datetime.now(),[
+    "https://i1.sndcdn.com/avatars-000336898423-5m8j59-t500x500.jpg"
+    ]),
+    (2, 'Kaori Fujimoto', 'GUIDE', 'fujimoto456', 'koari.fujimoto@gmail.com', ['ART', 'OUTDOOR_ACTIVITIES'],datetime.now(),datetime.now(),      [
+         "https://sliverofstonemagazinedotcom.files.wordpress.com/2015/03/kaori-fujimoto.jpg?w=1016"
+     ]),
+    (2, 'Ryota Kobayashi', 'GUIDE', 'kobayashi789','ryota.kobayashi@gmail.com', ['CULTURAL', 'NIGHTLIFE'],datetime.now(),datetime.now(),      [
+         "https://static.wikia.nocookie.net/kamenrider/images/c/c4/Kobayashi_Ryota.jpg/revision/latest?cb=20180508155304"
+     ])
 ]
 
 for data in guide_data:

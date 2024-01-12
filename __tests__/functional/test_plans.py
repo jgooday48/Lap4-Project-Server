@@ -1,13 +1,12 @@
 import json
 import pytest
-    
 
 # GET /plans
-def test_plana_page(client):
+def test_plans_page(client):
     response = client.get("/plans")
     assert response.status_code == 200
 
-def test_place_page(client):
+def test_plan_page(client):
     response = client.get('/plans/1')
     assert response.status_code == 200
 
@@ -58,3 +57,8 @@ def test_delete_plan(client):
     response = client.delete('/plans/1')
     assert response.status_code == 204  
     assert response.data == b''  
+
+def test_delete_plan_error(client):
+    response = client.delete('/plans/70')
+    assert response.status_code == 404  
+
