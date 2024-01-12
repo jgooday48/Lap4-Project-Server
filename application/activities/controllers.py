@@ -9,7 +9,7 @@ def index():
     activities = Activity.query.all()
 
     try:
-        return jsonify({"all activities": [a.json for a in activities]})
+        return jsonify({"all_activities": [a.json for a in activities]})
     except:
         raise exceptions.InternalServerError(
             f"Server is down. We are fixing it")
