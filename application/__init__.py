@@ -3,8 +3,8 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from flask_jwt_extended import JWTManager
-from flask_socketio import SocketIO, emit
-
+from flask_socketio import SocketIO
+from .events import socketio
 
 import os
 
@@ -18,11 +18,11 @@ def create_app(env=None):
     app.config['SECRET_KEY'] = 'KEEPITHUSHHUSH'
 
     CORS(app,resources={r"/*":{"origins":"*"}})
-    socketio = SocketIO(cors_allowed_origins="*", async_handlers=True)
+
     socketio.init_app(app)
 
     app.json_provider_class.sort_keys = False
-    CORS(app)
+   
     if env == 'TEST':
         app.config['TESTING'] = True
         app.config['DEBUG'] = False
@@ -32,21 +32,6 @@ def create_app(env=None):
         app.config['DEBUG'] = True
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["SQLALCHEMY_DATABASE_URI"]
 
-    @socketio.on("connect")
-    def connected():
-        print(request.sid)
-        emit("connect",{"data": "id is connected"})
-        print("client has connected")
-
-    @socketio.on('data')
-    def handle_message(data):
-        print("data from the front end: ",str(data))
-        emit("data",{'data':data},broadcast=True)
-
-    @socketio.on("disconnect")
-    def disconnected():
-        print("user disconnected")
-        emit("disconnect","user disconnected",broadcast=True)
 
 
     db.init_app(app)
@@ -102,5 +87,5 @@ def create_app(env=None):
     # app.register_blueprint(reviews)
 
 
-    return app, socketio
+    return app
 

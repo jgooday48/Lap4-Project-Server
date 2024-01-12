@@ -14,6 +14,10 @@ werkzeug = "*"
 flask-jwt-extended = "*"
 flask-socketio = "*"
 eventlet = "*"
+dnspython = "*"
+python-engineio = "*"
+python-socketio = "*"
+six = "*"
 
 [dev-packages]
 pytest = "*"
