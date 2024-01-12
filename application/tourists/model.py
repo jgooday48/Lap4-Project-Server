@@ -8,6 +8,7 @@ class Tourist(db.Model):
     __tablename__ = "tourists"
 
     tourist_id = db.Column(db.Integer, primary_key=True)
+    guide_id = db.Column(db.Integer)
     name = db.Column(db.String(100), nullable=False)
     user_type = db.Column(db.Enum(UserType), nullable=False)
     username = db.Column(db.String(100), nullable=False)
