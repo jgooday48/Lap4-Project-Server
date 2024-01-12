@@ -19,7 +19,9 @@ def register():
         email=data.get('email'),
         user_type=data.get('user_type'),
         name=data.get('name'),
-        filters=data.get('filters')
+        filters=data.get('filters'),
+        availible_from = data.get('availible_from'),
+        availible_to = data.get('availible_to')
     )
 
     new_user.set_password(password=data.get('password'))

@@ -28,10 +28,12 @@ class Guide(db.Model):
     )
     plans = db.relationship('Plan', backref='guide', lazy=True, foreign_keys='Plan.guide_id')
     reviews = db.relationship('Review', backref='guide', lazy=True, foreign_keys='Review.guide_id')
+    availible_from = db.Column(db.DateTime, nullable=False)
+    availible_to = db.Column(db.DateTime, nullable=False)
     images=db.Column(ARRAY(db.String()), nullable=True)
 
-    def __repr__(self):
-        return f"<Guide: {self.username}"
+    # def __repr__(self):
+    #     return f"<Guide: {self.username}"
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -70,6 +72,8 @@ class Guide(db.Model):
             "email": self.email,
             "password": self.password,
             "filters": [f.value for f in self.filters],
-            "images":self.images
+            "availible_from": self.availible_from,
+            "availible_to": self.availible_to,
+            "images":self.images,
         }
 

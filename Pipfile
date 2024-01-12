@@ -12,6 +12,13 @@ psycopg2-binary = "*"
 gunicorn = "*"
 werkzeug = "*"
 flask-jwt-extended = "*"
+flask-socketio = "*"
+eventlet = "*"
+dnspython = "*"
+python-engineio = "*"
+python-socketio = "*"
+six = "*"
+axios = "*"
 
 [dev-packages]
 pytest = "*"

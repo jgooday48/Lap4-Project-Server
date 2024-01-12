@@ -10,7 +10,7 @@ def index():
     activities = Activity.query.all()
 
     try:
-        return jsonify({"all activities": [a.json for a in activities]})
+        return jsonify({"all_activities": [a.json for a in activities]})
     except:
         raise exceptions.InternalServerError(
             f"Server is down. We are fixing it")
@@ -74,12 +74,6 @@ def update(id):
         raise exceptions.NotFound(f"Activity not found")
 
 
-
-# def destroy(id):
-#     activity = Activity.query.filter_by(activity_id=id).first()
-#     db.session.delete(activity)
-#     db.session.commit()
-#     return "Activity Deleted", 204
 
 
 def find_guides_by_activity(id):

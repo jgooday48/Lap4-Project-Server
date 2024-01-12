@@ -8,6 +8,7 @@ class Tourist(db.Model):
     __tablename__ = "tourists"
 
     tourist_id = db.Column(db.Integer, primary_key=True)
+    guide_id = db.Column(db.Integer)
     name = db.Column(db.String(100), nullable=False)
     user_type = db.Column(db.Enum(UserType), nullable=False)
     username = db.Column(db.String(100), nullable=False)
@@ -16,8 +17,8 @@ class Tourist(db.Model):
     plans = db.relationship('Plan', backref='tourist', lazy=True, foreign_keys='Plan.tourist_id')
     reviews = db.relationship('Review', backref='tourist', lazy=True, foreign_keys='Review.tourist_id')
 
-    def __repr__(self):
-        return f"<User {self.username}"
+    # def __repr__(self):
+    #     return f"<User {self.username}"
     
 
     def set_password(self, password):

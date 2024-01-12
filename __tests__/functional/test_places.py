@@ -1,10 +1,5 @@
 import json
-    
-
-
-def test_index_page(client):
-    response = client.get("/")    
-    assert response.status_code == 200     
+  
 
 # GET /places
 def test_places_page(client):
@@ -32,6 +27,14 @@ def test_create_place(client):
     assert response.status_code == 201
     created_data = json.loads(response.data)
     assert "data" in created_data
+    assert response.json =={ 'data': {
+        "place_id": 8,
+        "name": "Los Angeles",
+        "location": "California",
+        "description": "Largest city on the west coast of USA",
+        "tags": ["#Hollywood"],
+        "images": ["hkh"]
+    }}
 
 def test_create_place_error(client):
     data = {

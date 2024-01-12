@@ -1,13 +1,12 @@
 import json
 import pytest
-    
 
 # GET /plans
-def test_plana_page(client):
+def test_plans_page(client):
     response = client.get("/plans")
     assert response.status_code == 200
 
-def test_place_page(client):
+def test_plan_page(client):
     response = client.get('/plans/1')
     assert response.status_code == 200
 
@@ -20,7 +19,8 @@ def test_create_plan(client):
     data = {
         "tourist_id":1,
         "guide_id":1,
-        "timestamp": 14,
+        "date_from": "2024-01-12 10:50:29.918223",
+        "date_to": "2024-01-12 10:50:29.918223",
         "activity_id": 1,
         "status":"PLANNED"
     }
@@ -57,3 +57,8 @@ def test_delete_plan(client):
     response = client.delete('/plans/1')
     assert response.status_code == 204  
     assert response.data == b''  
+
+def test_delete_plan_error(client):
+    response = client.delete('/plans/70')
+    assert response.status_code == 404  
+

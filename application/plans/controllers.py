@@ -22,8 +22,8 @@ def show(id): #GET a plan
     
 def create(): #POST a plan
     try:
-        tourist_id, guide_id, timestamp, activity_id, status = request.json.values()
-        new_plan = Plan(tourist_id, guide_id, timestamp, activity_id, status)
+        tourist_id, guide_id, date_to, date_from, activity_id, status = request.json.values()
+        new_plan = Plan(tourist_id, guide_id, date_to, date_from, activity_id, status)
         db.session.add(new_plan)
         db.session.commit()
         return jsonify({ "data": new_plan.json}), 201
