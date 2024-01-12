@@ -4,6 +4,7 @@ from application.tourists.model import Tourist
 from application.guides.model import Guide
 from application.places.model import Place
 from application.activities.model import Activity
+from application.plans.model import Plan
 from sqlalchemy import text
 
 

@@ -7,6 +7,8 @@ from application.guides.model import Guide
 from application.reviews.model import Review
 from application.plans.model import Plan
 
+from datetime import datetime
+
 @pytest.fixture(scope='session')
 def client():
     env = "TEST"
@@ -154,7 +156,7 @@ def create_test_data():
     db.session.add(review)
 
     db.session.commit()
-    plan = Plan(tourist_id=1,guide_id=1,activity_id=1,status="PLANNED", timestamp=14)
+    plan = Plan(tourist_id=1,guide_id=1,activity_id=1,status="PLANNED", date_from=datetime.now(), date_to=datetime.now())
     db.session.add(plan)
     db.session.commit()
 
