@@ -27,3 +27,9 @@ TEST_DB=
 ```
 - copy and paste the URL into .env
 - Run `pipenv run test` or `pipenv run coverage`
+
+## Technologies
+- Python
+- Flask
+- PyTest
+- SQL (for database)

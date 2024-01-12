@@ -1,4 +1,3 @@
-# from application import app
 from flask import jsonify, Blueprint
 
 main_bp = Blueprint("main", __name__)
