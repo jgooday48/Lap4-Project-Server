@@ -72,12 +72,6 @@ def update(id):
 
 
 
-# def destroy(id):
-#     activity = Activity.query.filter_by(activity_id=id).first()
-#     db.session.delete(activity)
-#     db.session.commit()
-#     return "Activity Deleted", 204
-
 
 def find_guides_by_activity(id):
     try:

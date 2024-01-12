@@ -54,14 +54,7 @@ def test_update_activity_error(client):
     response = client.patch('/activities/500', json=data)
     assert response.status_code == 404
 
-# # @pytest.mark.skip(reason="Test is skipped for a specific reason")
-# def test_delete_activity(client):
-#     response = client.delete('/activities/1')
-#     assert response.status_code == 204  
-#     # assert response.data == b'' 
 
-# # @pytest.mark.skip(reason="Test is skipped for a specific reason")
-# def test_delete_activity_error(client):
-#     response = client.delete('/activities/100')
-#     assert response.status_code == 404  
 
+def test_find_guides_by_activity():
+    pass 
