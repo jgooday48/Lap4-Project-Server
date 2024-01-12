@@ -56,5 +56,10 @@ def test_update_activity_error(client):
 
 
 
-def test_find_guides_by_activity():
-    pass 
+def test_find_guides_by_activity(client):
+    response = client.get('/activities:1/guides') 
+    assert response.status_code == 200
+
+def test_find_guides_by_activity_error(client):
+    response = client.get('/activities:100/guides') 
+    assert response.status_code == 404
