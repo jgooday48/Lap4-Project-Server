@@ -1,5 +1,5 @@
 import json
-
+from flask_jwt_extended import create_access_token
 def test_handle_tourist_register(client): 
     data = {
         'name': 'John Doe',
@@ -25,3 +25,4 @@ def test_find_tourist_error(client):
 def test_tourist_db_no_auth(client):
     response_not_found = client.get('http://localhost:5000/tourists/current')
     assert response_not_found.json == {"msg": "Missing Authorization Header"}
+

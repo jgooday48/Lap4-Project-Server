@@ -9,8 +9,8 @@ class Token(db.Model):
     create_at = db.Column(db.DateTime(), default=datetime.utcnow)
 
 
-    def __repr__(self):
-        return f"<Token {self.jti}>"
+    # def __repr__(self):
+    #     return f"<Token {self.jti}>"
     
     def save(self): 
         db.session.add(self)

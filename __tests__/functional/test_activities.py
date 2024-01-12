@@ -2,7 +2,9 @@ import json
 import pytest
 
 
-
+def test_index_page(client):
+    response = client.get("/")
+    assert response.status_code == 200
 
 def test_activities_page(client):
     response = client.get("/activities")
