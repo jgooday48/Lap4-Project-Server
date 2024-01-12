@@ -4,8 +4,9 @@ from application.tourists.model import Tourist
 from application.guides.model import Guide
 from application.places.model import Place
 from application.activities.model import Activity
+from application.plans.model import Plan
 from sqlalchemy import text
-
+from datetime import datetime
 
 
 
@@ -35,7 +36,7 @@ place = Place(name=name, tags=tags, description=description, location=location, 
 db.session.add(place)
 
 
-guide1 = Guide(place_id=1, name='Guy Dunn', user_type='GUIDE', username='guydunn42', email='guy.dunn@gmail.com')
+guide1 = Guide(place_id=1, name='Guy Dunn', user_type='GUIDE', username='guydunn42', email='guy.dunn@gmail.com', availible_from=datetime.now(),availible_to=datetime.now())
 guide1.set_password('password')
 guide1.filters = ['HISTORICAL', 'OUTDOOR_ACTIVITIES']
 db.session.add(guide1)
@@ -63,9 +64,8 @@ def create_place(name, tags, description, location, images=None):
     db.session.add(place)
 
 
-def create_guide(place_id, name, user_type, username, email, filters, images=None):
-    guide = Guide(place_id=place_id, name=name,
-                  user_type=user_type, username=username, email=email, images=images or [])
+def create_guide(place_id, name, user_type, username, email, filters, availible_from, availible_to, images=None):
+    guide = Guide(place_id=place_id, name=name, user_type=user_type, username=username, email=email, availible_from=availible_from, availible_to=availible_to, images=images or [])
     guide.set_password('password')
     guide.filters = filters
     db.session.add(guide)
@@ -120,11 +120,11 @@ db.session.commit()
 
 # Add more guides
 guide_data = [
-    (2, 'Hiroshi Tanaka', 'GUIDE', 'hiroshi88','hiroshi.tanakaj@gmail.com', ['CULTURAL', 'SHOPPING']),
-    (2, 'Yuki Nakamura', 'GUIDE', 'yuki42','yuki.nakamura@gmail.com', ['HISTORICAL', 'FOOD']),
-    (2, 'Haruki Ito', 'GUIDE', 'haruki123', 'haruki.ito@gmail.com', ['NATURE', 'ENTERTAINMENT']),
-    (2, 'Kaori Fujimoto', 'GUIDE', 'fujimoto456', 'koari.fujimoto@gmail.com', ['ART', 'OUTDOOR_ACTIVITIES']),
-    (2, 'Ryota Kobayashi', 'GUIDE', 'kobayashi789','ryota.kobayashi@gmail.com', ['CULTURAL', 'NIGHTLIFE'])
+    (2, 'Hiroshi Tanaka', 'GUIDE', 'hiroshi88','hiroshi.tanakaj@gmail.com', ['CULTURAL', 'SHOPPING'],datetime.now(), datetime.now()),
+    (2, 'Yuki Nakamura', 'GUIDE', 'yuki42','yuki.nakamura@gmail.com', ['HISTORICAL', 'FOOD'],datetime.now(),datetime.now()),
+    (2, 'Haruki Ito', 'GUIDE', 'haruki123', 'haruki.ito@gmail.com', ['NATURE', 'ENTERTAINMENT'],datetime.now(),datetime.now()),
+    (2, 'Kaori Fujimoto', 'GUIDE', 'fujimoto456', 'koari.fujimoto@gmail.com', ['ART', 'OUTDOOR_ACTIVITIES'],datetime.now(),datetime.now()),
+    (2, 'Ryota Kobayashi', 'GUIDE', 'kobayashi789','ryota.kobayashi@gmail.com', ['CULTURAL', 'NIGHTLIFE'],datetime.now(),datetime.now())
 ]
 
 for data in guide_data:

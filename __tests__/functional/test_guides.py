@@ -9,7 +9,10 @@ def test_handle_guide_register(client):
         'user_type': 'GUIDE',
         'name': 'Dunn Guide',
         'filters': ['HISTORICAL', 'MUSIC'],
-        'password': 'test_password'
+        'password': 'test_password',
+        'availible_from': '2024-01-12 10:50:29.918223',
+        'availible_to': '2024-01-12 10:50:29.918223'
+
     }
 
     response = client.post('/guides/register', json=data)

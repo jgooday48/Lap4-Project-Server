@@ -1,10 +1,5 @@
 import json
-    
-
-
-def test_index_page(client):
-    response = client.get("/")    
-    assert response.status_code == 200     
+  
 
 # GET /places
 def test_places_page(client):

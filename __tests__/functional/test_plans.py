@@ -20,7 +20,8 @@ def test_create_plan(client):
     data = {
         "tourist_id":1,
         "guide_id":1,
-        "timestamp": 14,
+        "date_from": "2024-01-12 10:50:29.918223",
+        "date_to": "2024-01-12 10:50:29.918223",
         "activity_id": 1,
         "status":"PLANNED"
     }
