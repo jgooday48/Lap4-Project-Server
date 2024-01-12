@@ -22,5 +22,9 @@ def test_guides_page(client):
     response = client.get("/guides")
     assert response.status_code == 200
 
+def test_find_guide_by_username(client):
+    response = client.get('/guides/username/guydunn42')  
+    assert response.status_code == 200
+
 def test_guide_exists(client):
     pass
