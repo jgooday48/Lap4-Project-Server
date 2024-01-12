@@ -1,6 +1,7 @@
 from flask import jsonify, request
 from werkzeug import exceptions
 from .model import Activity
+from application.places.model import Place
 
 from .. import db
 
@@ -95,4 +96,14 @@ def find_guides_by_activity(id):
     except Exception as e:
         print(str(e))
         return jsonify({"error": "Error retrieving activities by guide"}), 500
+    
 
+def find_activities_by_place(id):
+    try:
+        activities = Activity.query.filter_by(place_id=id).all()
+        return jsonify([a.json for a in activities]), 200
+    except Exception as e: 
+        return jsonify({'error': str(e)}), 500
+
+
+    
