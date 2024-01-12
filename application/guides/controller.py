@@ -146,7 +146,5 @@ def guides_by_place_id(place_id):
     try: 
         guides = Guide.query.filter_by(place_id=place_id).all()
         return jsonify([g.json for g in guides]), 200
-    except:
-        raise exceptions.NotFound(f"Guide by ID not found")
-    # except Exception as e:
-        # return jsonify({'error': str(e)}), 500
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
