@@ -15,7 +15,5 @@ def hello():
             "/guides"
             "/plans"
             "/reviews"
-
-
         ]
     }), 200

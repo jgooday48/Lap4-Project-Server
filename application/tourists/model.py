@@ -16,8 +16,8 @@ class Tourist(db.Model):
     plans = db.relationship('Plan', backref='tourist', lazy=True, foreign_keys='Plan.tourist_id')
     reviews = db.relationship('Review', backref='tourist', lazy=True, foreign_keys='Review.tourist_id')
 
-    def __repr__(self):
-        return f"<User {self.username}"
+    # def __repr__(self):
+    #     return f"<User {self.username}"
     
 
     def set_password(self, password):

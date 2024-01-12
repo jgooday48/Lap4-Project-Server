@@ -32,8 +32,8 @@ class Guide(db.Model):
     availible_to = db.Column(db.DateTime, nullable=False)
     images=db.Column(ARRAY(db.String()), nullable=True)
 
-    def __repr__(self):
-        return f"<Guide: {self.username}"
+    # def __repr__(self):
+    #     return f"<Guide: {self.username}"
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
