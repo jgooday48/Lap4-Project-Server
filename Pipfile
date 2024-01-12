@@ -18,6 +18,7 @@ dnspython = "*"
 python-engineio = "*"
 python-socketio = "*"
 six = "*"
+axios = "*"
 
 [dev-packages]
 pytest = "*"
@@ -26,7 +27,7 @@ pytest-watch = "*"
 autopep8 = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.11"
 
 [scripts]
 dev = "python app.py"

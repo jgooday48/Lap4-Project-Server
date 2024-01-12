@@ -32,11 +32,13 @@ class Filters(Enum):
     GAMING = 'Gaming'
     PHOTOGRAPHY = 'Photography'
     WELLNESS = 'Wellness'
+    FOOD = 'Food'
+    NIGHTLIFE = 'Nightlife'
 
 
 class Status(Enum):
-    PLANNED=auto()
-    ONGOING=auto()
-    COMPLETED=auto()
+    PLANNED='Planned'
+    ONGOING='Ongoing'
+    COMPLETED='Completed'
     
 

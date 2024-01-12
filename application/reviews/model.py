@@ -3,7 +3,7 @@ from application import db
 class Review(db.Model):
     review_id = db.Column(db.Integer, primary_key=True)
     guide_id = db.Column(db.Integer, db.ForeignKey('guides.guide_id'), nullable=False)
-    tourist_id = db.Column(db.Integer, db.ForeignKey('tourists.tourist_id', nullable=False))
+    tourist_id = db.Column(db.Integer, db.ForeignKey('tourists.tourist_id'), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     comment = db.Column(db.String(500), nullable=True)
 
