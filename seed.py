@@ -42,12 +42,12 @@ guide1.set_password('password')
 guide1.filters = ['HISTORICAL', 'OUTDOOR_ACTIVITIES']
 db.session.add(guide1)
 
-# activity = Activity(name="canoe", location="nyc",
-#                     filters=["OUTDOOR_ACTIVITIES"], place_id=1, description="sick as", zip_code="NE3 4RY", images=['sdsds'])
+activity = Activity(name="canoe", location="nyc",
+                    filters=["OUTDOOR_ACTIVITIES"], place_id=1, description="sick as", zip_code="NE3 4RY", images=['sdsds'])
 
-# db.session.add(activity)
+db.session.add(activity)
 
-# guide1.activities.append(activity)
+guide1.activities.append(activity)
 
 # ... (existing code)
 
