@@ -127,7 +127,7 @@ guide_data = [
         "https://images.pexels.com/photos/8329300/pexels-photo-8329300.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         
         ]),
-    (2, 'Haruki Ito', "Discover Tokyo's Green Oases with Kenji – Your Nature Explorer!", 'GUIDE', 'haruki123', 'haruki.ito@gmail.com', ['NATURE', 'ENTERTAINMENT', 'OUTDOOR_ACTIVITIES', 'WELLNESS'], datetime.now(), one_year_from_now,
+    (2, 'Haruki Ito', "Discover Tokyo's Green Oases with Haruki – Your Nature Explorer!", 'GUIDE', 'haruki123', 'haruki.ito@gmail.com', ['NATURE', 'ENTERTAINMENT', 'OUTDOOR_ACTIVITIES', 'WELLNESS'], datetime.now(), one_year_from_now,
      "Nature enthusiast and entertainment aficionado, Haruki Ito, promises a guided experience that seamlessly combines the tranquility of nature with the excitement of entertainment hubs. Haruki's tours unfold against breathtaking natural backdrops, allowing visitors to connect with the environment. Dive into the thrill of entertainment, creating memories that resonate with both serenity and exhilaration."     ,[
         "https://images.pexels.com/photos/2584041/pexels-photo-2584041.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
         "https://images.pexels.com/photos/2480382/pexels-photo-2480382.jpeg"
