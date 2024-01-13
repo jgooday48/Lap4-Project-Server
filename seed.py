@@ -101,10 +101,10 @@ place_data = [
     ("Tokyo", ["#technology"], "Futuristic city", "Japan",  [
      "https://media.cntraveller.com/photos/64f6f03779eae8fd6b04756b/16:9/w_1920,c_limit/japan-GettyImages-1345059895.jpeg"]),
     ("Malta", ["#beach"], "best island", "Europe"),
-    ("Los Angeles", ["#city"], "vibrant city", "USA"),
     ("Paris", ["#culture"], "City of Love", "France"),
     ("Sydney", ["#beach"], "Beautiful beaches", "Australia"),
     ("Rome", ["#history"], "Eternal City", "Italy")
+    ("Los Angeles", ["#city"], "vibrant city", "USA"),
 ]
 
 for data in place_data:
