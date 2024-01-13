@@ -18,6 +18,7 @@ class Guide(db.Model):
     guide_id = db.Column(db.Integer, primary_key=True)
     place_id = db.Column(db.Integer, db.ForeignKey('places.place_id'))
     name = db.Column(db.String(100), nullable=False)
+    tagline = db.Column(db.String())
     user_type = db.Column(db.Enum(UserType), nullable=False)
     username = db.Column(db.String(100), nullable=False, unique=True)
     email = db.Column(db.String(), nullable=False)
@@ -70,6 +71,7 @@ class Guide(db.Model):
             "guide_id": self.guide_id,
             "place_id":self.place_id,
             "name": self.name,
+            "tagline": self.tagline,
             "user_type": self.user_type.value,
             "username": self.username,
             "email": self.email,
