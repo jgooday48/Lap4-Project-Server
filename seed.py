@@ -42,12 +42,12 @@ guide1.set_password('password')
 guide1.filters = ['HISTORICAL', 'OUTDOOR_ACTIVITIES']
 db.session.add(guide1)
 
-activity = Activity(name="canoe", location="nyc",
-                    filters=["OUTDOOR_ACTIVITIES"], place_id=1, description="sick as", zip_code="NE3 4RY")
+# activity = Activity(name="canoe", location="nyc",
+#                     filters=["OUTDOOR_ACTIVITIES"], place_id=1, description="sick as", zip_code="NE3 4RY", images=['sdsds'])
 
-db.session.add(activity)
+# db.session.add(activity)
 
-guide1.activities.append(activity)
+# guide1.activities.append(activity)
 
 # ... (existing code)
 
@@ -72,9 +72,9 @@ def create_guide(place_id, name, user_type, username, email, filters, availible_
     db.session.add(guide)
 
 
-def create_activity(name, location, filters, place_id, description, zip_code):
+def create_activity(name, location, filters, place_id, description, zip_code, images):
     activity = Activity(name=name, location=location, filters=filters,
-                        place_id=place_id, description=description, zip_code=zip_code)
+                        place_id=place_id, description=description, zip_code=zip_code, images=images)
     db.session.add(activity)
 
 
@@ -138,7 +138,7 @@ activity_data = [
         "https://cdn.cheapoguides.com/wp-content/uploads/sites/2/2017/08/Mt.-Kawanori.jpg"
     ]),
     ("museum tour", "Paris", ["CULTURAL", "HISTORICAL"],
-     3, "art and history exploration", "75001"),
+     3, "art and history exploration", "75001", []),
     ("sushi cooking class", "Tokyo", ["FOOD", "CULTURAL"], 4, "learn the art of sushi making", "100-0005", [
         "https://images.wowcher.co.uk/images/deal/28955882/777x520/1151816.jpg"
     ]),
@@ -212,7 +212,7 @@ activity_data = [
 for data in activity_data:
     create_activity(*data)
 
-db.session.commit()
+
 
 
 db.session.commit()
