@@ -30,7 +30,10 @@ class Guide(db.Model):
     reviews = db.relationship('Review', backref='guide', lazy=True, foreign_keys='Review.guide_id')
     availible_from = db.Column(db.DateTime, nullable=False)
     availible_to = db.Column(db.DateTime, nullable=False)
+    info = db.Column(db.String())
     images=db.Column(ARRAY(db.String()), nullable=True)
+
+
 
     # def __repr__(self):
     #     return f"<Guide: {self.username}"
@@ -74,6 +77,7 @@ class Guide(db.Model):
             "filters": [f.value for f in self.filters],
             "availible_from": self.availible_from,
             "availible_to": self.availible_to,
+            "info": self.info,
             "images":self.images,
         }
 
