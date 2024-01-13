@@ -57,7 +57,7 @@ def create_test_data():
     db.session.add(guide1)
 
     activity = Activity(name="canoe", location="nyc",
-                        filters=["OUTDOOR_ACTIVITIES"], place_id=1, description="sick as", zip_code="NE3 4RY")
+                        filters=["OUTDOOR_ACTIVITIES"], place_id=1, description="sick as", zip_code="NE3 4RY", images=['fsdf'])
 
     db.session.add(activity)
 
@@ -87,9 +87,9 @@ def create_test_data():
         db.session.add(guide)
 
 
-    def create_activity(name, location, filters, place_id, description, zip_code):
+    def create_activity(name, location, filters, place_id, description, zip_code, images):
         activity = Activity(name=name, location=location, filters=filters,
-                            place_id=place_id, description=description, zip_code=zip_code)
+                            place_id=place_id, description=description, zip_code=zip_code, images=images)
         db.session.add(activity)
 
 
@@ -140,11 +140,11 @@ def create_test_data():
 
     # Add more activities
     activity_data = [
-        ("hiking", "Los Angeles", ["OUTDOOR_ACTIVITIES"], 2, "amazing views", "90210"),
-        ("museum tour", "Paris", ["CULTURAL", "HISTORICAL"],3, "art and history exploration", "75001"),
-        ("sushi cooking class", "Tokyo", ["FOOD", "CULTURAL"], 4, "learn the art of sushi making", "100-0005"),
-        ("beach volleyball", "Sydney", ["OUTDOOR_ACTIVITIES", "SPORTS"], 5, "fun in the sun", "2000"),
-        ("Colosseum tour", "Rome", ["HISTORICAL","CULTURAL"], 6, "ancient wonders", "00184")
+        ("hiking", "Los Angeles", ["OUTDOOR_ACTIVITIES"], 2, "amazing views", "90210",[]),
+        ("museum tour", "Paris", ["CULTURAL", "HISTORICAL"],3, "art and history exploration", "75001",[]),
+        ("sushi cooking class", "Tokyo", ["FOOD", "CULTURAL"], 4, "learn the art of sushi making", "100-0005", []),
+        ("beach volleyball", "Sydney", ["OUTDOOR_ACTIVITIES", "SPORTS"], 5, "fun in the sun", "2000", []),
+        ("Colosseum tour", "Rome", ["HISTORICAL","CULTURAL"], 6, "ancient wonders", "00184", [])
     ]
 
     for data in activity_data:
