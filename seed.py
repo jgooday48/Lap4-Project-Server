@@ -128,7 +128,7 @@ db.session.commit()
 
 # Add more guides
 guide_data = [
-    (2, 'Hiroshi Tanaka', "Navigate Tokyo's Urban Jungle with Hiroshi – Your City Safari Guide!", 'GUIDE', 'hiroshi88', 'hiroshi.tanakaj@gmail.com', ['CULTURAL', 'SHOPPING'], datetime.now(), one_year_from_now,
+    (2, 'Hiroshi Tanaka', "Navigate Tokyo's Urban Jungle with Hiroshi – Your City Safari Guide!", 'GUIDE', 'hiroshi88', 'hiroshi.tanakaj@gmail.com', ['CULTURAL', 'SHOPPING', 'ENTERTAINMENT'], datetime.now(), one_year_from_now,
      "Meet Hiroshi, a seasoned guide with a deep appreciation for cultural nuances and a knack for uncovering hidden shopping gems. Hiroshi's passion lies in revealing the heart of the city, intertwining cultural narratives with the thrill of unique shopping experiences. His tours go beyond the ordinary, promising a journey filled with captivating stories, local insights, and an immersive exploration of the city's rich tapestry.",
      [
         "https://images.pexels.com/photos/5506098/pexels-photo-5506098.jpeg",
@@ -141,7 +141,7 @@ guide_data = [
         "https://images.pexels.com/photos/8329300/pexels-photo-8329300.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         
         ]),
-    (2, 'Haruki Ito', "Discover Tokyo's Green Oases with Haruki – Your Nature Explorer!", 'GUIDE', 'haruki123', 'haruki.ito@gmail.com', ['NATURE', 'ENTERTAINMENT', 'OUTDOOR_ACTIVITIES', 'WELLNESS'], datetime.now(), one_year_from_now,
+    (2, 'Haruki Ito', "Discover Tokyo's Green Oases with Haruki – Your Nature Explorer!", 'GUIDE', 'haruki123', 'haruki.ito@gmail.com', ['NATURE', 'OUTDOOR_ACTIVITIES', 'WELLNESS'], datetime.now(), one_year_from_now,
      "Nature enthusiast and entertainment aficionado, Haruki Ito, promises a guided experience that seamlessly combines the tranquility of nature with the excitement of entertainment hubs. Haruki's tours unfold against breathtaking natural backdrops, allowing visitors to connect with the environment. Dive into the thrill of entertainment, creating memories that resonate with both serenity and exhilaration."     ,[
         "https://images.pexels.com/photos/2584041/pexels-photo-2584041.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
         "https://images.pexels.com/photos/2480382/pexels-photo-2480382.jpeg"
@@ -155,7 +155,7 @@ guide_data = [
         "https://images.pexels.com/photos/9784035/pexels-photo-9784035.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         "https://images.pexels.com/photos/9784025/pexels-photo-9784025.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
      ]),
-    (2, 'Ryota Kobayashi', "Unlock Tokyo's Night Secrets with Ryota – Your Nightlife Navigator!", 'GUIDE', 'kobayashi789', 'ryota.kobayashi@gmail.com', ['CULTURAL', 'NIGHTLIFE', 'MUSIC', 'HOLIDAY_EVENTS'], datetime.now(), one_year_from_now,
+    (2, 'Ryota Kobayashi', "Unlock Tokyo's Night Secrets with Ryota – Your Nightlife Navigator!", 'GUIDE', 'kobayashi789', 'ryota.kobayashi@gmail.com', ['CULTURAL', 'NIGHTLIFE', 'MUSIC', 'HOLIDAY_EVENTS', 'ENTERTAINMENT'], datetime.now(), one_year_from_now,
      "Cultural connoisseur and nightlife maven, Ryota Kobayashi, invites you on a guided exploration that reveals the city's cultural treasures by day and comes alive with the vibrant energy of nightlife. Ryota's tours are a dynamic fusion of cultural insights and the pulsating rhythm of the city after dark. Expect a well-rounded experience that captures the essence of the city's day and night offerings."     ,  [
         
         "https://images.pexels.com/photos/7803592/pexels-photo-7803592.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
