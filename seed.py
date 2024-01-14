@@ -50,6 +50,7 @@ activity = Activity(name="canoe", location="nyc",
 db.session.add(activity)
 
 guide1.activities.append(activity)
+tourist1.guides.append(guide1)
 
 # ... (existing code)
 

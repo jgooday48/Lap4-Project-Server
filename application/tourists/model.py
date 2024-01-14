@@ -3,12 +3,17 @@ from application.enums import UserType
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
+tourist_guide_association = db.Table(
+    'tourist_guide',
+    db.Column('tourist_id', db.Integer, db.ForeignKey('tourists.tourist_id')),
+    db.Column('guide_id', db.Integer, db.ForeignKey('guides.guide_id'))
+)
+
 
 class Tourist(db.Model):
     __tablename__ = "tourists"
 
     tourist_id = db.Column(db.Integer, primary_key=True)
-    guide_id = db.Column(db.Integer)
     name = db.Column(db.String(100), nullable=False)
     user_type = db.Column(db.Enum(UserType), nullable=False)
     username = db.Column(db.String(100), nullable=False)
@@ -16,6 +21,8 @@ class Tourist(db.Model):
     password = db.Column(db.Text())
     plans = db.relationship('Plan', backref='tourist', lazy=True, foreign_keys='Plan.tourist_id')
     reviews = db.relationship('Review', backref='tourist', lazy=True, foreign_keys='Review.tourist_id')
+    guides = db.relationship('Guide', secondary=tourist_guide_association, backref='tourists', lazy='dynamic')
+
 
     # def __repr__(self):
     #     return f"<User {self.username}"
@@ -30,6 +37,19 @@ class Tourist(db.Model):
     @classmethod
     def get_user_by_username(cls, username): 
         return cls.query.filter_by(username = username).first()
+    
+    def get_guides(self):
+        return [g.json for g in self.guides]
+    
+    def add_guide(self, guide):
+        if guide not in self.guides:
+            self.guides.append(guide)
+            db.session.commit()
+    
+    def remove_guide(self, guide):
+        if guide in self.guides:
+            self.guides.remove(guide)
+            db.session.commit()
     
     def save(self):
         db.session.add(self)
