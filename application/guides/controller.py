@@ -99,9 +99,9 @@ def find_guide_by_index(id):
 
 
 
-def find_activities_by_guide(username):
+def find_activities_by_guide(id):
     try:
-        guide = Guide.query.filter_by(username=username).first()
+        guide = Guide.query.filter_by(guide_id=id).first()
         print("guide: ", guide)
 
         if guide:

@@ -52,3 +52,12 @@ def destroy(id): #DELETE a review
         return "book deleted", 204
     except:
         raise exceptions.NotFound(f"cant post review")
+    
+
+
+def find_reviews_by_guide(id): 
+    try:
+       reviews = Review.query.filter_by(guide_id=id).all()
+       return jsonify([r.json for r in reviews]), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
