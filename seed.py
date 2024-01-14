@@ -81,6 +81,20 @@ def create_activity(name, location, filters, place_id, description, zip_code, im
     db.session.add(activity)
 
 
+def create_guide_activity_pairs(guide_data, activity_data):
+    for guide_info in guide_data:
+        guide = Guide.query.filter_by(username=guide_info[4]).first()
+        guide_filters = set(guide_info[6])
+        guide_place_id = guide_info[0]
+        for activity_info in activity_data:
+            activity_filters = set(activity_info[2])
+            activity_place_id = activity_info[3]
+            if guide_filters.intersection(activity_filters) and guide_place_id == activity_place_id:
+                activity = Activity.query.filter_by(
+                    name=activity_info[0]).first()
+                guide.activities.append(activity)
+
+
 # Add more tourists
 tourist_data = [
     ('John Smith', 'TOURIST', 'johnsmith456', 'john.smith@gmail.com'),
@@ -234,7 +248,8 @@ activity_data = [
 for data in activity_data:
     create_activity(*data)
 
+    db.session.commit()
 
 
-
+create_guide_activity_pairs(guide_data, activity_data)
 db.session.commit()
