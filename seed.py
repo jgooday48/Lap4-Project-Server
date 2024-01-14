@@ -37,7 +37,7 @@ db.session.add(place)
 
 one_year_from_now = datetime.now() + timedelta(days=365)
 
-guide1 = Guide(place_id=1, name='Guy Dunn', user_type='GUIDE', username='guydunn42', email='guy.dunn@gmail.com', info="Just a guy", availible_from=datetime.now(),availible_to=datetime.now())
+guide1 = Guide(place_id=1, name='Guy Dunn', tagline="Just a dude", user_type='GUIDE', username='guydunn42', email='guy.dunn@gmail.com', info="Just a guy", availible_from=datetime.now(),availible_to=datetime.now())
 
 guide1.set_password('password')
 guide1.filters = ['HISTORICAL', 'OUTDOOR_ACTIVITIES']
@@ -66,8 +66,8 @@ def create_place(name, tags, description, location, images=None):
     db.session.add(place)
 
 
-def create_guide(place_id, name, user_type, username, email, filters, availible_from, availible_to, info,  images=None):
-    guide = Guide(place_id=place_id, name=name, user_type=user_type, username=username, email=email, availible_from=availible_from, availible_to=availible_to, info=info, images=images or [])
+def create_guide(place_id, name, tagline,  user_type, username, email, filters, availible_from, availible_to, info,  images=None):
+    guide = Guide(place_id=place_id, name=name, tagline=tagline, user_type=user_type, username=username, email=email, availible_from=availible_from, availible_to=availible_to, info=info, images=images or [])
     guide.set_password('password')
     guide.filters = filters
     db.session.add(guide)
@@ -79,6 +79,20 @@ def create_activity(name, location, filters, place_id, description, zip_code, im
                         place_id=place_id, description=description, zip_code=zip_code, images=images or [])
 
     db.session.add(activity)
+
+
+def create_guide_activity_pairs(guide_data, activity_data):
+    for guide_info in guide_data:
+        guide = Guide.query.filter_by(username=guide_info[4]).first()
+        guide_filters = set(guide_info[6])
+        guide_place_id = guide_info[0]
+        for activity_info in activity_data:
+            activity_filters = set(activity_info[2])
+            activity_place_id = activity_info[3]
+            if guide_filters.intersection(activity_filters) and guide_place_id == activity_place_id:
+                activity = Activity.query.filter_by(
+                    name=activity_info[0]).first()
+                guide.activities.append(activity)
 
 
 # Add more tourists
@@ -101,10 +115,10 @@ place_data = [
     ("Tokyo", ["#technology"], "Futuristic city", "Japan",  [
      "https://media.cntraveller.com/photos/64f6f03779eae8fd6b04756b/16:9/w_1920,c_limit/japan-GettyImages-1345059895.jpeg"]),
     ("Malta", ["#beach"], "best island", "Europe"),
-    ("Los Angeles", ["#city"], "vibrant city", "USA"),
     ("Paris", ["#culture"], "City of Love", "France"),
     ("Sydney", ["#beach"], "Beautiful beaches", "Australia"),
-    ("Rome", ["#history"], "Eternal City", "Italy")
+    ("Rome", ["#history"], "Eternal City", "Italy"),
+    ("Los Angeles", ["#city"], "vibrant city", "USA")
 ]
 
 for data in place_data:
@@ -114,26 +128,26 @@ db.session.commit()
 
 # Add more guides
 guide_data = [
-    (2, 'Hiroshi Tanaka', 'GUIDE', 'hiroshi88','hiroshi.tanakaj@gmail.com', ['CULTURAL', 'SHOPPING'],datetime.now(), one_year_from_now, 
+    (2, 'Hiroshi Tanaka', "Navigate Tokyo's Urban Jungle with Hiroshi – Your City Safari Guide!", 'GUIDE', 'hiroshi88', 'hiroshi.tanakaj@gmail.com', ['CULTURAL', 'SHOPPING'], datetime.now(), one_year_from_now,
      "Meet Hiroshi, a seasoned guide with a deep appreciation for cultural nuances and a knack for uncovering hidden shopping gems. Hiroshi's passion lies in revealing the heart of the city, intertwining cultural narratives with the thrill of unique shopping experiences. His tours go beyond the ordinary, promising a journey filled with captivating stories, local insights, and an immersive exploration of the city's rich tapestry.",
      [
         "https://images.pexels.com/photos/5506098/pexels-photo-5506098.jpeg",
         "https://images.pexels.com/photos/5506143/pexels-photo-5506143.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     ] ),
-    (2, 'Yuki Nakamura', 'GUIDE', 'yuki42','yuki.nakamura@gmail.com', ['HISTORICAL', 'FOOD'],datetime.now(), one_year_from_now, 
+    (2, 'Yuki Nakamura', "Savor Tokyo's Flavor Palette with Yuki – Your Culinary Companion!", 'GUIDE', 'yuki42', 'yuki.nakamura@gmail.com', ['HISTORICAL', 'FOOD', 'CULTURAL', 'FAMILY_FRIENDLY'], datetime.now(), one_year_from_now,
      "Yuki is a guide who bridges the gap between history and gastronomy, crafting experiences that resonate with both the intellect and the palate. Yuki's tours delve into the historical tapestry of the city, bringing stories to life, and exploring culinary treasures along the way. Expect a blend of historical significance and culinary delights, making Yuki's tours a satisfying and enriching adventure."     ,[
         "https://images.pexels.com/photos/8329668/pexels-photo-8329668.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         "https://images.pexels.com/photos/8329631/pexels-photo-8329631.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         "https://images.pexels.com/photos/8329300/pexels-photo-8329300.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         
         ]),
-    (2, 'Haruki Ito', 'GUIDE', 'haruki123', 'haruki.ito@gmail.com', ['NATURE', 'ENTERTAINMENT'],datetime.now(), one_year_from_now,
+    (2, 'Haruki Ito', "Discover Tokyo's Green Oases with Haruki – Your Nature Explorer!", 'GUIDE', 'haruki123', 'haruki.ito@gmail.com', ['NATURE', 'ENTERTAINMENT', 'OUTDOOR_ACTIVITIES', 'WELLNESS'], datetime.now(), one_year_from_now,
      "Nature enthusiast and entertainment aficionado, Haruki Ito, promises a guided experience that seamlessly combines the tranquility of nature with the excitement of entertainment hubs. Haruki's tours unfold against breathtaking natural backdrops, allowing visitors to connect with the environment. Dive into the thrill of entertainment, creating memories that resonate with both serenity and exhilaration."     ,[
         "https://images.pexels.com/photos/2584041/pexels-photo-2584041.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
         "https://images.pexels.com/photos/2480382/pexels-photo-2480382.jpeg"
         "https://images.pexels.com/photos/2480379/pexels-photo-2480379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     ]),
-    (2, 'Kaori Fujimoto', 'GUIDE', 'fujimoto456', 'koari.fujimoto@gmail.com', ['ART', 'OUTDOOR_ACTIVITIES', 'FEMALE_FRIENDLY'],datetime.now(), one_year_from_now,   
+    (2, 'Kaori Fujimoto', "Find Zen in Tokyo's Hustle with Koari – Your Wellness Wanderlust Partner!", 'GUIDE', 'fujimoto456', 'koari.fujimoto@gmail.com', ['ART', 'OUTDOOR_ACTIVITIES', 'FEMALE_FRIENDLY'], datetime.now(), one_year_from_now,
      "Kaori Fujimoto, a versatile guide, crafts experiences that cater to art enthusiasts, outdoor adventurers, and those seeking a female-friendly environment. Kaori's tours are a celebration of artistic expression and the great outdoors, providing a welcoming space for all travelers. Immerse yourself in a journey that transcends traditional boundaries, blending art, nature, and inclusivity."     ,   [
         "https://images.pexels.com/photos/9783910/pexels-photo-9783910.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         "https://images.pexels.com/photos/9784751/pexels-photo-9784751.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
@@ -141,7 +155,7 @@ guide_data = [
         "https://images.pexels.com/photos/9784035/pexels-photo-9784035.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         "https://images.pexels.com/photos/9784025/pexels-photo-9784025.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
      ]),
-    (2, 'Ryota Kobayashi', 'GUIDE', 'kobayashi789','ryota.kobayashi@gmail.com', ['CULTURAL', 'NIGHTLIFE',],datetime.now(), one_year_from_now,    
+    (2, 'Ryota Kobayashi', "Unlock Tokyo's Night Secrets with Ryota – Your Nightlife Navigator!", 'GUIDE', 'kobayashi789', 'ryota.kobayashi@gmail.com', ['CULTURAL', 'NIGHTLIFE', 'MUSIC', 'HOLIDAY_EVENTS'], datetime.now(), one_year_from_now,
      "Cultural connoisseur and nightlife maven, Ryota Kobayashi, invites you on a guided exploration that reveals the city's cultural treasures by day and comes alive with the vibrant energy of nightlife. Ryota's tours are a dynamic fusion of cultural insights and the pulsating rhythm of the city after dark. Expect a well-rounded experience that captures the essence of the city's day and night offerings."     ,  [
         
         "https://images.pexels.com/photos/7803592/pexels-photo-7803592.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
@@ -160,8 +174,8 @@ activity_data = [
         "https://cdn.cheapoguides.com/wp-content/uploads/sites/2/2017/08/Mt.-Kawanori.jpg"
     ]),
     ("museum tour", "Paris", ["CULTURAL", "HISTORICAL"],
-     3, "art and history exploration", "75001", []),
-    ("sushi cooking class", "Tokyo", ["FOOD", "CULTURAL"], 4, "learn the art of sushi making", "100-0005", [
+     4, "art and history exploration", "75001", []),
+    ("sushi cooking class", "Tokyo", ["FOOD", "CULTURAL"], 2, "learn the art of sushi making", "100-0005", [
         "https://images.wowcher.co.uk/images/deal/28955882/777x520/1151816.jpg"
     ]),
     ("beach volleyball", "Sydney", [
@@ -234,7 +248,8 @@ activity_data = [
 for data in activity_data:
     create_activity(*data)
 
+    db.session.commit()
 
 
-
+create_guide_activity_pairs(guide_data, activity_data)
 db.session.commit()
