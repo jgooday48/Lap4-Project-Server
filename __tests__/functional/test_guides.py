@@ -44,6 +44,6 @@ def test_find_guides_by_place_id_error(client):
     assert response.status_code == 404
 
 def test_find_activ_by_guide(client):
-    res = client.get('/guides/username:guydunn42/activities')
+    res = client.get('/guides/guideId:1/activities')
     assert res.status_code == 200
 
