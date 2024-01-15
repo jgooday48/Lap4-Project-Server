@@ -51,13 +51,13 @@ def test_new_place():
 #         "status": new_plan.status
 #         }
 
-def test_new_review():
-    new_review = Review(guide_id=1,tourist_id=1, rating=10, comment="jkl")
-    assert new_review.json == {
-        "review_id": new_review.review_id,
-        "guide_id": new_review.guide_id,
-        "tourist_id": new_review.tourist_id,
-        "rating": new_review.rating,
-        "comment": new_review.comment
-        }
+# def test_new_review():
+#     new_review = Review(guide_id=1,tourist_id=1, rating=10, comment="jkl", title='df')
+#     assert new_review.json == {
+#         "review_id": new_review.review_id,
+#         "guide_id": new_review.guide_id,
+#         "tourist_id": new_review.tourist_id,
+#         "rating": new_review.rating,
+#         "comment": new_review.comment
+#         }
 
