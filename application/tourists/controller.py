@@ -62,6 +62,15 @@ def find_user(username):
     else:
         return jsonify({"message": "User not found"}), 500
 
+def find_user_id(id):
+    try:
+        user = Tourist.query.filter_by(tourist_id=id)
+        return jsonify([tourist.json for tourist in user]), 200
+    
+    except Exception as e:
+        print(str(e))
+        return jsonify({"error": "Error: Tourist cannot be retrieved"}), 400
+
 
 def current_tourist():
     current_identity = get_jwt_identity()
