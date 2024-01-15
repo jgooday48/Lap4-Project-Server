@@ -1,7 +1,9 @@
 from flask import jsonify, request, Flask
 from flask_jwt_extended import create_access_token, create_refresh_token, current_user, get_jwt_identity, get_jwt, JWTManager
 from .model import Tourist
+from werkzeug import exceptions
 from application.guides.model import Guide
+
 
 
 app = Flask(__name__)
@@ -80,6 +82,16 @@ def refresh_access():
     return jsonify({"access_token": access_token})
 
 
+def index():
+    tourists = Tourist.query.all()
+
+    try:
+        return jsonify({"all_guides": [t.json for t in tourists]})
+    except:
+        raise exceptions.InternalServerError(
+            f"Server is down. We are fixing it")
+
+
 def find_guides_by_tourist(id): 
     try:
         tourist = Tourist.query.filter_by(tourist_id=id).first()
@@ -140,3 +152,4 @@ def remove_tourist_guide_pair(tourist_id, guide_id):
         return jsonify({"message": f"Guide with ID {guide_id} removed from tourist with ID {tourist_id}"})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+

@@ -49,6 +49,8 @@ def create_app(env=None):
     from application.reviews.routes import reviews_bp
     from application.plans.routes import plans_bp
     from application.activities.routes import activities_bp
+    from application.chat.routes import chat_bp
+    from application.message.routes import message_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(tourist_bp)
@@ -58,7 +60,9 @@ def create_app(env=None):
     app.register_blueprint(activities_bp)
     app.register_blueprint(plans_bp)
     app.register_blueprint(reviews_bp)
-   
+    app.register_blueprint(chat_bp)
+    app.register_blueprint(message_bp)
+
     @jwt.user_lookup_loader
     def user_lookup_callback(_jwt_headers, jwt_data):
         identity = jwt_data['sub']
