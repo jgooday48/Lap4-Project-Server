@@ -1,6 +1,6 @@
 from flask import request, Blueprint
 
-from .controller import register, login, find_user, current_tourist, refresh_access, find_guides_by_tourist, join_tourist_and_guide, remove_tourist_guide_pair
+from .controller import register, login, find_user, current_tourist, refresh_access, find_guides_by_tourist, join_tourist_and_guide, remove_tourist_guide_pair, index
 from flask_jwt_extended import jwt_required
 
 
