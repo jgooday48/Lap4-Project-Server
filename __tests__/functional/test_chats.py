@@ -1,4 +1,4 @@
-
+import json
 
 def test_chat_page(client):
     response = client.get("/chat")
