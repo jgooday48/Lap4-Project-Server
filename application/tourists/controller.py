@@ -67,7 +67,7 @@ def current_tourist():
     if tourist:
         return jsonify({
             "message": "User details retrieved successfully",
-            "user_details": {"username": tourist.username, "email": tourist.email}
+            "user_details": {"tourist_id": tourist.tourist_id, "username": tourist.username, "email": tourist.email}
         })
     else:
         return jsonify({"message": "User not found"}), 404
