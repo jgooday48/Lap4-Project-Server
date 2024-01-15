@@ -1,10 +1,14 @@
 from flask import request, Blueprint
-from .controller import register, login, find_user, current_tourist, refresh_access
+
+from .controller import register, login, find_user, current_tourist, refresh_access, find_guides_by_tourist, join_tourist_and_guide, remove_tourist_guide_pair, index
 from flask_jwt_extended import jwt_required
 
 
 tourist_bp = Blueprint('tourists', __name__)
 
+@tourist_bp.route('/tourists', methods=["GET"])
+def handle_tourists():
+    if request.method == "GET": return index()
 
 @tourist_bp.route('/tourists/register', methods=['POST'])
 def handle_user_register():
@@ -22,6 +26,10 @@ def handle_user_login():
 def handle_username(username): 
    if request.method == 'GET': 
       return find_user(username)
+   
+@tourist_bp.route("/tourists/<id>/guides", methods=["GET"])
+def handle_get_guides_by_tourist(id): 
+   if request.method == 'GET': return find_guides_by_tourist(id)
 
 
 @tourist_bp.route("/tourists/current", methods=['GET'])
@@ -37,3 +45,11 @@ def handle_refresh_token():
    return refresh_access()
 
 
+@tourist_bp.route("/tourists/guides", methods=['POST'])
+def handle_pair_tourist_guide(): 
+   return join_tourist_and_guide()
+
+
+@tourist_bp.route("/tourists/guides/<tourist_id>/<guide_id>", methods=['DELETE'])
+def handle_remove_tourist_guide_pair(tourist_id, guide_id):
+   return remove_tourist_guide_pair(tourist_id, guide_id)

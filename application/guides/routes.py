@@ -20,7 +20,6 @@ def handle_user_register():
    if request.method == 'POST':
       return register()
 
-
 @guide_bp.route('/guides/login', methods=['POST'])
 def handle_user_login():
    if request.method == 'POST':
@@ -38,9 +37,9 @@ def handle_activity_guide_pair():
 def handle_username(username):
    if request.method == 'GET': return find_user(username)
 
-@guide_bp.route("/guides/username:<username>/activities", methods=['GET'])
-def handle_activities_by_guide(username):
-   if request.method == 'GET': return find_activities_by_guide(username)
+@guide_bp.route("/guides/guideId:<id>/activities", methods=['GET'])
+def handle_activities_by_guide(id):
+   if request.method == 'GET': return find_activities_by_guide(id)
    
 
 @guide_bp.route("/guides/current", methods=['GET'])

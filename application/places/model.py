@@ -16,6 +16,7 @@ class Place(db.Model):
     plans = db.relationship('Guide', backref='place', lazy=True, foreign_keys='Guide.place_id')
 
 
+
     def __init__(self, name, location, description, tags, images):
         self.name = name
         self.location = location

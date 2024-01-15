@@ -68,7 +68,7 @@ def current_guide():
     if guide:
         return jsonify({
             "message": "User details retrieved successfully",
-            "user_details": {"username": guide.username, "email": guide.email, "guide_id": guide.guide_id}
+            "user_details": {"user_type":guide.user_type.name ,"guide_id": guide.guide_id, "username": guide.username, "email": guide.email}
         })
     else:
         return jsonify({"message": "User not found"}), 404
@@ -99,9 +99,9 @@ def find_guide_by_index(id):
 
 
 
-def find_activities_by_guide(username):
+def find_activities_by_guide(id):
     try:
-        guide = Guide.query.filter_by(username=username).first()
+        guide = Guide.query.filter_by(guide_id=id).first()
         print("guide: ", guide)
 
         if guide:

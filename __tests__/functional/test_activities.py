@@ -2,7 +2,9 @@ import json
 import pytest
 
 
-
+def test_index_page(client):
+    response = client.get("/")
+    assert response.status_code == 200
 
 def test_activities_page(client):
     response = client.get("/activities")
@@ -24,7 +26,8 @@ def test_create_activity(client):
         "filters": ["OUTDOOR_ACTIVITIES"],
         "place_id": 1,
         "description": "jkl",
-        "zip_code": "90210"
+        "zip_code": "90210",
+        "images": ['sfkgfe']
     }
     response = client.post('/activities', json=data)
     assert response.status_code == 201
@@ -56,5 +59,10 @@ def test_update_activity_error(client):
 
 
 
-def test_find_guides_by_activity():
-    pass 
+def test_find_guides_by_activity(client):
+    response = client.get('/activities:1/guides') 
+    assert response.status_code == 200
+
+def test_find_guides_by_activity_error(client):
+    response = client.get('/activities:100/guides') 
+    assert response.status_code == 404

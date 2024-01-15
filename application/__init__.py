@@ -1,9 +1,10 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from flask_jwt_extended import JWTManager
-
+from flask_socketio import SocketIO
+from .events import socketio
 
 import os
 
@@ -14,11 +15,14 @@ jwt = JWTManager()
 def create_app(env=None):
     load_dotenv()
     app = Flask(__name__)
-
     app.config['SECRET_KEY'] = 'KEEPITHUSHHUSH'
 
+    CORS(app,resources={r"/*":{"origins":"*"}})
+
+    socketio.init_app(app)
+
     app.json_provider_class.sort_keys = False
-    CORS(app)
+   
     if env == 'TEST':
         app.config['TESTING'] = True
         app.config['DEBUG'] = False
@@ -29,7 +33,8 @@ def create_app(env=None):
         app.config['DEBUG'] = True
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["SQLALCHEMY_DATABASE_URI"]
 
-    
+
+
     db.init_app(app)
     jwt.init_app(app)
 
@@ -44,6 +49,8 @@ def create_app(env=None):
     from application.reviews.routes import reviews_bp
     from application.plans.routes import plans_bp
     from application.activities.routes import activities_bp
+    from application.chat.routes import chat_bp
+    from application.message.routes import message_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(tourist_bp)
@@ -53,7 +60,9 @@ def create_app(env=None):
     app.register_blueprint(activities_bp)
     app.register_blueprint(plans_bp)
     app.register_blueprint(reviews_bp)
-   
+    app.register_blueprint(chat_bp)
+    app.register_blueprint(message_bp)
+
     @jwt.user_lookup_loader
     def user_lookup_callback(_jwt_headers, jwt_data):
         identity = jwt_data['sub']

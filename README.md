@@ -14,7 +14,7 @@ SQLALCHEMY_DATABASE_URI=DB_URI=postgresql://username:password@localhost:5432/dat
 - Hence, edit the DB URI in the .env file to replace username, password and database with your own
 - Run `docker compose up -d` to start the docker container
 - Make sure that your interpreter is selected as a pipenv one related to your file
-- Run `python seed.py` to seed the db instance
+- Run `pipenv run seed-db` to seed the db instance
 - Run `pipenv run dev` to start the api
 - The api runs on http://localhost:5000
 - To close the docker container run `docker compose down`
@@ -27,3 +27,9 @@ TEST_DB=
 ```
 - copy and paste the URL into .env
 - Run `pipenv run test` or `pipenv run coverage`
+
+## Technologies
+- Python
+- Flask
+- PyTest
+- SQL (for database)

@@ -1,6 +1,6 @@
 import json
 import pytest
-  
+from datetime import datetime  
 # GET /reviews
 def test_reviews_page(client):
     response = client.get("/reviews")
@@ -19,7 +19,8 @@ def test_create_review(client):
     data = {
         "guide_id": 1,
         "tourist_id": 1,
-        "rating": 9,
+        "rating": 5,
+        "title": "review",
         "comment": "very nice"
     }
     response = client.post('/reviews', json=data)

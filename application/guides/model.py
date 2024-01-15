@@ -18,6 +18,7 @@ class Guide(db.Model):
     guide_id = db.Column(db.Integer, primary_key=True)
     place_id = db.Column(db.Integer, db.ForeignKey('places.place_id'))
     name = db.Column(db.String(100), nullable=False)
+    tagline = db.Column(db.String())
     user_type = db.Column(db.Enum(UserType), nullable=False)
     username = db.Column(db.String(100), nullable=False, unique=True)
     email = db.Column(db.String(), nullable=False)
@@ -28,12 +29,15 @@ class Guide(db.Model):
     )
     plans = db.relationship('Plan', backref='guide', lazy=True, foreign_keys='Plan.guide_id')
     reviews = db.relationship('Review', backref='guide', lazy=True, foreign_keys='Review.guide_id')
-    images=db.Column(ARRAY(db.String()), nullable=True)
     availible_from = db.Column(db.DateTime, nullable=False)
     availible_to = db.Column(db.DateTime, nullable=False)
+    info = db.Column(db.String())
+    images=db.Column(ARRAY(db.String()), nullable=True)
 
-    def __repr__(self):
-        return f"<Guide: {self.username}"
+
+
+    # def __repr__(self):
+    #     return f"<Guide: {self.username}"
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -67,13 +71,15 @@ class Guide(db.Model):
             "guide_id": self.guide_id,
             "place_id":self.place_id,
             "name": self.name,
+            "tagline": self.tagline,
             "user_type": self.user_type.value,
             "username": self.username,
             "email": self.email,
             "password": self.password,
             "filters": [f.value for f in self.filters],
-            "images":self.images,
             "availible_from": self.availible_from,
-            "availible_to": self.availible_to
+            "availible_to": self.availible_to,
+            "info": self.info,
+            "images":self.images,
         }
 
