@@ -19,8 +19,10 @@ def test_create_plan(client):
     data = {
         "tourist_id":1,
         "guide_id":1,
+        "place_id": 1,
         "date_from": "2024-01-12 10:50:29.918223",
         "date_to": "2024-01-12 10:50:29.918223",
+        "activities": ["canoeing"],
         "status":"PLANNED",
         "notes": "gjhgj"
     }
@@ -31,7 +33,7 @@ def test_create_plan(client):
 
 def test_create_plan_error(client):
     data = {
-        "activity_id": 1
+        "guide_id": 1
     }
     response = client.post('/plans', json=data)
     assert response.status_code == 400
