@@ -31,5 +31,6 @@ python_version = "3.11"
 
 [scripts]
 dev = "python app.py"
+seed-db = "python seed.py"
 test = "ptw -- -v -rP"
 coverage = "pytest --cov=application --cov-report term-missing"

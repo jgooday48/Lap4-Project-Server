@@ -57,7 +57,7 @@ def create_test_data():
     db.session.add(guide1)
 
     activity = Activity(name="canoe", location="nyc",
-                        filters=["OUTDOOR_ACTIVITIES"], place_id=1, description="sick as", zip_code="NE3 4RY")
+                        filters=["OUTDOOR_ACTIVITIES"], place_id=1, description="sick as", zip_code="NE3 4RY", images=['fsdf'])
 
     db.session.add(activity)
 
@@ -79,17 +79,17 @@ def create_test_data():
         db.session.add(place)
 
 
-    def create_guide(place_id, name, user_type, username, email, filters, availible_from, availible_to,images=None):
+    def create_guide(place_id, name, user_type, username, email, filters, availible_from, availible_to,info,images=None):
         guide = Guide(place_id=place_id, name=name,
-                    user_type=user_type, username=username, email=email,  availible_from=availible_from, availible_to=availible_to,images=images or [])
+                    user_type=user_type, username=username, email=email,  availible_from=availible_from, availible_to=availible_to,info=info,images=images or [])
         guide.set_password('password')
         guide.filters = filters
         db.session.add(guide)
 
 
-    def create_activity(name, location, filters, place_id, description, zip_code):
+    def create_activity(name, location, filters, place_id, description, zip_code, images):
         activity = Activity(name=name, location=location, filters=filters,
-                            place_id=place_id, description=description, zip_code=zip_code)
+                            place_id=place_id, description=description, zip_code=zip_code, images=images)
         db.session.add(activity)
 
 
@@ -126,11 +126,11 @@ def create_test_data():
 
     # Add more guides
     guide_data = [
-        (2, 'Hiroshi Tanaka', 'GUIDE', 'hiroshi88','hiroshi.tanakaj@gmail.com', ['CULTURAL', 'SHOPPING'],datetime.now(),datetime.now() ),
-        (2, 'Yuki Nakamura', 'GUIDE', 'yuki42','yuki.nakamura@gmail.com', ['HISTORICAL', 'FOOD'],datetime.now(),datetime.now() ),
-        (2, 'Haruki Ito', 'GUIDE', 'haruki123', 'haruki.ito@gmail.com', ['NATURE', 'ENTERTAINMENT'],datetime.now(),datetime.now() ),
-        (2, 'Kaori Fujimoto', 'GUIDE', 'fujimoto456', 'koari.fujimoto@gmail.com', ['ART', 'OUTDOOR_ACTIVITIES'],datetime.now(),datetime.now() ),
-        (2, 'Ryota Kobayashi', 'GUIDE', 'kobayashi789','ryota.kobayashi@gmail.com', ['CULTURAL', 'NIGHTLIFE'],datetime.now(),datetime.now() )
+        (2, 'Hiroshi Tanaka', 'GUIDE', 'hiroshi88','hiroshi.tanakaj@gmail.com', ['CULTURAL', 'SHOPPING'],datetime.now(),datetime.now(), 'sfdhjkfds' ),
+        (2, 'Yuki Nakamura', 'GUIDE', 'yuki42','yuki.nakamura@gmail.com', ['HISTORICAL', 'FOOD'],datetime.now(),datetime.now(), 'sfdhjkfds'  ),
+        (2, 'Haruki Ito', 'GUIDE', 'haruki123', 'haruki.ito@gmail.com', ['NATURE', 'ENTERTAINMENT'],datetime.now(),datetime.now(), 'sfdhjkfds'  ),
+        (2, 'Kaori Fujimoto', 'GUIDE', 'fujimoto456', 'koari.fujimoto@gmail.com', ['ART', 'OUTDOOR_ACTIVITIES'],datetime.now(),datetime.now(), 'sfdhjkfds'  ),
+        (2, 'Ryota Kobayashi', 'GUIDE', 'kobayashi789','ryota.kobayashi@gmail.com', ['CULTURAL', 'NIGHTLIFE'],datetime.now(),datetime.now(), 'sfdhjkfds'  )
     ]
 
     for data in guide_data:
@@ -140,11 +140,11 @@ def create_test_data():
 
     # Add more activities
     activity_data = [
-        ("hiking", "Los Angeles", ["OUTDOOR_ACTIVITIES"], 2, "amazing views", "90210"),
-        ("museum tour", "Paris", ["CULTURAL", "HISTORICAL"],3, "art and history exploration", "75001"),
-        ("sushi cooking class", "Tokyo", ["FOOD", "CULTURAL"], 4, "learn the art of sushi making", "100-0005"),
-        ("beach volleyball", "Sydney", ["OUTDOOR_ACTIVITIES", "SPORTS"], 5, "fun in the sun", "2000"),
-        ("Colosseum tour", "Rome", ["HISTORICAL","CULTURAL"], 6, "ancient wonders", "00184")
+        ("hiking", "Los Angeles", ["OUTDOOR_ACTIVITIES"], 2, "amazing views", "90210",[]),
+        ("museum tour", "Paris", ["CULTURAL", "HISTORICAL"],3, "art and history exploration", "75001",[]),
+        ("sushi cooking class", "Tokyo", ["FOOD", "CULTURAL"], 4, "learn the art of sushi making", "100-0005", []),
+        ("beach volleyball", "Sydney", ["OUTDOOR_ACTIVITIES", "SPORTS"], 5, "fun in the sun", "2000", []),
+        ("Colosseum tour", "Rome", ["HISTORICAL","CULTURAL"], 6, "ancient wonders", "00184", [])
     ]
 
     for data in activity_data:
@@ -152,7 +152,7 @@ def create_test_data():
 
     db.session.commit()
 
-    review = Review(guide_id=1, tourist_id=1, rating=10, comment="nice")
+    review = Review(guide_id=1, tourist_id=1, rating=10, title='review',comment="nice", timestamp=datetime.now())
     db.session.add(review)
 
     db.session.commit()

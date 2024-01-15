@@ -22,8 +22,8 @@ def show(id): #GET a review
     
 def create(): #POST a review
     try:
-        guide_id,tourist_id, rating, comment = request.json.values()
-        new_review = Review(guide_id,tourist_id, rating, comment)
+        guide_id,tourist_id, rating, title, comment = request.json.values()
+        new_review = Review(guide_id,tourist_id, rating, title,comment)
         db.session.add(new_review)
         db.session.commit()
         return jsonify({ "data": new_review.json}), 201
@@ -52,3 +52,12 @@ def destroy(id): #DELETE a review
         return "book deleted", 204
     except:
         raise exceptions.NotFound(f"cant post review")
+    
+
+
+def find_reviews_by_guide(id): 
+    try:
+       reviews = Review.query.filter_by(guide_id=id).all()
+       return jsonify([r.json for r in reviews]), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500

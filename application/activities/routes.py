@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from .controllers import index, show, create, update, find_guides_by_activity
+from .controllers import index, show, create, update, find_guides_by_activity, find_activities_by_place
 
 
 activities_bp = Blueprint("activities",__name__)
@@ -21,3 +21,7 @@ def handle_activity(id):
 @activities_bp.route('/activities:<int:id>/guides', methods=["GET"])
 def handle_activity_guides(id):
     if request.method == "GET": return find_guides_by_activity(id)
+
+@activities_bp.route('/activities/placeId:<id>', methods=["GET"])
+def handle_activity_places(id):
+    if request.method == "GET": return find_activities_by_place(id)

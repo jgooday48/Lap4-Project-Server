@@ -2,6 +2,9 @@ from flask import jsonify, request, Flask
 from flask_jwt_extended import create_access_token, create_refresh_token, current_user, get_jwt_identity, get_jwt, JWTManager
 from .model import Tourist
 from werkzeug import exceptions
+from application.guides.model import Guide
+
+
 
 app = Flask(__name__)
 jwt = JWTManager(app)
@@ -78,6 +81,7 @@ def refresh_access():
     access_token = create_access_token(identity=identity)
     return jsonify({"access_token": access_token})
 
+
 def index():
     tourists = Tourist.query.all()
 
@@ -86,3 +90,66 @@ def index():
     except:
         raise exceptions.InternalServerError(
             f"Server is down. We are fixing it")
+
+
+def find_guides_by_tourist(id): 
+    try:
+        tourist = Tourist.query.filter_by(tourist_id=id).first()
+
+        if tourist: 
+            tourist_guides = tourist.get_guides()
+            return jsonify(tourist_guides), 200
+        else:
+            return jsonify({"error": "Tourist not found"}), 404
+    
+    except Exception as e:
+        print(str(e))
+
+
+def join_tourist_and_guide():
+    data = request.json
+
+    tourist_id = data.get('tourist_id')
+    guide_id = data.get('guide_id')
+
+    if not guide_id or not tourist_id:
+        return jsonify({'error': 'Guide ID and Tourist ID are required'}), 400
+
+
+    guide = Guide.query.get(guide_id)
+
+    if not guide:
+        return jsonify({'error': 'Guide not found'}), 404
+
+
+    tourist = Tourist.query.get(tourist_id)
+
+    if not tourist:
+        return jsonify({'error': 'Tourist not found'}), 404
+
+
+    tourist.add_guide(guide)
+
+    return jsonify({'message': 'Tourist and Guide paired up successfully'}), 200
+
+
+def remove_tourist_guide_pair(tourist_id, guide_id):
+    try:
+
+        # Check if both tourist_id and guide_id are provided as query parameters
+        if not tourist_id or not guide_id:
+            return jsonify({"error": "Both tourist_id and guide_id must be provided as query parameters"}), 400
+
+        tourist = Tourist.query.get(tourist_id)
+        guide = Guide.query.get(guide_id)
+
+
+        if not tourist or not guide:
+            return jsonify({"error": "Tourist or guide not found"}), 404
+
+        tourist.remove_guide(guide)
+
+        return jsonify({"message": f"Guide with ID {guide_id} removed from tourist with ID {tourist_id}"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+

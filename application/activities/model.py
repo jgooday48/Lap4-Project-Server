@@ -18,6 +18,15 @@ class Activity(db.Model):
     description = db.Column(db.String(), nullable=False)
     zip_code = db.Column(db.String(100), nullable=False)
     images = db.Column(ARRAY(db.String()), nullable=True)
+
+    def __init__(self, name, location, filters, place_id, description, zip_code, images):
+        self.name = name
+        self.location = location
+        self.filters = filters
+        self.place_id = place_id
+        self.description = description
+        self.zip_code = zip_code
+        self.images = images
   
     @property
     def json(self):
