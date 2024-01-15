@@ -24,10 +24,10 @@ def show(id): #GET a plan
 def create():
     try:
         # Extract data from the request
-        tourist_id, guide_id, date_to, date_from, status, notes, activity_ids = request.json.values()
+        tourist_id, guide_id, place_id, date_to, date_from, status, notes, activity_ids = request.json.values()
 
         # Create a new plan
-        new_plan = Plan(tourist_id, guide_id, date_to,
+        new_plan = Plan(tourist_id, guide_id, place_id, date_to,
                         date_from, status, notes)
 
         # Query and fetch existing activities based on their IDs
