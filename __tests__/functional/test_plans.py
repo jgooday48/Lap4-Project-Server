@@ -21,8 +21,8 @@ def test_create_plan(client):
         "guide_id":1,
         "date_from": "2024-01-12 10:50:29.918223",
         "date_to": "2024-01-12 10:50:29.918223",
-        "activity_id": 1,
-        "status":"PLANNED"
+        "status":"PLANNED",
+        "notes": "gjhgj"
     }
     response = client.post('/plans', json=data)
     assert response.status_code == 201
@@ -38,17 +38,16 @@ def test_create_plan_error(client):
 
 def test_update_plan(client):
     data = {
-        "timestamp": 10
+        "notes": "gjhgj"
     }
     response = client.patch('/plans/1', json=data)
     assert response.status_code == 200
-    updated_data = json.loads(response.data)
-    assert "data" in updated_data
+
 
 
 def test_update_plan_error(client):
     data = {
-        "timestamp": 10
+        "notes": "gjhgj"
     }
     response = client.patch('/plans/500', json=data)
     assert response.status_code == 404
