@@ -68,7 +68,7 @@ class Tourist(db.Model):
             "username": self.username,
             "email": self.email,
             "password": self.password,
-            "guide_username": self.guide_username
+            # "guide_username": self.guide_username
         }
 
 
