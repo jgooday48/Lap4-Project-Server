@@ -1,6 +1,6 @@
 from flask import request, Blueprint
 from werkzeug import exceptions
-from .controllers import index, create, show, update, destroy
+from .controllers import index, create, show, update, destroy, find_plans_by_guide_id, find_plans_by_tourist_id
 
 plans_bp = Blueprint("plans", __name__)
 
@@ -15,6 +15,17 @@ def handle_acivity(id):
     if request.method == "GET": return show(id)
     if request.method == "PATCH": return update(id)
     if request.method == "DELETE": return destroy(id)
+
+@plans_bp.route("/plans/guide:<id>", methods=["GET"])
+def handle_plans_by_guide(id):
+    if request.method == "GET": return find_plans_by_guide_id(id)
+
+
+@plans_bp.route("/plans/tourist:<id>", methods=['GET'])
+def handle_plans_by_tourist(id):
+    if request.method == "GET": return find_plans_by_tourist_id(id)
+
+
 
 
 @plans_bp.errorhandler(exceptions.NotFound)
