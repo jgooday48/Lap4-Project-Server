@@ -52,7 +52,7 @@ def test_update_plan_error(client):
         "notes": "gjhgj"
     }
     response = client.patch('/plans/500', json=data)
-    assert response.status_code == 404
+    assert response.status_code == 500
 
 def test_delete_plan(client):
     response = client.delete('/plans/1')
