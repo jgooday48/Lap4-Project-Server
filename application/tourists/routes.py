@@ -1,10 +1,13 @@
 from flask import request, Blueprint
-from .controller import register, login, find_user, current_tourist, refresh_access
+from .controller import register, login, find_user, current_tourist, refresh_access, index
 from flask_jwt_extended import jwt_required
 
 
 tourist_bp = Blueprint('tourists', __name__)
 
+@tourist_bp.route('/tourists', methods=["GET"])
+def handle_tourists():
+    if request.method == "GET": return index()
 
 @tourist_bp.route('/tourists/register', methods=['POST'])
 def handle_user_register():

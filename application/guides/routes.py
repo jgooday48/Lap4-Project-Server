@@ -20,7 +20,6 @@ def handle_user_register():
    if request.method == 'POST':
       return register()
 
-
 @guide_bp.route('/guides/login', methods=['POST'])
 def handle_user_login():
    if request.method == 'POST':

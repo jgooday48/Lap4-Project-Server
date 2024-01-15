@@ -1,14 +1,14 @@
 from application import db
 from application.enums import UserType
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from sqlalchemy.dialects.postgresql import ARRAY
 
 
 class Tourist(db.Model):
     __tablename__ = "tourists"
 
     tourist_id = db.Column(db.Integer, primary_key=True)
-    guide_id = db.Column(db.Integer)
+    guide_username = db.Column(ARRAY(db.String(100)))
     name = db.Column(db.String(100), nullable=False)
     user_type = db.Column(db.Enum(UserType), nullable=False)
     username = db.Column(db.String(100), nullable=False)
@@ -47,7 +47,8 @@ class Tourist(db.Model):
             "user_type": self.user_type.name,  
             "username": self.username,
             "email": self.email,
-            "password": self.password
+            "password": self.password,
+            "guide_username": self.guide_username
         }
 
 

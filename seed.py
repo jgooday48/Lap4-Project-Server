@@ -20,7 +20,7 @@ db.create_all()
 print("Creating Database")
 
 print("Seeding Database")
-tourist1 = Tourist(name='Jane Doe', user_type='TOURIST',username='janedoe123', email='jane.doe@gmail.com')
+tourist1 = Tourist(name='Jane Doe', user_type='TOURIST',username='janedoe123', email='jane.doe@gmail.com', guide_username=['guydunn42', 'hiroshi88'])
 tourist1.set_password('password')
 
 db.session.add(tourist1)
@@ -42,7 +42,7 @@ guide1.filters = ['HISTORICAL', 'OUTDOOR_ACTIVITIES']
 db.session.add(guide1)
 
 activity = Activity(name="canoe", location="nyc",
-                    filters=["OUTDOOR_ACTIVITIES"], place_id=1, description="sick as", zip_code="NE3 4RY")
+                    filters=["OUTDOOR_ACTIVITIES"], place_id=1, description="sick as", zip_code="NE3 4RY", images=["https://cdn.britannica.com/69/155969-050-CF4B71FA/kayaker-ocean-waves.jpg"])
 
 db.session.add(activity)
 
