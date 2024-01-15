@@ -68,7 +68,7 @@ def current_guide():
     if guide:
         return jsonify({
             "message": "User details retrieved successfully",
-            "user_details": {"username": guide.username, "email": guide.email}
+            "user_details": {"username": guide.username, "email": guide.email, "guide_id": guide.guide_id}
         })
     else:
         return jsonify({"message": "User not found"}), 404
