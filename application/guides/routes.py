@@ -12,7 +12,8 @@ def handle_guides():
 
 @guide_bp.route('/guides/<int:id>', methods=["GET"])
 def handle_guide(id):
-    if request.method == "GET": return find_guide_by_index(id)
+    if request.method == "GET": 
+       return find_guide_by_index(id)
 
 
 @guide_bp.route('/guides/register', methods=['POST'])
