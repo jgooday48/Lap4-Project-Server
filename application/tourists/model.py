@@ -35,6 +35,11 @@ class Tourist(db.Model):
         return check_password_hash(self.password, password)
     
     @classmethod
+    def get_user_by_email(cls, email): 
+        return cls.query.filter_by(email = email).first()
+    
+
+    @classmethod
     def get_user_by_username(cls, username): 
         return cls.query.filter_by(username = username).first()
     

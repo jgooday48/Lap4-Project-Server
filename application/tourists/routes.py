@@ -23,9 +23,9 @@ def handle_user_login():
    
 @tourist_bp.route("/tourists/username/<username>", methods=['GET'])
 # @jwt_required()
-def handle_username(username): 
+def handle_username(email): 
    if request.method == 'GET': 
-      return find_user(username)
+      return find_user(email)
    
 @tourist_bp.route("/tourists/<id>/guides", methods=["GET"])
 def handle_get_guides_by_tourist(id): 

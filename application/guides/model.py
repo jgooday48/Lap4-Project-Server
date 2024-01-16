@@ -56,7 +56,10 @@ class Guide(db.Model):
     @classmethod
     def get_user_by_username(cls, username):
         return cls.query.filter_by(username=username).first()
-
+    
+    @classmethod
+    def get_user_by_email(cls, email):
+        return cls.query.filter_by(email=email).first()
     def save(self):
         db.session.add(self)
         db.session.commit()

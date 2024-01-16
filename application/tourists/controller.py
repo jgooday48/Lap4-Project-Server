@@ -33,11 +33,11 @@ def register():
 def login():
     data = request.get_json()
 
-    user = Tourist.get_user_by_username(username=data.get('username'))
+    user = Tourist.get_user_by_email(email=data.get('email'))
 
     if user and (user.check_password(password=data.get('password'))):
-        access_token = create_access_token(identity=user.username)
-        refresh_token = create_refresh_token(identity=user.username)
+        access_token = create_access_token(identity=user.email)
+        refresh_token = create_refresh_token(identity=user.email)
 
         return jsonify(
             {"message": "Logged in ",
@@ -47,15 +47,15 @@ def login():
              }
              }
         ), 200
-    return jsonify({"error": "Invalid username or password"}), 400
+    return jsonify({"error": "Invalid email or password"}), 400
 
 
-def find_user(username):
+def find_user(email):
 
-    if username is None:
-        return jsonify({"error": "Username parameter is required"}), 403
+    if email is None:
+        return jsonify({"error": "email parameter is required"}), 403
 
-    user = Tourist.get_user_by_username(username=username)
+    user = Tourist.get_user_by_email(email=email)
 
     if user is not None:
         return jsonify([user.json]), 200
