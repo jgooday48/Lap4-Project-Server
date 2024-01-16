@@ -37,8 +37,9 @@ class Filters(Enum):
 
 
 class Status(Enum):
-    PLANNED='Planned'
+    BOOKED='Booked'
     ONGOING='Ongoing'
     COMPLETED='Completed'
+    CANCELLED='Cancelled'
     
 

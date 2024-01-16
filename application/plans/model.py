@@ -21,7 +21,7 @@ class Plan(db.Model):
     date_from = db.Column(db.DateTime, nullable=False, default=datetime.now())
     date_to = db.Column(db.DateTime, nullable=False, default=datetime.now())
     activities = db.relationship('Activity', secondary=plans_activities_association, backref='plans', lazy='dynamic')
-    notes = db.Column(db.String())
+    notes = db.Column(db.String(), nullable=True)
     status = db.Column(db.Enum(Status), nullable=False)
 
     # place = db.relationship('Place', backref='plans', foreign_keys=[place_id])
