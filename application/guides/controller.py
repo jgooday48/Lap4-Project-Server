@@ -32,11 +32,11 @@ def register():
 def login():
     data = request.get_json()
 
-    user = Guide.get_user_by_username(username=data.get('username'))
+    user = Guide.get_user_by_email(email=data.get('email'))
 
     if user and (user.check_password(password=data.get('password'))):
-        access_token = create_access_token(identity=user.username)
-        refresh_token = create_refresh_token(identity=user.username)
+        access_token = create_access_token(identity=user.email)
+        refresh_token = create_refresh_token(identity=user.email)
 
         return jsonify(
             {"message": "Logged in ",
@@ -46,7 +46,14 @@ def login():
              }
              }
         ), 200
-    return jsonify({"error": "Invalid username or password"}), 400
+    return jsonify({"error": "Invalid email or password"}), 400
+
+
+def find_user_by_email(email):
+    if email is None:
+        return jsonify({"error": "Email parameter is required"}), 403
+
+    user = Guide.get_user_by_email(email=email)
 
 
 def update(id):
@@ -93,57 +100,19 @@ def update(id):
 
 
 
-# def update(id):
-#     try:
-#         data = request.json
-#         guide = Guide.query.filter_by(guide_id=id).first()
-
-#         if guide is None:
-#             raise exceptions.NotFound("Guide does not exist")
-
-#         # Check if 'filters' key exists in the request data
-#         if 'filters' in data:
-#             new_filters = set(data['filters'])
-
-#             # Get activities that match the specified filters
-#             matching_activities = Activity.query.filter(
-#                 Activity.filters.overlap(new_filters)).all()
-
-#             # Add matching activities to the guide
-#             for activity in matching_activities:
-#                 if activity not in guide.activities:
-#                     guide.activities.append(activity)
-
-#         # Update other attributes
-#         for (attribute, value) in data.items():
-#             if hasattr(guide, attribute):
-#                 setattr(guide, attribute, value)
-
-#         # Commit the changes
-#         db.session.commit()
-
-#         return jsonify({"data": guide.json})
-
-#     except Exception as e:
-#         db.session.rollback()
-#         raise exceptions.InternalServerError(f"Error updating guide: {str(e)}")
-
-
-# def destroy(id):  # DELETE a place
-#     try:
-#         place = Place.query.filter_by(place_id=id).first()
-#         db.session.delete(place)
-#         db.session.commit()
-#     except:
-#         raise exceptions.NotFound(f"place does not exist")
-
-
-
 
 
 def find_user(username):
+
+    if user is not None:
+        return jsonify([user.json]), 200
+    else:
+        return jsonify({"message": "User not found"}), 500
+    
+def find_user_by_username(username):
+
     if username is None:
-        return jsonify({"error": "Username parameter is required"}), 403
+        return jsonify({"error": "username parameter is required"}), 403
 
     user = Guide.get_user_by_username(username=username)
 
@@ -151,16 +120,15 @@ def find_user(username):
         return jsonify([user.json]), 200
     else:
         return jsonify({"message": "User not found"}), 500
-    
 
 def current_guide():
     current_identity = get_jwt_identity()
-    guide = Guide.query.filter_by(username=current_identity).first()
+    guide = Guide.query.filter_by(email=current_identity).first()
 
     if guide:
         return jsonify({
             "message": "User details retrieved successfully",
-            "user_details": {"user_type":guide.user_type.name ,"guide_id": guide.guide_id, "username": guide.username, "email": guide.email}
+            "user_details": {"user_type":guide.user_type.name ,"guide_id": guide.guide_id, "email": guide.email, "guide_Username": guide.username}
         })
     else:
         return jsonify({"message": "User not found"}), 404

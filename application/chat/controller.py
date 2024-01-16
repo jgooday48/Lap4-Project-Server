@@ -40,6 +40,15 @@ def userChat(sender_id):
     except Exception as e:
         print(str(e))
         return jsonify({"error": "Error: Chat cannot be retrieved"}), 400
+    
+def guideChat(receiver_id):
+    try:
+        chats = Chat.query.filter_by(receiver=receiver_id)
+        return jsonify([chat.json for chat in chats]), 200
+    
+    except Exception as e:
+        print(str(e))
+        return jsonify({"error": "Error: Chat cannot be retrieved"}), 400
 
 def findChat(sender_id, receiver_id):
     try:
