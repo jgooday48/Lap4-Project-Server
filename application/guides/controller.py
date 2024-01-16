@@ -49,18 +49,84 @@ def login():
     return jsonify({"error": "Invalid username or password"}), 400
 
 
-def update(id):  # PATCH a place
+def update(id):
     try:
         data = request.json
         guide = Guide.query.filter_by(guide_id=id).first()
 
+        if guide is None:
+            raise exceptions.NotFound("Guide does not exist")
+
+        # Check if 'filters' key exists in the request data
+        if 'filters' in data:
+            new_filters = set(data['filters'])
+
+            # Keep activities that have at least one matching filter
+            guide.activities = [
+                activity for activity in guide.activities if any(
+                    filter in new_filters for filter in activity.filters
+                )
+            ]
+
+            # Get new matching activities
+            matching_activities = Activity.query.filter(
+                Activity.filters.overlap(new_filters)).all()
+
+            # Add new matching activities to the guide
+            for activity in matching_activities:
+                if activity not in guide.activities:
+                    guide.activities.append(activity)
+
+        # Update other attributes
         for (attribute, value) in data.items():
             if hasattr(guide, attribute):
                 setattr(guide, attribute, value)
+
+        # Commit the changes
         db.session.commit()
+
         return jsonify({"data": guide.json})
-    except:
-        raise exceptions.NotFound(f"guide does not exist")
+
+    except Exception as e:
+        db.session.rollback()
+        raise exceptions.InternalServerError(f"Error updating guide: {str(e)}")
+
+
+
+# def update(id):
+#     try:
+#         data = request.json
+#         guide = Guide.query.filter_by(guide_id=id).first()
+
+#         if guide is None:
+#             raise exceptions.NotFound("Guide does not exist")
+
+#         # Check if 'filters' key exists in the request data
+#         if 'filters' in data:
+#             new_filters = set(data['filters'])
+
+#             # Get activities that match the specified filters
+#             matching_activities = Activity.query.filter(
+#                 Activity.filters.overlap(new_filters)).all()
+
+#             # Add matching activities to the guide
+#             for activity in matching_activities:
+#                 if activity not in guide.activities:
+#                     guide.activities.append(activity)
+
+#         # Update other attributes
+#         for (attribute, value) in data.items():
+#             if hasattr(guide, attribute):
+#                 setattr(guide, attribute, value)
+
+#         # Commit the changes
+#         db.session.commit()
+
+#         return jsonify({"data": guide.json})
+
+#     except Exception as e:
+#         db.session.rollback()
+#         raise exceptions.InternalServerError(f"Error updating guide: {str(e)}")
 
 
 # def destroy(id):  # DELETE a place
