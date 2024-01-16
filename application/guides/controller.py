@@ -49,7 +49,7 @@ def login():
     return jsonify({"error": "Invalid email or password"}), 400
 
 
-def find_user(email):
+def find_user_by_email(email):
     if email is None:
         return jsonify({"error": "Email parameter is required"}), 403
 
@@ -60,6 +60,16 @@ def find_user(email):
     else:
         return jsonify({"message": "User not found"}), 500
     
+def find_user_by_username(username):
+    if username is None:
+        return jsonify({"error": "username parameter is required"}), 403
+
+    user = Guide.get_user_by_username(username=username)
+
+    if user is not None:
+        return jsonify([user.json]), 200
+    else:
+        return jsonify({"message": "User not found"}), 500
 
 def current_guide():
     current_identity = get_jwt_identity()
