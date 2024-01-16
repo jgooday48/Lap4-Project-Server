@@ -33,11 +33,11 @@ def register():
 def login():
     data = request.get_json()
 
-    user = Tourist.get_user_by_username(username=data.get('username'))
+    user = Tourist.get_user_by_email(email=data.get('email'))
 
     if user and (user.check_password(password=data.get('password'))):
-        access_token = create_access_token(identity=user.username)
-        refresh_token = create_refresh_token(identity=user.username)
+        access_token = create_access_token(identity=user.email)
+        refresh_token = create_refresh_token(identity=user.email)
 
         return jsonify(
             {"message": "Logged in ",
@@ -47,13 +47,35 @@ def login():
              }
              }
         ), 200
-    return jsonify({"error": "Invalid username or password"}), 400
+    return jsonify({"error": "Invalid email or password"}), 400
 
 
-def find_user(username):
+def find_user_by_email(email):
+
+    if email is None:
+        return jsonify({"error": "email parameter is required"}), 403
+
+    user = Tourist.get_user_by_email(email=email)
+
+    if user is not None:
+        return jsonify([user.json]), 200
+    else:
+        return jsonify({"message": "User not found"}), 500
+
+def find_user_id(id):
+    try:
+        user = Tourist.query.filter_by(tourist_id=id)
+        return jsonify([tourist.json for tourist in user]), 200
+    
+    except Exception as e:
+        print(str(e))
+        return jsonify({"error": "Error: Tourist cannot be retrieved"}), 400
+
+
+def find_user_by_username(username):
 
     if username is None:
-        return jsonify({"error": "Username parameter is required"}), 403
+        return jsonify({"error": "email parameter is required"}), 403
 
     user = Tourist.get_user_by_username(username=username)
 
@@ -62,10 +84,9 @@ def find_user(username):
     else:
         return jsonify({"message": "User not found"}), 500
 
-
 def current_tourist():
     current_identity = get_jwt_identity()
-    tourist = Tourist.query.filter_by(username=current_identity).first()
+    tourist = Tourist.query.filter_by(email=current_identity).first()
 
     if tourist:
         return jsonify({

@@ -156,7 +156,7 @@ def create_test_data():
     db.session.add(review)
 
     db.session.commit()
-    plan = Plan(tourist_id=1,guide_id=1,status="PLANNED", date_from=datetime.now(), date_to=datetime.now(), notes='hsjk')
+    plan = Plan(tourist_id=1,guide_id=1, place_id=1, status="BOOKED", date_from=datetime.now(), date_to=datetime.now(), notes='hsjk')
     db.session.add(plan)
     db.session.commit()
 
