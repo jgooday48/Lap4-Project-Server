@@ -1,6 +1,6 @@
 from flask import request, Blueprint
 
-from .controller import register, login, find_user, current_tourist, refresh_access, find_guides_by_tourist, join_tourist_and_guide, remove_tourist_guide_pair, index, find_user_id
+from .controller import register, login, find_user_by_email,find_user_by_username, current_tourist, refresh_access, find_guides_by_tourist, join_tourist_and_guide, remove_tourist_guide_pair, index, find_user_id
 from flask_jwt_extended import jwt_required
 
 
@@ -23,9 +23,17 @@ def handle_user_login():
    
 @tourist_bp.route("/tourists/username/<username>", methods=['GET'])
 # @jwt_required()
-def handle_username(email): 
+def handle_username(username): 
    if request.method == 'GET': 
-      return find_user(email)
+      return find_user_by_username(username)
+   
+
+@tourist_bp.route("/tourists/email/<email>", methods=['GET'])
+# @jwt_required()
+def handle_email(email): 
+   if request.method == 'GET': 
+      return find_user_by_email(email)
+
    
 @tourist_bp.route("/tourist/<int:id>", methods=['GET'])
 def find_tourist(id):
