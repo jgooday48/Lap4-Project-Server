@@ -13,7 +13,7 @@ def handle_notification():
         return index()
 
 
-@notification_bp.route('/notifications/<int:sender_id>', methods=["GET"])
+@notification_bp.route('/notifications/tourist/<int:sender_id>', methods=["GET"])
 def find_sender(sender_id):
     if request.method == "GET":
         return userNotification(sender_id)

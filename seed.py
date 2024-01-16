@@ -6,6 +6,7 @@ from application.places.model import Place
 from application.activities.model import Activity
 from application.plans.model import Plan
 from application.reviews.model import Review
+from application.notification.model import Notification
 from sqlalchemy import text
 from datetime import datetime, timedelta
 
@@ -222,6 +223,13 @@ guide_data = [
 ]
 for data in guide_data:
     create_guide(*data)
+
+db.session.commit()
+
+for i in range(1, 11): 
+    for j in range(1, 7): 
+        notification = Notification(sender=i, receiver=j)
+        db.session.add(notification)
 
 db.session.commit()
 

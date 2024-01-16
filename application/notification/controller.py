@@ -19,10 +19,11 @@ def create():
     try:
         data = request.json
 
-        sender_id = data.get('senderId')
-        receiver_id = data.get('receiverId')
+        sender_id = data.get('sender')
+        receiver_id = data.get('receiver')
 
         new_notification = Notification(sender=sender_id, receiver=receiver_id)
+    
 
         db.session.add(new_notification)
         db.session.commit()
