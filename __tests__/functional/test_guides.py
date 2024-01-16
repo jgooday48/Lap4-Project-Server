@@ -26,6 +26,11 @@ def test_find_guide_by_username(client):
     response = client.get('/guides/username/guydunn42')  
     assert response.status_code == 200
 
+def test_find_guide_by_email(client):
+    response = client.get('/guides/email/guy.dunn@gmail.com')  
+    assert response.status_code == 200
+
+
 def test_find_guide_by_index(client):
     response = client.get('/guides/1')  
     assert response.status_code == 200
@@ -46,4 +51,7 @@ def test_find_guides_by_place_id_error(client):
 def test_find_activ_by_guide(client):
     res = client.get('/guides/guideId:1/activities')
     assert res.status_code == 200
+
+
+
 

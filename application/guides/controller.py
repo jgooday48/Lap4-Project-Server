@@ -54,6 +54,11 @@ def find_user_by_email(email):
         return jsonify({"error": "Email parameter is required"}), 403
 
     user = Guide.get_user_by_email(email=email)
+    if user is not None:
+        return jsonify([user.json]), 200
+    else:
+        return jsonify({"message": "User not found"}), 500
+    
 
 
 def update(id):
@@ -102,12 +107,12 @@ def update(id):
 
 
 
-def find_user(username):
+# def find_user(username):
 
-    if user is not None:
-        return jsonify([user.json]), 200
-    else:
-        return jsonify({"message": "User not found"}), 500
+#     if user is not None:
+#         return jsonify([user.json]), 200
+#     else:
+#         return jsonify({"message": "User not found"}), 500
     
 def find_user_by_username(username):
 
