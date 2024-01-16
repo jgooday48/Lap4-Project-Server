@@ -24,7 +24,7 @@ def test_create_plan(client):
         "date_from": "2024-01-12 10:50:29.918223",
         "date_to": "2024-01-12 10:50:29.918223",
         "activities": [2],
-        "status":"PLANNED",
+        "status":"BOOKED",
         "notes": "gjhgj"
     }
     response = client.post('/plans', json=data)
