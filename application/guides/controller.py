@@ -97,7 +97,7 @@ def update(id):
         # Commit the changes
         db.session.commit()
 
-        return jsonify({"data": guide.json})
+        return jsonify({"data": guide.json}), 201
 
     except Exception as e:
         db.session.rollback()

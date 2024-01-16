@@ -18,6 +18,14 @@ def test_handle_guide_register(client):
     response = client.post('/guides/register', json=data)
     assert response.status_code == 201
 
+def test_update_guide(client):
+    data = {
+        'tagline': 'tag'
+    }
+
+    response = client.patch('/guides/1', json=data)
+    assert response.status_code == 201
+
 def test_guides_page(client):
     response = client.get("/guides")
     assert response.status_code == 200
@@ -30,6 +38,13 @@ def test_find_guide_by_email(client):
     response = client.get('/guides/email/guy.dunn@gmail.com')  
     assert response.status_code == 200
 
+def test_find_guide_by_email_error(client):
+    response = client.get('/guides/email/none')  
+    assert response.status_code == 500
+
+def test_find_guide_by_username_error(client):
+    response = client.get('/guides/username/none')  
+    assert response.status_code == 500
 
 def test_find_guide_by_index(client):
     response = client.get('/guides/1')  
@@ -78,9 +93,13 @@ def test_handle_user_login_invalid_credentials(client):
     response = client.post('/guides/login', json=login_data)
     assert response.status_code == 400
 
-
-
-
 def test_protected_route_current_guide_missing_token(client):
     response = client.get('/guides/current')
     assert response.status_code == 401
+
+
+
+
+
+
+
