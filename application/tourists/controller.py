@@ -77,7 +77,7 @@ def find_user_by_username(username):
 
 def current_tourist():
     current_identity = get_jwt_identity()
-    tourist = Tourist.query.filter_by(username=current_identity).first()
+    tourist = Tourist.query.filter_by(email=current_identity).first()
 
     if tourist:
         return jsonify({
