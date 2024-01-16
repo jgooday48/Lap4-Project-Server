@@ -32,10 +32,10 @@ def handle_activity_guide_pair():
       return add_activity_to_guide()
 
 
-@guide_bp.route("/guides/username/<username>", methods=['GET'])
+@guide_bp.route("/guides/email/<email>", methods=['GET'])
 # @jwt_required()
-def handle_username(username):
-   if request.method == 'GET': return find_user(username)
+def handle_email(email):
+   if request.method == 'GET': return find_user(email)
 
 @guide_bp.route("/guides/guideId:<id>/activities", methods=['GET'])
 def handle_activities_by_guide(id):
