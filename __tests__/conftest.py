@@ -6,7 +6,8 @@ from application.tourists.model import Tourist
 from application.guides.model import Guide
 from application.reviews.model import Review
 from application.plans.model import Plan
-
+from application.message.model import Message
+from application.chat.model import Chat
 from datetime import datetime
 
 @pytest.fixture(scope='session')
@@ -158,5 +159,11 @@ def create_test_data():
     db.session.commit()
     plan = Plan(tourist_id=1,guide_id=1, place_id=1, status="BOOKED", date_from=datetime.now(), date_to=datetime.now(), notes='hsjk')
     db.session.add(plan)
+
+    message = Message(chat_id=1, sender_id=1, text='a message')
+    db.session.add(message)
+
+    chat = Chat(chat_id=1, sender=1, receiver=1)
+    db.session.add(chat)
     db.session.commit()
 
