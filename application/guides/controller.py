@@ -3,7 +3,7 @@ from flask_jwt_extended import create_access_token, create_refresh_token, curren
 from .model import Guide
 from werkzeug import exceptions
 from application.activities.model import Activity
-
+from .. import db
 
 def register():
     data = request.get_json()
@@ -47,6 +47,32 @@ def login():
              }
         ), 200
     return jsonify({"error": "Invalid username or password"}), 400
+
+
+def update(id):  # PATCH a place
+    try:
+        data = request.json
+        guide = Guide.query.filter_by(guide_id=id).first()
+
+        for (attribute, value) in data.items():
+            if hasattr(guide, attribute):
+                setattr(guide, attribute, value)
+        db.session.commit()
+        return jsonify({"data": guide.json})
+    except:
+        raise exceptions.NotFound(f"guide does not exist")
+
+
+# def destroy(id):  # DELETE a place
+#     try:
+#         place = Place.query.filter_by(place_id=id).first()
+#         db.session.delete(place)
+#         db.session.commit()
+#     except:
+#         raise exceptions.NotFound(f"place does not exist")
+
+
+
 
 
 def find_user(username):
