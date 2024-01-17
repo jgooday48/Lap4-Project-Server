@@ -19,7 +19,7 @@ def handle_new_user(new_user_id):
             active_users[request.sid] = {"userId": new_user_id, "socketId": request.sid}
             print("New User Connected", active_users)
         # Send all active users to the new user
-        emit("get-users", active_users, broadcast=True, include_self=False)
+        emit("get-users", active_users)
 
     # Handle message sending
 @socketio.on("send-message")

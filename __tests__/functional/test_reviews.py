@@ -23,6 +23,7 @@ def test_create_review(client):
         "title": "review",
         "comment": "very nice",
 
+
     }
     response = client.post('/reviews', json=data)
     assert response.status_code == 201

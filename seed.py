@@ -2,6 +2,8 @@ from application import create_app, db
 
 from application.tourists.model import Tourist
 from application.guides.model import Guide
+from application.chat.model import Chat
+from application.message.model import Message
 from application.places.model import Place
 from application.activities.model import Activity
 from application.plans.model import Plan
@@ -39,11 +41,34 @@ db.session.add(place)
 
 one_year_from_now = datetime.now() + timedelta(days=365)
 
-guide1 = Guide(place_id=1, name='Guy Dunn', tagline="Just a dude", user_type='GUIDE', username='guydunn42', email='guy.dunn@gmail.com', info="Just a guy", availible_from=datetime.now(),availible_to=datetime.now())
+guide1 = Guide(place_id=1, name='Guy Dunn', tagline="Just a dude", user_type='GUIDE', username='guydunn42', email='guy.dunn@gmail.com', info="Just a guy", availible_from=datetime.now(),availible_to=datetime.now(), images=["https://images.pexels.com/photos/775358/pexels-photo-775358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"])
 
 guide1.set_password('password')
 guide1.filters = ['HISTORICAL', 'OUTDOOR_ACTIVITIES']
 db.session.add(guide1)
+
+chat1 = Chat(sender=2, receiver=1)
+chat2 = Chat(sender=2, receiver=3)
+chat3 = Chat(sender=2, receiver=4)
+chat4 = Chat(sender=2, receiver=5)
+db.session.add_all([chat1, chat2, chat3, chat4])
+db.session.commit()
+
+message1_1 = Message(chat_id=1, sender_id=2, text="Hey!", time="11:08")
+message1_2 = Message(chat_id=1, sender_id=1, text="Hey!", time="11:08")
+message1_3 = Message(chat_id=1, sender_id=2, text="How are you?", time="11:09")
+message1_4 = Message(chat_id=1, sender_id=1, text="I'm great, and you?", time="11:11")
+message1_5 = Message(chat_id=1, sender_id=2, text="Great! I love the look of your plan", time="11:12")
+
+message2_1 = Message(chat_id=2, sender_id=2, text="Hey!", time="11:08")
+message2_2 = Message(chat_id=2, sender_id=3, text="Hey, how are you?", time="11:08")
+
+message3_1 = Message(chat_id=3, sender_id=2, text="Hey!", time="11:08")
+
+message4_1 = Message(chat_id=4, sender_id=2, text="Hey!", time="11:08")
+message4_2 = Message(chat_id=4, sender_id=2, text="Your plan looks great!", time="11:08")
+db.session.add_all([message1_1, message1_2, message1_3, message1_4, message1_5, message2_1, message2_2, message3_1, message4_1, message4_2])
+db.session.commit()
 
 activity = Activity(name="canoe", location="nyc",
                     filters=["OUTDOOR_ACTIVITIES"], place_id=1, description="sick as", zip_code="NE3 4RY", images=['https://i.cbc.ca/1.4764103.1532699684!/fileImage/httpImage/canoeing.jpg'])
@@ -389,6 +414,7 @@ for data in review_data:
     db.session.commit()
 
 
+
 def create_plan(tourist_id, guide_id, place_id, date_from, date_to, status, notes, activity_ids):
     plan = Plan(
         tourist_id=tourist_id,
@@ -436,3 +462,8 @@ plan_data = [
 
 for data in plan_data:
     create_plan(*data)
+
+chat_data = [
+
+]
+

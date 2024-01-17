@@ -23,22 +23,18 @@ def show(id): #GET a plan
 
 def create():
     try:
-        # Extract data from the request
+
         tourist_id, guide_id, place_id, date_to, date_from, status, notes, activity_ids = request.json.values()
 
-        # Create a new plan
         new_plan = Plan(tourist_id, guide_id, place_id, date_to,
                         date_from, status, notes)
         print("new plan: ", new_plan)
 
-        # Query and fetch existing activities based on their IDs
         existing_activities = Activity.query.filter(
             Activity.activity_id.in_(activity_ids)).all()
 
-        # Associate existing activities with the plan
         new_plan.activities.extend(existing_activities)
 
-        # Add the plan and activities to the database
         db.session.add(new_plan)
         db.session.commit()
 

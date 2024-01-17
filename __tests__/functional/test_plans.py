@@ -23,7 +23,7 @@ def test_create_plan(client):
         "place_id": 1,
         "date_from": "2024-01-12 10:50:29.918223",
         "date_to": "2024-01-12 10:50:29.918223",
-        "activities": [2],
+        "activities": [{"activity_id":2}],
         "status":"BOOKED",
         "notes": "gjhgj"
     }

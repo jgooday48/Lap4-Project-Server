@@ -54,6 +54,11 @@ def find_user_by_email(email):
         return jsonify({"error": "Email parameter is required"}), 403
 
     user = Guide.get_user_by_email(email=email)
+    if user is not None:
+        return jsonify([user.json]), 200
+    else:
+        return jsonify({"message": "User not found"}), 500
+    
 
 
 def update(id):
@@ -92,7 +97,7 @@ def update(id):
         # Commit the changes
         db.session.commit()
 
-        return jsonify({"data": guide.json})
+        return jsonify({"data": guide.json}), 201
 
     except Exception as e:
         db.session.rollback()
@@ -102,12 +107,12 @@ def update(id):
 
 
 
-def find_user(username):
+# def find_user(username):
 
-    if user is not None:
-        return jsonify([user.json]), 200
-    else:
-        return jsonify({"message": "User not found"}), 500
+#     if user is not None:
+#         return jsonify([user.json]), 200
+#     else:
+#         return jsonify({"message": "User not found"}), 500
     
 def find_user_by_username(username):
 
@@ -151,9 +156,10 @@ def index():
     
 
 def find_guide_by_index(id):
-    guide= Guide.query.filter_by(guide_id=id).first()
     try:
-        return jsonify({"data": guide.json}), 200
+         guide= Guide.query.filter_by(guide_id=id)
+         return jsonify([guides.json for guides in guide]), 200
+
     except:
         raise exceptions.NotFound(f"guide does not exist")
 
