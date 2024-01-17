@@ -1,6 +1,8 @@
 from flask import request, Blueprint
 from flask_jwt_extended import jwt_required
-from .controller import register, login, find_user_by_email, find_user_by_username, refresh_access, current_guide, find_activities_by_guide, index, add_activity_to_guide, guides_by_place_id, find_guide_by_index
+
+from .controller import register, login, find_user_by_email, find_user_by_username, refresh_access, current_guide, find_activities_by_guide, index, add_activity_to_guide, guides_by_place_id, find_guide_by_index, update
+
 
 
 guide_bp = Blueprint('guides', __name__)
@@ -10,10 +12,10 @@ guide_bp = Blueprint('guides', __name__)
 def handle_guides():
     if request.method == "GET": return index()
 
-@guide_bp.route('/guides/<int:id>', methods=["GET"])
+@guide_bp.route('/guides/<int:id>', methods=["GET", "PATCH"])
 def handle_guide(id):
-    if request.method == "GET": 
-       return find_guide_by_index(id)
+    if request.method == "GET": return find_guide_by_index(id)
+    if request.method == "PATCH": return update(id)
 
 
 @guide_bp.route('/guides/register', methods=['POST'])

@@ -4,10 +4,16 @@ def test_chat_page(client):
     response = client.get("/chat")
     assert response.status_code == 200
 
-# def test_activity_page(client):
-#     response = client.get('/activities/1')
-#     assert response.status_code == 200
+# def test_post_chat(client):
+#     data = {
+#         "sender": 1,
+#         "receiver": 1
+#     }
 
-# def test_chat_page_not_found(client):
-#     err_response = client.get('/chat/68')
-#     assert err_response.status_code == 404
+#     response = client.post('/chat', json=data)
+#     assert response == 200
+
+
+# def test_find_sender(client):
+#     response = client.get('/chat/1')
+#     assert response == <WrapperTestResponse streamed [200 OK]>
