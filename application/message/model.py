@@ -10,6 +10,7 @@ class Message(db.Model):
     chat_id = db.Column(db.Integer)
     sender_id = db.Column(db.Integer)
     text = db.Column(db.String(100))
+    time = db.Column(db.String(100))
 
     @property
     def json(self):
@@ -17,5 +18,6 @@ class Message(db.Model):
             "message_id": self.message_id,
             "chat_id": self.chat_id,
             "sender_id": self.sender_id,
-            "text": self.text
+            "text": self.text,
+            "time": self.time
         }
