@@ -3,7 +3,7 @@ from flask_jwt_extended import create_access_token, create_refresh_token, curren
 from .model import Guide
 from werkzeug import exceptions
 from application.activities.model import Activity
-
+from .. import db
 
 def register():
     data = request.get_json()
@@ -54,13 +54,68 @@ def find_user_by_email(email):
         return jsonify({"error": "Email parameter is required"}), 403
 
     user = Guide.get_user_by_email(email=email)
-
     if user is not None:
         return jsonify([user.json]), 200
     else:
         return jsonify({"message": "User not found"}), 500
     
+
+
+def update(id):
+    try:
+        data = request.json
+        guide = Guide.query.filter_by(guide_id=id).first()
+
+        if guide is None:
+            raise exceptions.NotFound("Guide does not exist")
+
+        # Check if 'filters' key exists in the request data
+        if 'filters' in data:
+            new_filters = set(data['filters'])
+
+            # Keep activities that have at least one matching filter
+            guide.activities = [
+                activity for activity in guide.activities if any(
+                    filter in new_filters for filter in activity.filters
+                )
+            ]
+
+            # Get new matching activities
+            matching_activities = Activity.query.filter(
+                Activity.filters.overlap(new_filters)).all()
+
+            # Add new matching activities to the guide
+            for activity in matching_activities:
+                if activity not in guide.activities:
+                    guide.activities.append(activity)
+
+        # Update other attributes
+        for (attribute, value) in data.items():
+            if hasattr(guide, attribute):
+                setattr(guide, attribute, value)
+
+        # Commit the changes
+        db.session.commit()
+
+        return jsonify({"data": guide.json})
+
+    except Exception as e:
+        db.session.rollback()
+        raise exceptions.InternalServerError(f"Error updating guide: {str(e)}")
+
+
+
+
+
+# def find_user(username):
+
+#     if user is not None:
+#         return jsonify([user.json]), 200
+#     else:
+#         return jsonify({"message": "User not found"}), 500
+    
 def find_user_by_username(username):
+
     if username is None:
         return jsonify({"error": "username parameter is required"}), 403
 
@@ -101,9 +156,10 @@ def index():
     
 
 def find_guide_by_index(id):
-    guide= Guide.query.filter_by(guide_id=id).first()
     try:
-        return jsonify({"data": guide.json}), 200
+         guide= Guide.query.filter_by(guide_id=id)
+         return jsonify([guides.json for guides in guide]), 200
+
     except:
         raise exceptions.NotFound(f"guide does not exist")
 
