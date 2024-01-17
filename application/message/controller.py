@@ -20,8 +20,9 @@ def createMessage():
         chat_id = data.get('chatId')
         sender_id = data.get('senderId')
         text = data.get('text')
+        time = data.get('time')
 
-        new_message = Message(chat_id=chat_id, sender_id=sender_id, text=text)
+        new_message = Message(chat_id=chat_id, sender_id=sender_id, text=text, time=time)
         db.session.add(new_message)
         db.session.commit()
 
