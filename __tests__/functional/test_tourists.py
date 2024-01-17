@@ -24,15 +24,16 @@ def test_find_tourist_by_email(client):
 def test_find_tourist_by_email_error(client):
     response = client.get('/tourists/email/john.smith@gmail')  
     assert response.status_code == 500
+    assert response.json == {"message": "User not found"}
 
 def test_find_tourist_by_username_error(client):
-    response_not_found = client.get('/tourists/username/johnsmith45')
-    assert response_not_found.status_code == 500
-    assert response_not_found.json == {"message": "User not found"}
+    response = client.get('/tourists/username/johnsmith45')
+    assert response.status_code == 500
+    assert response.json == {"message": "User not found"}
 
 def test_tourist_db_no_auth(client):
-    response_not_found = client.get('http://localhost:5000/tourists/current')
-    assert response_not_found.json == {"msg": "Missing Authorization Header"}
+    response = client.get('http://localhost:5000/tourists/current')
+    assert response.json == {"msg": "Missing Authorization Header"}
 
 
 def test_find_tourist_by_id(client):
@@ -42,7 +43,7 @@ def test_find_tourist_by_id(client):
 
 
 def test_handle_tourist_register_existing_username(client):
-    # Register a tourist with a specific username
+
     data = {
         'name': 'John Doe',
         'user_type': 'TOURIST',
@@ -52,13 +53,11 @@ def test_handle_tourist_register_existing_username(client):
     }
     response = client.post('/tourists/register', json=data)
     assert response.status_code == 201
-
-    # Try to register another tourist with the same username (should fail)
     response_existing_username = client.post('/tourists/register', json=data)
     assert response_existing_username.status_code == 403
 
 def test_handle_user_login(client):
-    # Register a tourist
+
     data = {
         'name': 'John Doe',
         'user_type': 'TOURIST',
@@ -68,7 +67,6 @@ def test_handle_user_login(client):
     }
     client.post('/tourists/register', json=data)
 
-    # Login with the registered user
     login_data = {
         'email': 'test@example.com',
         'password': 'test_password'
@@ -78,7 +76,6 @@ def test_handle_user_login(client):
     assert 'tokens' in response.json
 
 def test_handle_user_login_invalid_credentials(client):
-    # Try to login with invalid credentials
     login_data = {
         'email': 'nonexistent@example.com',
         'password': 'invalid_password'
@@ -89,7 +86,6 @@ def test_handle_user_login_invalid_credentials(client):
 
 
 def test_protected_route_current_tourist(client):
-    # Register a tourist
     data = {
         'name': 'John Doe',
         'user_type': 'TOURIST',
@@ -99,7 +95,6 @@ def test_protected_route_current_tourist(client):
     }
     client.post('/tourists/register', json=data)
 
-    # Login with the registered user to get an access token
     login_data = {
         'email': 'protected_route@example.com',
         'password': 'test_password'
@@ -108,13 +103,28 @@ def test_protected_route_current_tourist(client):
     assert login_response.status_code == 200
     access_token = login_response.json['tokens']['access']
 
-    # Access the protected route with a valid access token
+
     headers = {'Authorization': f'Bearer {access_token}'}
     response = client.get('/tourists/current', headers=headers)
     assert response.status_code == 200
     assert 'user_details' in response.json
 
 def test_protected_route_current_tourist_missing_token(client):
-    # Access the protected route without providing a token (should fail)
     response = client.get('/tourists/current')
     assert response.status_code == 401
+
+
+
+def test_find_guides_by_tourist_not_found(client):
+
+    response = client.get('/tourists/999/guides')
+    assert response.status_code == 404
+
+def test_remove_tourist_guide_pair_invalid_ids(client):
+
+    response = client.delete('/tourists/guides/')
+    assert response.status_code == 404
+
+
+
+
