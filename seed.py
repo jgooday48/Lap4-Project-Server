@@ -38,7 +38,7 @@ db.session.add(place)
 
 one_year_from_now = datetime.now() + timedelta(days=365)
 
-guide1 = Guide(place_id=1, name='Guy Dunn', tagline="Just a dude", user_type='GUIDE', username='guydunn42', email='guy.dunn@gmail.com', info="Just a guy", availible_from=datetime.now(),availible_to=datetime.now())
+guide1 = Guide(place_id=1, name='Guy Dunn', tagline="Just a dude", user_type='GUIDE', username='guydunn42', email='guy.dunn@gmail.com', info="Just a guy", availible_from=datetime.now(),availible_to=datetime.now(), images=["https://images.pexels.com/photos/775358/pexels-photo-775358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"])
 
 guide1.set_password('password')
 guide1.filters = ['HISTORICAL', 'OUTDOOR_ACTIVITIES']
