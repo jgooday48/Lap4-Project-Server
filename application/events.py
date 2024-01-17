@@ -10,6 +10,7 @@ active_users = {}
 def handle_connect():
     print(f"User connected: {request.sid}")
 
+
     # Handle new user addition
 @socketio.on("new-user-add")
 def handle_new_user(new_user_id):
@@ -47,6 +48,8 @@ def handle_disconnect():
         emit("get-users", active_users, broadcast=True)
 
 
+
+
 @socketio.on('notification')
 def handle_notification(data):
     from application import db  # Import locally
@@ -64,4 +67,7 @@ def handle_notification(data):
     db.session.commit()
 
         # Emit a response to acknowledge the notification
-    socketio.emit('notification_ack', { 'status': 'success'}, room=request.sid)
+    emit('notification_ack', { 'status': 'success'}, room=request.sid)
+    emit('notification', {'message': message, 'senderId': sender_id,'timestamp': new_note.timestamp}, room=guide_id)
+
+

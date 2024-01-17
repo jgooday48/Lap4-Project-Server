@@ -29,6 +29,7 @@ def create():
         # Create a new plan
         new_plan = Plan(tourist_id, guide_id, place_id, date_to,
                         date_from, status, notes)
+        print("new plan: ", new_plan)
 
         # Query and fetch existing activities based on their IDs
         existing_activities = Activity.query.filter(

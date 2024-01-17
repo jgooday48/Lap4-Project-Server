@@ -46,7 +46,7 @@ guide1.filters = ['HISTORICAL', 'OUTDOOR_ACTIVITIES']
 db.session.add(guide1)
 
 activity = Activity(name="canoe", location="nyc",
-                    filters=["OUTDOOR_ACTIVITIES"], place_id=1, description="sick as", zip_code="NE3 4RY", images=['sdsds'])
+                    filters=["OUTDOOR_ACTIVITIES"], place_id=1, description="sick as", zip_code="NE3 4RY", images=['https://i.cbc.ca/1.4764103.1532699684!/fileImage/httpImage/canoeing.jpg'])
 
 db.session.add(activity)
 
@@ -226,12 +226,12 @@ for data in guide_data:
 
 db.session.commit()
 
-for i in range(1, 11): 
-    for j in range(1, 7): 
-        notification = Notification(sender=i, receiver=j)
-        db.session.add(notification)
+# for i in range(1, 11): 
+#     for j in range(1, 7): 
+#         notification = Notification(sender=i, receiver=j)
+#         db.session.add(notification)
 
-db.session.commit()
+# db.session.commit()
 
 # Add more activities
 activity_data = [
@@ -387,3 +387,52 @@ for data in review_data:
     create_review(*data)
 
     db.session.commit()
+
+
+def create_plan(tourist_id, guide_id, place_id, date_from, date_to, status, notes, activity_ids):
+    plan = Plan(
+        tourist_id=tourist_id,
+        guide_id=guide_id,
+        place_id=place_id,
+        date_from=date_from,
+        date_to=date_to,
+        status=status,
+        notes=notes
+    )
+
+    # Add activities to the plan
+    for activity_id in activity_ids:
+        activity = Activity.query.get(activity_id)
+        if activity:
+            plan.activities.append(activity)
+
+    # Add the plan to the database
+    db.session.add(plan)
+    db.session.commit()
+
+
+plan_data = [
+    (1, 2, 2, "2022-02-17T12:30:00", "2022-01-17T12:30:00",
+     "COMPLETED", "Let's go karaoke bar!", [1, 2, 3]),
+    (2, 3, 3, "2022-01-01T12:30:00", "2021-12-30T12:30:00",
+     "ONGOING", "Exploring historical sites", [4, 5, 6]),
+    (3, 4, 4, "2021-12-15T12:30:00", "2021-12-10T12:30:00",
+     "UPDATING", "Culinary adventure", [7, 8, 9]),
+    (4, 5, 5, "2021-11-28T12:30:00", "2021-11-25T12:30:00",
+     "UPDATING", "Nature exploration", [10]),
+    (5, 6, 6, "2021-11-10T12:30:00", "2021-11-05T12:30:00",
+     "CANCELLED", "Shopping spree", [1, 2, 3, 4]),
+    (6, 2, 2, "2022-03-01T12:30:00", "2022-02-25T12:30:00",
+     "UPDATING", "Art exploration", [5, 6, 7]),
+    (7, 2, 2, "2022-02-15T12:30:00", "2022-02-10T12:30:00",
+     "UPDATING", "Cultural immersion", [8, 9, 10]),
+    (8, 2, 2, "2022-01-28T12:30:00", "2022-01-25T12:30:00",
+     "BOOKED", "Nightlife experience", [1, 2, 3, 4]),
+    (9, 2, 2, "2022-01-10T12:30:00", "2022-01-05T12:30:00",
+     "CANCELLED", "Outdoor adventure", [6, 7, 8]),
+    (10, 2, 2, "2021-12-25T12:30:00", "2021-12-20T12:30:00",
+     "ONGOING", "Local festivities", [9, 10]),
+]
+
+for data in plan_data:
+    create_plan(*data)

@@ -1,5 +1,5 @@
 from flask import request, Blueprint
-from .controller import index, create_note, get_notes_by_notification
+from .controller import index, create_note, get_notes_by_notification, get_notes_by_guide
 from flask_jwt_extended import jwt_required
 
 notes_bp = Blueprint('notes', __name__)
@@ -17,3 +17,9 @@ def create_notes():
 def get_notes(notification_id):
     if request.method == "GET":
         return get_notes_by_notification(notification_id)
+    
+
+@notes_bp.route("/notes/guide/<int:id>", methods=["GET"])
+def get_notes_guide(id):
+    if request.method == "GET":
+        return get_notes_by_guide(id)

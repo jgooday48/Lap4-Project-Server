@@ -41,3 +41,13 @@ def get_notes_by_notification(notification_id):
     except Exception as e:
         print(str(e))
         return jsonify({"error": "Error: note cannot be retrieved"}), 400
+
+
+def get_notes_by_guide(guide_id):
+    try:
+        note = Note.query.filter_by(guide_id=guide_id).all()
+        return jsonify([m.json for m in note])
+
+    except Exception as e:
+        print(str(e))
+        return jsonify({"error": "Error: note cannot be retrieved"}), 400
