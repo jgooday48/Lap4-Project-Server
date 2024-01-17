@@ -51,6 +51,8 @@ def create_app(env=None):
     from application.activities.routes import activities_bp
     from application.chat.routes import chat_bp
     from application.message.routes import message_bp
+    from application.notification.routes import notification_bp
+    from application.notes.routes import notes_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(tourist_bp)
@@ -62,6 +64,8 @@ def create_app(env=None):
     app.register_blueprint(reviews_bp)
     app.register_blueprint(chat_bp)
     app.register_blueprint(message_bp)
+    app.register_blueprint(notification_bp)
+    app.register_blueprint(notes_bp)
 
     @jwt.user_lookup_loader
     def user_lookup_callback(_jwt_headers, jwt_data):

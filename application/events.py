@@ -1,12 +1,15 @@
 from .extensions import socketio
 from flask_socketio import emit
 from flask import request
+from datetime import datetime
+
 
 active_users = {}
 
 @socketio.on("connect")
 def handle_connect():
     print(f"User connected: {request.sid}")
+
 
     # Handle new user addition
 @socketio.on("new-user-add")
@@ -43,3 +46,28 @@ def handle_disconnect():
         print("User Disconnected", active_users)
         # Send all active users to all users
         emit("get-users", active_users, broadcast=True)
+
+
+
+
+@socketio.on('notification')
+def handle_notification(data):
+    from application import db  # Import locally
+    from application.notes.model import Note  # Import locally
+    
+    # Handle the notification data (store it in the database)
+    guide_id = data.get('guideId')
+    message = data.get('message')
+    sender_id = data.get('senderId')
+
+
+    new_note = Note( sender_id=sender_id,text=message,guide_id=guide_id, timestamp=datetime.now())
+        # Add the note to the database
+    db.session.add(new_note)
+    db.session.commit()
+
+        # Emit a response to acknowledge the notification
+    emit('notification_ack', { 'status': 'success'}, room=request.sid)
+    emit('notification', {'message': message, 'senderId': sender_id,'timestamp': new_note.timestamp}, room=guide_id)
+
+

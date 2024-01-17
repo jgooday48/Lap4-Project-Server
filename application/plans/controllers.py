@@ -28,6 +28,7 @@ def create():
 
         new_plan = Plan(tourist_id, guide_id, place_id, date_to,
                         date_from, status, notes)
+        print("new plan: ", new_plan)
 
         existing_activities = Activity.query.filter(
             Activity.activity_id.in_(activity_ids)).all()
