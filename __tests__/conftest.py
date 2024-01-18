@@ -67,9 +67,9 @@ def create_test_data():
     # ... (existing code)
 
 
-    def create_tourist(name, user_type, username, email):
+    def create_tourist(name, user_type, username, email, images):
         tourist = Tourist(name=name, user_type=user_type,
-                        username=username, email=email)
+                        username=username, email=email, images=images)
         tourist.set_password('password')
         db.session.add(tourist)
 
@@ -96,11 +96,11 @@ def create_test_data():
 
     # Add more tourists
     tourist_data = [
-        ('John Smith', 'TOURIST', 'johnsmith456', 'john.smith@gmail.com'),
-        ('Emily Wilson', 'TOURIST', 'emilywilson789', 'emily.wilson@gmail.com'),
-        ('Michael Brown', 'TOURIST', 'michaelbrown123', 'michael.brown@gmail.com'),
-        ('Sophia Rodriguez', 'TOURIST', 'sophiarodriguez456', 'sophia.rodriguez@gmail.com'),
-        ('Daniel Taylor', 'TOURIST', 'danieltaylor789', 'daniel.taylor@gmail.com')
+        ('John Smith', 'TOURIST', 'johnsmith456', 'john.smith@gmail.com',[]),
+        ('Emily Wilson', 'TOURIST', 'emilywilson789', 'emily.wilson@gmail.com',[]),
+        ('Michael Brown', 'TOURIST', 'michaelbrown123', 'michael.brown@gmail.com',[]),
+        ('Sophia Rodriguez', 'TOURIST', 'sophiarodriguez456', 'sophia.rodriguez@gmail.com',[]),
+        ('Daniel Taylor', 'TOURIST', 'danieltaylor789', 'daniel.taylor@gmail.com', [])
     ]
 
     for data in tourist_data:

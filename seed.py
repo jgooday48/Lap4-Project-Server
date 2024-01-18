@@ -23,7 +23,7 @@ print("Creating Database")
 
 print("Seeding Database")
 tourist1 = Tourist(name='Jane Doe', user_type='TOURIST',
-                   username='janedoe123', email='jane.doe@gmail.com')
+                   username='janedoe123', email='jane.doe@gmail.com', images=[])
 tourist1.set_password('password')
 
 db.session.add(tourist1)
@@ -91,9 +91,9 @@ tourist1.guides.append(guide1)
 # ... (existing code)
 
 
-def create_tourist(name, user_type, username, email):
+def create_tourist(name, user_type, username, email, images):
     tourist = Tourist(name=name, user_type=user_type,
-                      username=username, email=email)
+                      username=username, email=email, images=images or [])
     tourist.set_password('password')
     db.session.add(tourist)
 
@@ -149,51 +149,51 @@ def create_guide_activity_pairs(guide_data, activity_data):
 
 # Add more tourists
 tourist_data = [
-    ('John Smith', 'TOURIST', 'johnsmith456', 'john.smith@gmail.com'),
-    ('Emily Wilson', 'TOURIST', 'emilywilson789', 'emily.wilson@gmail.com'),
-    ('Michael Brown', 'TOURIST', 'michaelbrown123', 'michael.brown@gmail.com'),
-    ('Sophia Rodriguez', 'TOURIST', 'sophiarodriguez456', 'sophia.rodriguez@gmail.com'),
-    ('Daniel Taylor', 'TOURIST', 'danieltaylor789', 'daniel.taylor@gmail.com'),
-    ('Olivia Johnson', 'TOURIST', 'oliviajohnson234', 'olivia.johnson@gmail.com'),
-    ('Matthew Davis', 'TOURIST', 'matthewdavis567', 'matthew.davis@gmail.com'),
-    ('Isabella Martinez', 'TOURIST', 'isabellamartinez890', 'isabella.martinez@gmail.com'),
-    ('Ethan White', 'TOURIST', 'ethanwhite123', 'ethan.white@gmail.com'),
-    ('Ava Anderson', 'TOURIST', 'avaanderson456', 'ava.anderson@gmail.com'),
-    ('Noah Harris', 'TOURIST', 'noahharris789', 'noah.harris@gmail.com'),
-    ('Sophie Clark', 'TOURIST', 'sophieclark123', 'sophie.clark@gmail.com'),
-    ('William Turner', 'TOURIST', 'williamturner456', 'william.turner@gmail.com'),
-    ('Emma Lee', 'TOURIST', 'emmalee789', 'emma.lee@gmail.com'),
-    ('James Mitchell', 'TOURIST', 'jamesmitchell123', 'james.mitchell@gmail.com'),
-    ('Aria Thompson', 'TOURIST', 'ariathompson456', 'aria.thompson@gmail.com'),
-    ('Liam Garcia', 'TOURIST', 'liamgarcia789', 'liam.garcia@gmail.com'),
-    ('Grace Adams', 'TOURIST', 'graceadams123', 'grace.adams@gmail.com'),
-    ('Logan Moore', 'TOURIST', 'loganmoore456', 'logan.moore@gmail.com'),
-    ('Sophie Turner', 'TOURIST', 'sophieturner987', 'sophie.turner@gmail.com'),
-    ('Henry Miller', 'TOURIST', 'henrymiller234', 'henry.miller@gmail.com'),
-    ('Ella Parker', 'TOURIST', 'ellaparker567', 'ella.parker@gmail.com'),
-    ('Carter Brown', 'TOURIST', 'carterbrown890', 'carter.brown@gmail.com'),
-    ('Chloe Davis', 'TOURIST', 'chloedavis123', 'chloe.davis@gmail.com'),
-    ('Owen Smith', 'TOURIST', 'owensmith456', 'owen.smith@gmail.com'),
-    ('Madison Clark', 'TOURIST', 'madisonclark789', 'madison.clark@gmail.com'),
-    ('Jackson White', 'TOURIST', 'jacksonwhite123', 'jackson.white@gmail.com'),
-    ('Scarlett Taylor', 'TOURIST', 'scarletttaylor456', 'scarlett.taylor@gmail.com'),
-    ('Gabriel Hernandez', 'TOURIST','gabrielhernandez789', 'gabriel.hernandez@gmail.com'),
-    ('Zoe Adams', 'TOURIST', 'zoeadams123', 'zoe.adams@gmail.com'),
-    ('Nathan Wilson', 'TOURIST', 'nathanwilson456', 'nathan.wilson@gmail.com'),
-    ('Peyton Moore', 'TOURIST', 'peytonmoore789', 'peyton.moore@gmail.com'),
-    ('Hannah Martinez', 'TOURIST', 'hannahmartinez123', 'hannah.martinez@gmail.com'),
-    ('Landon Johnson', 'TOURIST', 'landonjohnson456', 'landon.johnson@gmail.com'),
-    ('Lily Harris', 'TOURIST', 'lilyharris789', 'lily.harris@gmail.com'),
-    ('Max Anderson', 'TOURIST', 'maxanderson123', 'max.anderson@gmail.com'),
-    ('Avery Turner', 'TOURIST', 'averyturner456', 'avery.turner@gmail.com'),
-    ('Evan Garcia', 'TOURIST', 'evangarcia789', 'evan.garcia@gmail.com'),
-    ('Mia Adams', 'TOURIST', 'miaadams123', 'mia.adams@gmail.com'),
-    ('Nicholas Baker', 'TOURIST', 'nicholasbaker234', 'nicholas.baker@gmail.com'),
-    ('Aubrey Cooper', 'TOURIST', 'aubreycooper567', 'aubrey.cooper@gmail.com'),
-    ('Zachary Turner', 'TOURIST', 'zacharyturner890', 'zachary.turner@gmail.com'),
-    ('Samantha Mitchell', 'TOURIST','samanthamitchell123', 'samantha.mitchell@gmail.com'),
-    ('Oscar Thompson', 'TOURIST', 'oscarthompson456', 'oscar.thompson@gmail.com'),
-    ('Aaliyah Wilson', 'TOURIST', 'aaliyahwilson789', 'aaliyah.wilson@gmail.com'),
+    ('John Smith', 'TOURIST', 'johnsmith456', 'john.smith@gmail.com', ['https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg']),
+    ('Emily Wilson', 'TOURIST', 'emilywilson789', 'emily.wilson@gmail.com', ['https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1']),
+    ('Michael Brown', 'TOURIST', 'michaelbrown123', 'michael.brown@gmail.com', []),
+    ('Sophia Rodriguez', 'TOURIST', 'sophiarodriguez456', 'sophia.rodriguez@gmail.com', []),
+    ('Daniel Taylor', 'TOURIST', 'danieltaylor789', 'daniel.taylor@gmail.com', []),
+    ('Olivia Johnson', 'TOURIST', 'oliviajohnson234', 'olivia.johnson@gmail.com', []),
+    ('Matthew Davis', 'TOURIST', 'matthewdavis567', 'matthew.davis@gmail.com', []),
+    ('Isabella Martinez', 'TOURIST', 'isabellamartinez890', 'isabella.martinez@gmail.com', []),
+    ('Ethan White', 'TOURIST', 'ethanwhite123', 'ethan.white@gmail.com', []),
+    ('Ava Anderson', 'TOURIST', 'avaanderson456', 'ava.anderson@gmail.com', []),
+    ('Noah Harris', 'TOURIST', 'noahharris789', 'noah.harris@gmail.com', []),
+    ('Sophie Clark', 'TOURIST', 'sophieclark123', 'sophie.clark@gmail.com', []),
+    ('William Turner', 'TOURIST', 'williamturner456', 'william.turner@gmail.com', []),
+    ('Emma Lee', 'TOURIST', 'emmalee789', 'emma.lee@gmail.com', []),
+    ('James Mitchell', 'TOURIST', 'jamesmitchell123', 'james.mitchell@gmail.com', []),
+    ('Aria Thompson', 'TOURIST', 'ariathompson456', 'aria.thompson@gmail.com', []),
+    ('Liam Garcia', 'TOURIST', 'liamgarcia789', 'liam.garcia@gmail.com', []),
+    ('Grace Adams', 'TOURIST', 'graceadams123', 'grace.adams@gmail.com', []),
+    ('Logan Moore', 'TOURIST', 'loganmoore456', 'logan.moore@gmail.com', []),
+    ('Sophie Turner', 'TOURIST', 'sophieturner987', 'sophie.turner@gmail.com', []),
+    ('Henry Miller', 'TOURIST', 'henrymiller234', 'henry.miller@gmail.com', []),
+    ('Ella Parker', 'TOURIST', 'ellaparker567', 'ella.parker@gmail.com', []),
+    ('Carter Brown', 'TOURIST', 'carterbrown890', 'carter.brown@gmail.com', []),
+    ('Chloe Davis', 'TOURIST', 'chloedavis123', 'chloe.davis@gmail.com', []),
+    ('Owen Smith', 'TOURIST', 'owensmith456', 'owen.smith@gmail.com', []),
+    ('Madison Clark', 'TOURIST', 'madisonclark789', 'madison.clark@gmail.com', []),
+    ('Jackson White', 'TOURIST', 'jacksonwhite123', 'jackson.white@gmail.com', []),
+    ('Scarlett Taylor', 'TOURIST', 'scarletttaylor456', 'scarlett.taylor@gmail.com', []),
+    ('Gabriel Hernandez', 'TOURIST','gabrielhernandez789', 'gabriel.hernandez@gmail.com', []),
+    ('Zoe Adams', 'TOURIST', 'zoeadams123', 'zoe.adams@gmail.com', []),
+    ('Nathan Wilson', 'TOURIST', 'nathanwilson456', 'nathan.wilson@gmail.com', []),
+    ('Peyton Moore', 'TOURIST', 'peytonmoore789', 'peyton.moore@gmail.com', []),
+    ('Hannah Martinez', 'TOURIST', 'hannahmartinez123', 'hannah.martinez@gmail.com', []),
+    ('Landon Johnson', 'TOURIST', 'landonjohnson456', 'landon.johnson@gmail.com', []),
+    ('Lily Harris', 'TOURIST', 'lilyharris789', 'lily.harris@gmail.com', []),
+    ('Max Anderson', 'TOURIST', 'maxanderson123', 'max.anderson@gmail.com', []),
+    ('Avery Turner', 'TOURIST', 'averyturner456', 'avery.turner@gmail.com', []),
+    ('Evan Garcia', 'TOURIST', 'evangarcia789', 'evan.garcia@gmail.com', []),
+    ('Mia Adams', 'TOURIST', 'miaadams123', 'mia.adams@gmail.com', []),
+    ('Nicholas Baker', 'TOURIST', 'nicholasbaker234', 'nicholas.baker@gmail.com', []),
+    ('Aubrey Cooper', 'TOURIST', 'aubreycooper567', 'aubrey.cooper@gmail.com', []),
+    ('Zachary Turner', 'TOURIST', 'zacharyturner890', 'zachary.turner@gmail.com', []),
+    ('Samantha Mitchell', 'TOURIST','samanthamitchell123', 'samantha.mitchell@gmail.com', []),
+    ('Oscar Thompson', 'TOURIST', 'oscarthompson456', 'oscar.thompson@gmail.com', []),
+    ('Aaliyah Wilson', 'TOURIST', 'aaliyahwilson789', 'aaliyah.wilson@gmail.com', []),
 ]
 
 
