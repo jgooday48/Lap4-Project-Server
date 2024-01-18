@@ -3,6 +3,7 @@ from application.enums import UserType, Filters
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.dialects.postgresql import ARRAY
 
+
 class Chat(db.Model):
     __tablename__ = "chat"
 
