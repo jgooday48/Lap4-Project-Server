@@ -14,6 +14,10 @@ def test_chat_page(client):
 #     assert response == 200
 
 
-# def test_find_sender(client):
-#     response = client.get('/chat/1')
-#     assert response == <WrapperTestResponse streamed [200 OK]>
+def test_find_sender(client):
+    response = client.get('/chat/tourist/1')
+    assert response == 200
+
+def test_find_owner(client):
+    response = client.get('/chat/guide/1')
+    assert response == 200

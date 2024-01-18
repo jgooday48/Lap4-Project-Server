@@ -1,4 +1,4 @@
-def test_notes_page(client):
+def test_notification_page(client):
     response = client.get("/notifications")
     assert response.status_code == 200
 
@@ -10,7 +10,7 @@ def test_notes_page_not_found(client):
     err_response = client.get('/notifications/68')
     assert err_response.status_code == 404
 
-def test_create_note(client):
+def test_create_notification(client):
     data = {
         "sender": 1,
         "receiver": 1
