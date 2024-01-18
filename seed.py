@@ -207,11 +207,11 @@ db.session.commit()
 place_data = [
     ("Tokyo", ["#technology"], "Futuristic city", "Japan",  [
      "https://media.cntraveller.com/photos/64f6f03779eae8fd6b04756b/16:9/w_1920,c_limit/japan-GettyImages-1345059895.jpeg"]),
-    ("Malta", ["#beach"], "best island", "Europe"),
-    ("Paris", ["#culture"], "City of Love", "France"),
-    ("Sydney", ["#beach"], "Beautiful beaches", "Australia"),
-    ("Rome", ["#history"], "Eternal City", "Italy"),
-    ("Los Angeles", ["#city"], "vibrant city", "USA")
+    ("Sydney", ["#beach"], "Beautiful beaches", "Australia", ['https://images.pexels.com/photos/995764/pexels-photo-995764.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1']),
+    ("Rome", ["#history"], "Eternal City", "Italy", ['https://images.pexels.com/photos/1797161/pexels-photo-1797161.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1']),
+    ("Los Angeles", ["#city"], "vibrant city", "USA", ['https://images.pexels.com/photos/14657304/pexels-photo-14657304.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1']),
+    ("Malta", ["#beach"], "best island", "Europe", ['https://images.pexels.com/photos/7573362/pexels-photo-7573362.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1']),
+    ("Paris", ["#culture"], "City of Love", "France", ['https://images.pexels.com/photos/1308940/pexels-photo-1308940.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1']),
 ]
 
 for data in place_data:

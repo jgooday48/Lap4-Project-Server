@@ -28,7 +28,7 @@ def create():
         db.session.add(new_notification)
         db.session.commit()
 
-        return jsonify(new_notification.json), 200
+        return jsonify(new_notification.json), 201
 
     except Exception as e:
         print(str(e))

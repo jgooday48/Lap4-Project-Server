@@ -8,6 +8,8 @@ from application.reviews.model import Review
 from application.plans.model import Plan
 from application.message.model import Message
 from application.chat.model import Chat
+from application.notes.model import Note
+from application.notification.model import Notification
 from datetime import datetime
 
 @pytest.fixture(scope='session')
@@ -165,5 +167,11 @@ def create_test_data():
 
     chat = Chat(chat_id=1, sender=1, receiver=1)
     db.session.add(chat)
+
+    notes = Note(sender_id=1, text='dffs', guide_id=1, timestamp=datetime.now())
+    db.session.add(notes)
+
+    notifications = Notification(sender=1, receiver=1)
+    db.session.add(notifications)
     db.session.commit()
 
