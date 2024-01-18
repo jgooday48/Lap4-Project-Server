@@ -205,13 +205,18 @@ db.session.commit()
 
 # Add more places
 place_data = [
-    ("Tokyo", ["#technology"], "Futuristic city", "Japan",  [
+    ("Tokyo", ["#technology"], "A vibrant metropolis where tradition seamlessly blends with cutting-edge technology. From the iconic Tokyo Tower to the serene Meiji Shrine, the city offers a dynamic mix of ancient cultural landmarks and modern skyscrapers.", "Japan",  [
      "https://media.cntraveller.com/photos/64f6f03779eae8fd6b04756b/16:9/w_1920,c_limit/japan-GettyImages-1345059895.jpeg"]),
-    ("Sydney", ["#beach"], "Beautiful beaches", "Australia", ['https://images.pexels.com/photos/995764/pexels-photo-995764.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1']),
-    ("Rome", ["#history"], "Eternal City", "Italy", ['https://images.pexels.com/photos/1797161/pexels-photo-1797161.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1']),
-    ("Los Angeles", ["#city"], "vibrant city", "USA", ['https://images.pexels.com/photos/14657304/pexels-photo-14657304.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1']),
-    ("Malta", ["#beach"], "best island", "Europe", ['https://images.pexels.com/photos/7573362/pexels-photo-7573362.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1']),
-    ("Paris", ["#culture"], "City of Love", "France", ['https://images.pexels.com/photos/1308940/pexels-photo-1308940.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1']),
+
+    ("Sydney", ["#beach"], " The city boasts a stunning harbor setting with the iconic Sydney Opera House and Harbor Bridge defining its skyline. Known for its laid-back atmosphere and beautiful beaches like Bondi, Sydney is a captivating blend of urban sophistication and natural beauty.", "Australia", ['https://images.pexels.com/photos/995764/pexels-photo-995764.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1']),
+
+    ("Rome", ["#history"], " The eternal city stands as a living testament to its rich history, with ancient wonders like the Colosseum, Roman Forum, and Pantheon dotting the landscape.", "Italy", ['https://images.pexels.com/photos/1797161/pexels-photo-1797161.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1']),
+
+    ("Los Angeles", ["#city"], " The entertainment capital of the world, is synonymous with Hollywood glamour and an eclectic cultural scene, epitomized by the iconic Hollywood Sign and the Walk of Fame.", "USA", ['https://images.pexels.com/photos/14657304/pexels-photo-14657304.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1']),
+
+    ("Malta", ["#beach"], "The Mediterranean archipelago of Malta is a treasure trove of historic sites, from the medieval city of Mdina to the ancient temples of Ħaġar Qim, offering a unique blend of history and Mediterranean charm.", "Europe", ['https://images.pexels.com/photos/7573362/pexels-photo-7573362.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1']),
+
+    ("Paris", ["#culture"], "The City of Love, exudes romance with its iconic landmarks like the Eiffel Tower and Louvre Museum, charming streets, and world-class cuisine, making it a perennial favorite for lovers of art, culture, and fine living.", "France", ['https://images.pexels.com/photos/1308940/pexels-photo-1308940.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1']),
 ]
 
 for data in place_data:
