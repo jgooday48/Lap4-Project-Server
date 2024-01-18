@@ -26,7 +26,7 @@ def create_note():
         db.session.add(new_note)
         db.session.commit()
 
-        return jsonify(new_note.json), 200
+        return jsonify(new_note.json), 201
 
     except Exception as e:
         print(str(e))
