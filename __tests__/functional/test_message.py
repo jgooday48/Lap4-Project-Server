@@ -22,10 +22,11 @@ def test_post_message(client):
     response = client.post('/message', json=data)
     assert response.status_code == 200
 
+
+
 # def test_post_message_err(client):
 #     data = {
-#         "chat_id":1,
 #         "sender_id": 1
 #     }
 #     response = client.post('/message', json=data)
-#     assert response.status_code == 400
+#     assert response.status_code == 200

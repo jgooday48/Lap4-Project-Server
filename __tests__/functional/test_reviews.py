@@ -38,7 +38,7 @@ def test_create_review_error(client):
     response = client.post('/reviews', json=data)
     assert response.status_code == 400
 
-# @pytest.mark.skip(reason="Test is skipped for a specific reason")
+
 def test_update_review(client):
     data = {
         "comment": "America"
@@ -48,7 +48,6 @@ def test_update_review(client):
     updated_data = json.loads(response.data)
     assert "data" in updated_data
 
-# @pytest.mark.skip(reason="Test is skipped for a specific reason")
 def test_update_review_error(client):
     data = {
         "comment": "America"
@@ -62,7 +61,7 @@ def test_delete_review(client):
     assert response.status_code == 204  
     assert response.data == b'' 
 
-# @pytest.mark.skip(reason="Test is skipped for a specific reason")
+
 def test_delete_review_error(client):
     response = client.delete('/reviews/100')
     assert response.status_code == 404 

@@ -64,3 +64,10 @@ def test_delete_plan_error(client):
     response = client.delete('/plans/70')
     assert response.status_code == 404  
 
+def test_find_plan_by_guide_err(client):
+    response = client.get('/plans/guide:50')
+    assert response.status_code == 404
+
+def test_find_plan_by_tourist_err(client):
+    response = client.get('/plans/tourist:50')
+    assert response.status_code == 404
