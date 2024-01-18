@@ -52,8 +52,8 @@ chat2 = Chat(sender=2, receiver=3)
 chat3 = Chat(sender=2, receiver=4)
 chat4 = Chat(sender=2, receiver=5)
 
-chat5 = Chat(sender=1, receiver=3)
-chat6 = Chat(sender=4, receiver=3)
+# chat5 = Chat(sender=1, receiver=3)
+# chat6 = Chat(sender=4, receiver=3)
 db.session.add_all([chat1, chat2, chat3, chat4])
 db.session.commit()
 
@@ -71,13 +71,13 @@ message3_1 = Message(chat_id=3, sender_id=2, text="Hey!", time="11:08")
 message4_1 = Message(chat_id=4, sender_id=2, text="Hey!", time="11:08")
 message4_2 = Message(chat_id=4, sender_id=2, text="Your plan looks great!", time="11:08")
 
-message5_1 = Message(chat_id=5, sender_id=1, text="Your plan looks great!", time="11:08")
+# message5_1 = Message(chat_id=5, sender_id=1, text="Your plan looks great!", time="11:08")
 
-message6_1 = Message(chat_id=6, sender_id=4, text="Hey!", time="11:08")
-message6_2 = Message(chat_id=6, sender_id=4, text="How are you?", time="11:08")
+# message6_1 = Message(chat_id=6, sender_id=4, text="Hey!", time="11:08")
+# message6_2 = Message(chat_id=6, sender_id=4, text="How are you?", time="11:08")
 
 
-db.session.add_all([message1_1, message1_2, message1_3, message1_4, message1_5, message2_1, message2_2, message3_1, message4_1, message4_2, message5_1, message6_1, message6_2])
+db.session.add_all([message1_1, message1_2, message1_3, message1_4, message1_5, message2_1, message2_2, message3_1, message4_1, message4_2])
 db.session.commit()
 
 activity = Activity(name="canoe", location="nyc",
