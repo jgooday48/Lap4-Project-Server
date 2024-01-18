@@ -19,6 +19,7 @@ class Tourist(db.Model):
     username = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(), nullable=False)
     password = db.Column(db.Text())
+    images=db.Column(ARRAY(db.String()), nullable=True)
     plans = db.relationship('Plan', backref='tourist', lazy=True, foreign_keys='Plan.tourist_id')
     reviews = db.relationship('Review', backref='tourist', lazy=True, foreign_keys='Review.tourist_id')
     guides = db.relationship('Guide', secondary=tourist_guide_association, backref='tourists', lazy='dynamic')
@@ -73,6 +74,7 @@ class Tourist(db.Model):
             "username": self.username,
             "email": self.email,
             "password": self.password,
+            "images": self.images
             # "guide_username": self.guide_username
         }
 
